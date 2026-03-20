@@ -29,7 +29,7 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                     {nsfw===1 && <span className="nsfw">18+</span>}
                 </div>
                 {chapter !== "" && <span>Chapitre : {chapter}</span>}
-                {lastReadCompter !== "" && <span>Lecture : {lastReadCompter} jours</span>}
+                {lastReadCount !== "" && <span>Lecture : {lastReadCompter} jours</span>}
             </li>
             {isPopup && 
                 <Popup 
