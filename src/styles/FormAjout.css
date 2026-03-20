@@ -31,7 +31,7 @@
     justify-content: space-between;
     align-items: center;
     height: 30px;
-    padding: 10px 20px;
+    padding: 0px 20px 20px 20px;
     border-bottom: 1px solid #2a2d35;
 }
 
@@ -155,4 +155,103 @@
     color: #AFA9EC;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.nsfwSpan {
+    background: #A32D2D;
+    border-radius: 50px;
+    padding: 0px 5px;
+    color: #F7C1C1;
+    margin-left: 10px;
+}
+
+.switchNSFW {
+    width: 60px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #30302e;
+    border: 1px solid #555;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.switchNSFW div {
+    background: #555;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    transition: all 0.3s ease-in-out;
+    z-index: 2;
+}
+
+/* .switchNSFW::before {
+    content: '';
+    background-color: #0F6E56;
+    width: 80px;
+    height: 28px;
+    display: flex;
+    border-radius: 50px;
+    z-index: 0;
+    position: absolute;
+    left: -50px;
+    transition: all 0.4s ease-in-out;
+} */
+
+.divNsfw:has(input:checked) .switchNSFW div {
+    transform: translateX(42px);
+    background-color: #F7C1C1;
+}
+
+.divNsfw:has(input:checked) .switchNSFW {
+    background-color: #A32D2D;
+}
+
+.divNsfw {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #16191f;
+    border-radius: 10px;
+    border: 1px solid #30302e;
+    padding: 10px;
+}
+
+/* .divNsfw:has(input:checked) .switchNSFW::before {
+    transform: translate(52px);
+} */
+
+#inputNsfw {
+    display: none;
+}
+
+.closeAjout .gaucheAjout, .closeAjout .droiteAjout {
+    width: 3px;
+    height: 25px;
+    background-color: rgb(161, 161, 161);
+    border-radius: 5px;
+}
+
+.closeAjout {
+    background: #16191f;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 5px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.gaucheAjout {
+    transform: translate(2px) rotate(45deg);
+}
+
+.droiteAjout {
+    transform: rotate(-45deg);
 }

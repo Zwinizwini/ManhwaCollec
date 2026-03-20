@@ -32,7 +32,6 @@ const FormAjout = ({isForm, setForm, manhwaList}) => {
             nsfw: nsfw,
             cover: `${cover}`
         }
-        console.log(manhwaObj)
         manhwaList.push(manhwaObj)
         localStorage.setItem("manhwaList", JSON.stringify(manhwaList))
     }
@@ -40,7 +39,6 @@ const FormAjout = ({isForm, setForm, manhwaList}) => {
     useEffect(() => {
         if (isForm) {
             document.body.style.overflow = "hidden"
-            window.scrollBy(0,-window.innerHeight)
         } else { 
             document.body.style.overflow = ""
         }
@@ -60,7 +58,7 @@ const FormAjout = ({isForm, setForm, manhwaList}) => {
     const [chapter, setChapter] = useState(0)
     const [urlChapt, setURLChapter] = useState('')
     const [desc, setDesc] = useState('')
-    const [statusAjout, setStatusAjout] = useState('')
+    const [statusAjout, setStatusAjout] = useState('Pas lu')
     const [nsfw, setNSFW] = useState(0)
 
     return (
@@ -68,8 +66,9 @@ const FormAjout = ({isForm, setForm, manhwaList}) => {
             <div className="popupAjout">
                 <div className="head">
                     <h2>Ajouter un manhwa</h2>
-                    <div onClick={() => setForm(false)}>
-                        <img src="" alt="" />ddd
+                    <div onClick={() => setForm(false)} className="closeAjout">
+                        <div className="gaucheAjout"></div>
+                        <div className="droiteAjout"></div>
                     </div>
                 </div>
                 <div className="ajout-body">
@@ -90,7 +89,7 @@ const FormAjout = ({isForm, setForm, manhwaList}) => {
                             <input type="radio" name="radioStatus" value="Hiatus" onClick={() => setStatusAjout("Hiatus")}/> Hiatus
                         </label>
                         <label className="noir">
-                            <input type="radio" name="radioStatus" value="Pas lu" onClick={() => setStatusAjout("Pas lu")}/> Pas Lu
+                            <input type="radio" name="radioStatus" value="Pas lu" onClick={() => setStatusAjout("Pas lu")} defaultChecked/> Pas Lu
                         </label>
                     </div>
                     <div className="formChapter">
@@ -113,7 +112,16 @@ const FormAjout = ({isForm, setForm, manhwaList}) => {
                         />
                     </label>
                     <label>
-                        <div onChange={(e) => {e.target.checked ? setNSFW(1) : setNSFW(0)}}>Contenu adulte <span className="nsfwSpan">18 +</span> <input type="checkbox"/></div>
+                        <div onChange={(e) => {e.target.checked ? setNSFW(1) : setNSFW(0)}}
+                            className="divNsfw"
+                        >
+                            <div>
+                                Contenu adulte 
+                                <span className="nsfwSpan">18 +</span>
+                            </div> 
+                            <div className="switchNSFW"><div></div></div>
+                            <input type="checkbox" id="inputNsfw"/>
+                        </div>
                     </label>
                 </div>
                 <div className="foot">
