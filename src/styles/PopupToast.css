@@ -1,0 +1,54 @@
+.popupToast {
+    background: #085041;
+    border: 1px solid #1D9E75;
+    color: #9FE1CB;
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    padding: 10px;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 1;
+    font-size: 13px;
+    overflow: hidden;
+    animation: normal slidein 3s ease-in-out;
+}
+
+@keyframes slidein {
+    0% {
+        bottom: -60px;
+    }
+    25% {
+        bottom: 50px;
+    }
+    50% {
+        bottom: 50px;
+    }
+    75% {
+        bottom: 50px;
+    }
+    100% {
+        bottom: -80px;
+    }
+}
+
+.popupToast p {
+    margin: 0;
+}
+
+.popupToast p span {
+    font-weight: bold;
+}
+
+.popupToast div {
+    width: 200px;
+    height: 3px;
+    background: #666;
+}
+
+.popupToast div span {
+    width: 100%;
+    height: 100%;
+    background-color: #1D9E75;
+}

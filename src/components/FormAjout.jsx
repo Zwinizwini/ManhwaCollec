@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import '../styles/FormAjout.css'
 
-const FormAjout = ({isForm, setForm, manhwaList, updateManhwalist}) => {
+const FormAjout = ({isForm, setForm, manhwaList, updateManhwalist, setAjoutList}) => {
 
     const btnAjout = () => {
         ajoutManhwa()
@@ -34,6 +34,7 @@ const FormAjout = ({isForm, setForm, manhwaList, updateManhwalist}) => {
         }
         const newList = [...manhwaList, manhwaObj]
         updateManhwalist(newList)
+        setAjoutList(true)
     }
 
     useEffect(() => {

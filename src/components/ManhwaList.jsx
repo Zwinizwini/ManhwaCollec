@@ -11,7 +11,7 @@ const handleClick = (manhwaList) => {
     localStorage.setItem("manhwaList", JSON.stringify(manhwaList))
 }
 
-const ManhwaList = ({manhwaList, updateManhwalist, activeList, setActiveList}) => {
+const ManhwaList = ({manhwaList, updateManhwalist, activeList, setActiveList, setAjoutList}) => {
     const [filtreStatus, setStatus] = useState('')
     const [isForm, setForm] = useState(false)
     const [isNsfw, setIsNsfw] = useState(2)
@@ -41,7 +41,7 @@ const ManhwaList = ({manhwaList, updateManhwalist, activeList, setActiveList}) =
                         setIsNsfw={setIsNsfw}
                     />
                     <button className='ajouter-manhwa' onClick={() => setForm(true)}>+ Ajouter</button>
-                    {isForm && <FormAjout isForm={isForm} setForm={setForm} manhwaList={manhwaList} updateManhwalist={updateManhwalist}/>}
+                    {isForm && <FormAjout isForm={isForm} setForm={setForm} manhwaList={manhwaList} updateManhwalist={updateManhwalist} setAjoutList={setAjoutList}/>}
                 </div>
             </div>
             <ul className='manhwa-list'>
