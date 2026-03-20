@@ -15,6 +15,7 @@ const FormAjout = ({isForm, setForm, manhwaList}) => {
 
     const ajoutManhwa = () => {
         let dateJour = ""
+        const maxChapterCond = maxChapter === 0 ? 1 : maxChapter
         if (statusAjout !== "Pas lu") {
             dateJour = new Date()
         }
@@ -22,7 +23,7 @@ const FormAjout = ({isForm, setForm, manhwaList}) => {
             id: initialManhwa(title)+manhwaList.length,
             title: `${title}`,
             chapter: `${chapter}`,
-            maxChapter: maxChapter,
+            maxChapter: maxChapterCond,
             status: statusAjout,
             link: `${urlChapt}`,
             lastReadCount: "",

@@ -19,7 +19,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, descri
     useEffect(() => {
         if (isPopup) {
                 document.body.style.overflow = "hidden"
-                window.scrollBy(0,-window.innerHeight)
+                
 
             } else { 
                 document.body.style.overflow = ""
