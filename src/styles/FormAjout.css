@@ -1,0 +1,158 @@
+.popupAjoutBack {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 2;
+}
+
+.popupAjout {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    padding: 20px 0px;
+    text-align: center;
+    color: white;
+    background-color: #1c1f27;
+    border-radius: 20px;
+    border: 1px solid #2a2d35;
+    z-index: 3;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    padding: 10px 20px;
+    border-bottom: 1px solid #2a2d35;
+}
+
+.foot {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 30px;
+    padding: 10px 20px;
+    border-top: 1px solid #2a2d35;
+}
+
+.ajout-body input {
+    color: white;
+}
+
+.head h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.ajout-body {
+    padding: 10px 20px;
+}
+
+.ajout-body label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 15px;
+    color: #888;
+    font-size: 14px;
+    gap: 5px;
+}
+
+.ajout-body input {
+    background-color: #30302e;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 95%;
+}
+
+.radio-status {
+    display: flex;
+    gap: 10px;
+}
+
+.formChapter {
+    display: flex;
+    gap: 10px;
+}
+
+.radio-status input {
+    display: none;
+}
+
+.formChapter label {
+    width: 50%;
+}
+.formChapter input {
+    width: 90%;
+}
+
+.radio-status label {
+    width: 80px;
+    height: 25px;
+    border-radius: 50px;
+    text-align: center;
+    background-color: #16191f;
+    border: 1px solid #2a2d35;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.bleu:has(input:checked) {
+    background: #185FA5;
+    border: #185FA5 1px solid;
+    color: #B5D4F4;
+}
+
+.vert:has(input:checked) {
+    background: #0F6E56;
+    border: #0F6E56 1px solid;
+    color: #9FE1CB;
+}
+
+.jaune:has(input:checked) {
+    background: #854F0B;
+    border: #854F0B 1px solid;
+    color: #FAC775;
+}
+
+.noir:has(input:checked) {
+    background: #2a2d35 ;
+    border: #2a2d35  1px solid;
+    color: #aaa ;
+}
+
+.popupAjout input:focus, .ajout-body textarea:focus {
+    border: 1px solid #7F77DD;
+    outline: none;
+    box-shadow: #7F77DD 1px 5px 10px;
+}
+
+.ajout-body textarea {
+    background: #16191f;
+    border: 1px solid #2a2d35;
+    border-radius: 10px;
+    width: 97%;
+    color: white;
+    padding: 5px 10px;
+}
+
+.foot button {
+    margin-top: 10px;
+    width: 100px;
+    height: 40px;
+    border: 1px solid #3C3489;
+    background: #26215C;
+    color: #AFA9EC;
+    border-radius: 10px;
+    cursor: pointer;
+}

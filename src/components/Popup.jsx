@@ -1,0 +1,87 @@
+import { useEffect, useState } from 'react'
+import '../styles/Popup.css'
+import PopupInfo from './PopupInfo'
+import Modifier from './Modifier'
+
+//Permet de tranformer le nom du manhwa en ses initial
+// const initialManhwa = (manhwa) => {
+//     const iti = manhwa.split(" ")
+//     return iti.reduce((acc, mot) => acc + mot[0], "").toLocaleUpperCase()
+// }
+
+const styleCouleur = (status) => {
+    if (status === "En Cours" || status === "Hiatus") return '#378ADD'
+    if (status === "Pas lu") return '#555555'
+    return '#1D9E75'
+}
+
+const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, description, link, setPopup, isPopup, maxChapter, manhwaList}) => {
+    useEffect(() => {
+        if (isPopup) {
+                document.body.style.overflow = "hidden"
+                window.scrollBy(0,-window.innerHeight)
+
+            } else { 
+                document.body.style.overflow = ""
+            }
+        return () => {document.body.style.overflow = ""}
+    }, [isPopup])
+
+    useEffect(() => {
+        const handleKey = (e) => {
+            if (e.key === 'Escape') setPopup(false)
+        }
+        window.addEventListener('keydown', handleKey)
+        return () => window.removeEventListener('keydown', handleKey)
+    }, [])
+
+    const couleurStatus = styleCouleur(status)
+    const [modifier, setModifier] = useState(false)
+
+
+    return (
+        <div className='popupBackground'>
+            <div className="popup">
+                <div className='container-hover' id='container-popup'>
+                    <img src={cover} alt={`Cover de ${title}`} className="manhwa-item-cover"/>
+                    <span className="status" style={{background:couleurStatus}}>{status}</span>
+                    {nsfw===1 && <span className="nsfw">18+</span>}
+                </div>
+                <div className='snd-container'>
+                    <h2>{title}</h2>
+                    {description && <p className='description'>{description}</p>
+                    }
+
+                    <div className='popupInfo'>
+                        <PopupInfo info1={"Chapitre"} info2={`${maxChapter}`}/>
+                        <PopupInfo info1={"Dernier Lu"} info2={`Ch. ${chapter}`}/>
+                        <PopupInfo info1={"Lu il y a"} info2={`${lastReadCompter ? lastReadCompter : 0} jours`}/>
+                        <PopupInfo info1={"Progression"} info2={`${Math.round((parseInt(chapter)/maxChapter) * 100)}%`} />
+                    </div>
+                    {link && <a href={link+chapter} className='bouton-chap' target='__blank'>Voir le lien de lecture</a>}
+                </div>
+                <div className='closePopup' onClick={() => setPopup(false)}>
+                    <div className='gauche'></div>
+                    <div className='droite'></div>
+                </div>
+                <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>
+                {modifier && <Modifier 
+                    title={title}
+                    chapter={chapter}
+                    status={status}
+                    nsfw={nsfw}
+                    cover={cover}
+                    description={description}
+                    link={link}
+                    maxChapter={maxChapter}
+                    setModifier={setModifier}
+                    manhwaList={manhwaList}
+                    id={id}
+                />}
+            </div>
+        </div>
+    )
+}
+
+
+export default Popup

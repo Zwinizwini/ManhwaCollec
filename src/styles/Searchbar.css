@@ -1,0 +1,11 @@
+.menu input {
+    border-radius: 5px;
+    width: 50%;
+    height: 35px;
+    color: #888;
+    background-color: #1c1f27;
+    border: 1px solid #2a2d35;
+    box-shadow: #2a2d35 1px 1px 5px;
+    padding: 0px 10px;
+}
+

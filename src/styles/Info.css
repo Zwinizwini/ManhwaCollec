@@ -1,0 +1,70 @@
+.menu-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    gap: 15px;
+    width: 750px;
+}
+
+.div-info {
+    display: flex;
+    justify-content: center;
+    width: 25%;
+    height: 70px;
+    background-color: #1c1f27;
+    border-radius: 10px;
+    border: 1px solid #2a2d35;
+    color: white;
+    flex-direction: column;
+    padding: 0 20px;
+}
+
+.div-info div {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.point {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
+
+h5, .div-info p {
+    margin: 0;
+}
+
+.div-info p {
+    color: #888 ;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+.Lus {
+    background-color: #555555 ;
+}
+.Finis {
+    background-color: #1D9E75 ;
+}
+.Cours {
+    background-color: #378ADD ;
+}
+.Total {
+    background-color: #7f77dd;
+}
+.LusH {
+    color: #555555 ;
+}
+.FinisH {
+    color: #1D9E75 ;
+}
+.CoursH {
+    color: #378ADD ;
+}
+.TotalH {
+    color: #7f77dd;
+}

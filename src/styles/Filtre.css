@@ -1,0 +1,17 @@
+.filtre select {
+    border-radius: 5px;
+    height: 35px;
+    text-align: center;
+    padding: 0px 10px;
+    color: #888;
+    background-color: #1c1f27;
+    border: 1px solid #2a2d35;
+    box-shadow: #2a2d35 1px 1px 5px;
+}
+
+.sous-filtre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}

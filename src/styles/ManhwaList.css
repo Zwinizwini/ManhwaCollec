@@ -1,0 +1,70 @@
+.manhwa-list {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 75%;
+    padding: 0px;
+    margin-top: 60px;
+}
+
+.menu {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-direction: column;
+}
+
+.filtre {
+    display: flex;
+    width: 750px;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    gap: 15px;
+}
+
+.ajouter-manhwa {
+    background-color: #1c1f27;
+    color: #7F77DD;
+    border: solid 1px #3C3489;
+    border-radius: 5px;
+    height: 35px;
+    padding: 0 10px;
+    width: 10%;
+    position: relative;
+    overflow: hidden;
+}
+
+.ajouter-manhwa::before {
+    content: '';
+    width: 0;
+    height: 100%;
+    z-index: -1;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%);
+    background-color: #7F77DD;
+}
+
+.ajouter-manhwa:hover::before {
+    width: 100%;
+    transition: all 0.4s ease-in-out;
+}
+
+.ajouter-manhwa:hover {
+    z-index: 0;
+    color: white;
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1100px) {
+    .manhwa-list {
+        width: 100%;
+    }
+}

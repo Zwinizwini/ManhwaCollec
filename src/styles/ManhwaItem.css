@@ -1,0 +1,67 @@
+.manhwa-item-cover {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.manhwa-item {
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	text-transform: capitalize;
+	color: white;
+	height: 300px;
+}
+
+.container-hover {
+	position: relative;
+	width: 150px;
+	height: 250px;
+	border-radius: 10px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.name-hover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 1.5rem;
+	display: none;
+	background: rgba(0, 0, 0, 0.7);
+}
+
+.container-hover:hover {
+	box-shadow: #2a2d35 5px 1px 5px, #2a2d35 -5px -1px 5px;
+	transition: all 0.2s ease-in-out;
+}
+
+.container-hover:hover .name-hover {
+	display: flex;
+}
+
+.container-hover:hover img {
+	transform: scale(1.15);
+	transition: all 0.2s ease-in-out;
+}
+
+.status, .nsfw {
+	position: absolute;
+	width: 50px;
+	height: 20px;
+	top: 0;
+	right: 0;
+	font-size: 11px;
+	text-align: center;
+}
+
+.nsfw {
+	top: 20px;
+	background-color: #A32D2D ;
+}
