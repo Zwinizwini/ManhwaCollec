@@ -15,7 +15,7 @@ const styleCouleur = (status) => {
     return '#1D9E75'
 }
 
-const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, description, link, setPopup, isPopup, maxChapter, manhwaList}) => {
+const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist}) => {
     useEffect(() => {
         if (isPopup) {
                 document.body.style.overflow = "hidden"
@@ -77,6 +77,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, descri
                     setModifier={setModifier}
                     manhwaList={manhwaList}
                     id={id}
+                    updateManhwalist={updateManhwalist}
                 />}
             </div>
         </div>

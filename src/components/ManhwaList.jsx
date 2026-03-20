@@ -11,11 +11,10 @@ const handleClick = (manhwaList) => {
     localStorage.setItem("manhwaList", JSON.stringify(manhwaList))
 }
 
-const ManhwaList = ({manhwaList}) => {
+const ManhwaList = ({manhwaList, updateManhwalist, activeList, setActiveList}) => {
     const [filtreStatus, setStatus] = useState('')
     const [isForm, setForm] = useState(false)
     const [isNsfw, setIsNsfw] = useState(2)
-    const [activeList, setActiveList] = useState(manhwaList)
     const statusList = manhwaList.reduce(
         (acc, manhwa) => acc.includes(manhwa.status) ? acc : acc.concat(manhwa.status),
         []
@@ -42,7 +41,7 @@ const ManhwaList = ({manhwaList}) => {
                         setIsNsfw={setIsNsfw}
                     />
                     <button className='ajouter-manhwa' onClick={() => setForm(true)}>+ Ajouter</button>
-                    {isForm && <FormAjout isForm={isForm} setForm={setForm} manhwaList={manhwaList}/>}
+                    {isForm && <FormAjout isForm={isForm} setForm={setForm} manhwaList={manhwaList} updateManhwalist={updateManhwalist}/>}
                 </div>
             </div>
             <ul className='manhwa-list'>
@@ -62,6 +61,7 @@ const ManhwaList = ({manhwaList}) => {
                                 link={link}
                                 maxChapter={maxChapter}
                                 manhwaList={manhwaList}
+                                updateManhwalist={updateManhwalist}
                             />
                         </div>
                     : null ) 

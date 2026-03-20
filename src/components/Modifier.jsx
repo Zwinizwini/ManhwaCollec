@@ -13,7 +13,7 @@ const styleCouleur = (status) => {
     return '#1D9E75'
 }
 
-const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, setModifier, maxChapter, manhwaList}) => {
+const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, setModifier, maxChapter, manhwaList, updateManhwalist}) => {
     useEffect(() => {
         const handleKey = (e) => {
             if (e.key === 'Escape') setModifier(false)
@@ -23,19 +23,20 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
     }, [])
 
     const handleMAJ = () => {
-        const manhwa = manhwaList.find((manhwa) => manhwa.id === id)
-        const index = manhwaList.findIndex((manhwa) => manhwa.id === id)
-        manhwa.title = updateTitle
-        manhwa.description = desc
-        manhwa.chapter = updateChapter
-        if (updateChapter > maxChapter) manhwa.maxChapter = updateChapter
-        manhwa.cover = urlCover
-        manhwa.link = updateURL
-        manhwa.status = updateStatus
-        if (updateChapter !== chapter) manhwa.lastRead = new Date()
-        
-        manhwaList[index] = manhwa
-        localStorage.setItem("manhwaList", JSON.stringify(manhwaList))
+        const updateList = manhwaList.map((m) => (
+            m.id === id ? {
+                ...m,
+                title: updateTitle,
+                description: desc,
+                chapter: updateChapter,
+                maxChapter: updateChapter > maxChapter ? updateChapter : maxChapter,
+                cover: urlCover,
+                link: updateURL,
+                status: updateStatus,
+                lastRead: updateChapter !== chapter ? new Date().toLocaleDateString('fr-FR') : m.lastRead
+            } : m
+        ))
+        updateManhwalist(updateList)
         setModifier(false)
     }
 

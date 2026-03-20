@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import '../styles/FormAjout.css'
 
-const FormAjout = ({isForm, setForm, manhwaList}) => {
+const FormAjout = ({isForm, setForm, manhwaList, updateManhwalist}) => {
 
     const btnAjout = () => {
         ajoutManhwa()
@@ -15,9 +15,9 @@ const FormAjout = ({isForm, setForm, manhwaList}) => {
 
     const ajoutManhwa = () => {
         let dateJour = ""
-        const maxChapterCond = maxChapter === 0 ? 1 : maxChapter
+        const maxChapterCond = maxChapter < chapter ? chapter : maxChapter
         if (statusAjout !== "Pas lu") {
-            dateJour = new Date()
+            dateJour = new Date().toLocaleDateString('fr-FR')
         }
         const manhwaObj = {
             id: initialManhwa(title)+manhwaList.length,
@@ -32,8 +32,8 @@ const FormAjout = ({isForm, setForm, manhwaList}) => {
             nsfw: nsfw,
             cover: `${cover}`
         }
-        manhwaList.push(manhwaObj)
-        localStorage.setItem("manhwaList", JSON.stringify(manhwaList))
+        const newList = [...manhwaList, manhwaObj]
+        updateManhwalist(newList)
     }
 
     useEffect(() => {
@@ -54,7 +54,7 @@ const FormAjout = ({isForm, setForm, manhwaList}) => {
 
     const [title, setTitle] = useState('')
     const [cover, setCover] = useState('')
-    const [maxChapter, setMaxChapter] = useState(0)
+    const [maxChapter, setMaxChapter] = useState(1)
     const [chapter, setChapter] = useState(0)
     const [urlChapt, setURLChapter] = useState('')
     const [desc, setDesc] = useState('')

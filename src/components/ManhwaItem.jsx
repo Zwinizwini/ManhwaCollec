@@ -8,7 +8,7 @@ const styleCouleur = (status) => {
     return '#1D9E75'
 }
 
-const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList}) => {
+const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList, updateManhwalist}) => {
     const [isPopup, setPopup] = useState(false)
     const dateNow = new Date()
     const [day, month, year] = lastRead.split('/')
@@ -47,6 +47,7 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                     maxChapter={maxChapter}
                     id={id}
                     manhwaList={manhwaList}
+                    updateManhwalist={updateManhwalist}
                 />
             }
         </>
