@@ -41,7 +41,7 @@ const ManhwaList = () => {
                         isNsfw={isNsfw}
                         setIsNsfw={setIsNsfw}
                     />
-                    <button className='ajouter-manhwa' onClick={() => setForm(true)}>+ Ajouter</button>
+                    <button className='ajouter-manhwa' onClick={() => handleClick()}>+ Ajouter</button>
                     {isForm && <FormAjout isForm={isForm} setForm={setForm} manhwaList={manhwaList}/>}
                 </div>
             </div>
