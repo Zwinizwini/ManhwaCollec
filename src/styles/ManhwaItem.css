@@ -65,3 +65,13 @@
 	top: 20px;
 	background-color: #A32D2D ;
 }
+
+.info-hover {
+	position: absolute;
+	bottom: 0;
+	font-size: 11px;
+	background: #2a2d35;
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+}

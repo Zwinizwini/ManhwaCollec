@@ -27,9 +27,11 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                     <span className="name-hover">{title}</span>
                     <span className="status" style={{background:couleurStatus}}>{status}</span>
                     {nsfw===1 && <span className="nsfw">18+</span>}
+                    <div className='info-hover'>
+                        {chapter !== "" && <span>Ch. {chapter}</span>}
+                        {lastReadCount !== "" && <span>{lastReadCompter} jours</span>}
+                    </div>
                 </div>
-                {chapter !== "" && <span>Chapitre : {chapter}</span>}
-                {lastReadCount !== "" && <span>Lecture : {lastReadCompter} jours</span>}
             </li>
             {isPopup && 
                 <Popup 
