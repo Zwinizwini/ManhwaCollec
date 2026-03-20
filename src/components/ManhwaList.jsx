@@ -5,13 +5,13 @@ import { useState } from 'react'
 import Searchbar from './Searchbar'
 import Info from './Info'
 import FormAjout from './FormAjout'
-import { manhwaList } from '../datas/data'
+
 
 const handleClick = (manhwaList) => {
     localStorage.setItem("manhwaList", JSON.stringify(manhwaList))
 }
 
-const ManhwaList = () => {
+const ManhwaList = ({manhwaList}) => {
     const [filtreStatus, setStatus] = useState('')
     const [isForm, setForm] = useState(false)
     const [isNsfw, setIsNsfw] = useState(2)
@@ -41,7 +41,7 @@ const ManhwaList = () => {
                         isNsfw={isNsfw}
                         setIsNsfw={setIsNsfw}
                     />
-                    <button className='ajouter-manhwa' onClick={() => handleClick()}>+ Ajouter</button>
+                    <button className='ajouter-manhwa' onClick={() => setForm(true)}>+ Ajouter</button>
                     {isForm && <FormAjout isForm={isForm} setForm={setForm} manhwaList={manhwaList}/>}
                 </div>
             </div>
