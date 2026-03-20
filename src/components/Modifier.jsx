@@ -46,6 +46,7 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
     const [updateTitle, setTitle] = useState(title)
     const [updateURL, setURL] = useState(link)
     const [updateStatus, setUpdateStatus] = useState(status)
+    
 
 
     return (
@@ -63,7 +64,7 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                     <div className='popupInfo'>
                         <div>
                             <p>URL</p>
-                            <input value={updateURL} onChange={setURL}/>
+                            <input type="text" value={updateURL} onChange={(e) => setURL(e.target.value)}/>
                         </div>
                         <div>
                             <p>Dernier Lu</p>
