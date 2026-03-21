@@ -5,6 +5,7 @@ import Popup from './Popup'
 const styleCouleur = (status) => {
     if (status === "En Cours" || status === "Hiatus") return '#378ADD'
     if (status === "Pas lu") return '#555555'
+    if (status === "Drop") return '#791F1F'
     return '#1D9E75'
 }
 

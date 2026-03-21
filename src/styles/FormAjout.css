@@ -131,6 +131,12 @@
     color: #aaa ;
 }
 
+.rouge:has(input:checked) {
+    background-color: #791F1F;
+    border: 1px solid #791F1F;
+    color: #F09595 ;
+}
+
 .popupAjout input:focus, .ajout-body textarea:focus {
     border: 1px solid #7F77DD;
     outline: none;

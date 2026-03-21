@@ -86,6 +86,7 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                                 <option value="En Cours">En Cours</option>
                                 <option value="Hiatus">Hiatus</option>
                                 <option value="Pas lu">Pas lu</option>
+                                <option value="Drop">Drop</option>
                             </select>
                         </div>
                     </div>

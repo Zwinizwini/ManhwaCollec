@@ -92,6 +92,9 @@ const FormAjout = ({isForm, setForm, manhwaList, updateManhwalist, setAjoutList}
                         <label className="noir">
                             <input type="radio" name="radioStatus" value="Pas lu" onClick={() => setStatusAjout("Pas lu")} defaultChecked/> Pas Lu
                         </label>
+                        <label className="rouge">
+                            <input type="radio" name="radioStatus" value="Drop" onClick={() => setStatusAjout("Drop")}/> Drop
+                        </label>
                     </div>
                     <div className="formChapter">
                         <label>
