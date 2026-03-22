@@ -16,11 +16,12 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
     const lastReadDate = new Date(`${year}-${month}-${day}`)
     const lastReadCompter = Math.floor((dateNow - lastReadDate) / (1000 * 60 * 60 * 24))
     const couleurStatus = styleCouleur(status)
+    const gradientSeuil = Math.round((parseInt(chapter)/maxChapter) * 100)
 
     return (
         <>
             <li className="manhwa-item">
-                <div 
+                <div
                     className='container-hover'
                     onClick={() => setPopup(true)}
                 >
@@ -29,8 +30,11 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                     <span className="status" style={{background:couleurStatus}}>{status}</span>
                     {nsfw===1 && <span className="nsfw">18+</span>}
                     <div className='info-hover'>
-                        {chapter !== "" && <span>Ch. {chapter}</span>}
-                        {lastRead !== "" && lastReadCount !== "" && <span>{lastReadCompter} jours</span>}
+                        <div>
+                            {chapter !== "" && <span>Ch. {chapter}</span>}
+                            {lastRead !== "" && lastReadCount !== "" && <span>{lastReadCompter} jours</span>}
+                        </div>
+                        <div className='progression-bar' style={{background: `linear-gradient(to right,#39FF14 ${gradientSeuil}%, black ${gradientSeuil}%)`}}></div>
                     </div>
                     {note && <span className='note-hover'>{note}<span>★</span></span>}
                 </div>

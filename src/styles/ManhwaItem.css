@@ -16,10 +16,15 @@
 .container-hover {
 	position: relative;
 	width: 150px;
-	height: 250px;
+	height: 280px;
 	border-radius: 10px;
 	overflow: hidden;
 	cursor: pointer;
+	border: #2a2d35 1px solid;
+}
+
+.container-hover img {
+	height: 250px;
 }
 
 .name-hover {
@@ -42,7 +47,7 @@
 	transition: all 0.2s ease-in-out;
 }
 
-.container-hover:hover .name-hover {
+.container-hover:hover span {
 	display: flex;
 }
 
@@ -73,10 +78,21 @@
 	position: absolute;
 	bottom: 0;
 	font-size: 11px;
-	background: #2a2d35;
-	display: flex;
-	justify-content: space-around;
+	background: #1c1f27;
 	width: 100%;
+	height: 25px;
+	text-align: center;
+	padding: 3px 0px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.info-hover div {
+	display: flex;
+	justify-content: space-between;
+	width: 85%;
 }
 
 .note-hover {
@@ -84,4 +100,14 @@
 	background-color: rgba(0,0,0,0.65);
 	width: 40px;
 	color: #ef9f27;
+}
+
+.progression-bar {
+	width: 80%;
+	height: 3px;
+	border-radius: 50px;
+}
+
+p {
+	margin: 0;
 }
