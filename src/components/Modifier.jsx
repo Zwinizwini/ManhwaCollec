@@ -56,25 +56,25 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
     return (
         <div className='popupBackground'>
             <div className="popup">
-                <input type="number" min="0" max="10"
-                    value={noteM}
-                    onChange={(e) => {
-                        if (e.target.value > 10) {
-                            setNote(10)
-                        } else if (e.target.value < 0) {
-                            setNote(0)
-                        } else {
-                            setNote(e.target.value)
-                        }
-                    }}    
-                />
                 <div className='container-hover' id='container-popup'>
-                    <img src={cover} alt={`Cover de ${title}`} className="manhwa-item-cover"/>
+                    <img src={cover} alt={`Cover de ${title}`} className="manhwa-item-cover" id='img-popup'/>
                     <span className="status" style={{background:couleurStatus}}>{status}</span>
                     {nsfw===1 && <span className="nsfw">18+</span>}
                 </div>
                 <div className='snd-container'>
                     <input onChange={(e) => setTitle(e.target.value)} value={updateTitle} id='changeTitle'/>
+                    <div className='input-note'><input type="number" min="0" max="10"
+                        value={noteM}
+                        onChange={(e) => {
+                            if (e.target.value > 10) {
+                                setNote(10)
+                            } else if (e.target.value < 0) {
+                                setNote(0)
+                            } else {
+                                setNote(e.target.value)
+                            }
+                        }}    
+                    />/10</div>
                     <textarea onChange={(e) => setDesc(e.target.value)} value={desc} placeholder='Description'/>
 
                     <div className='popupInfo'>

@@ -173,6 +173,10 @@ h2 {
     margin-bottom: 15px;
 }
 
+.input-note {
+    display: flex;
+    width: 60px;
+}
 
 #changeTitle {
     padding: 10px;

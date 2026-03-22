@@ -137,7 +137,7 @@
     color: #F09595 ;
 }
 
-.popupAjout input:focus, .ajout-body textarea:focus {
+input:focus, textarea:focus {
     border: 1px solid #7F77DD;
     outline: none;
     box-shadow: #7F77DD 1px 5px 10px;

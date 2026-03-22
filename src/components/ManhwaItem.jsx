@@ -25,7 +25,7 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                     className='container-hover'
                     onClick={() => setPopup(true)}
                 >
-                    {cover && <img src={cover} alt={`Cover de ${title}`} className="manhwa-item-cover"/>}
+                    {cover && <img src={cover} alt={`Cover de ${title}`} className="manhwa-item-cover" id='img-item'/>}
                     <span className="name-hover">{title}</span>
                     <span className="status" style={{background:couleurStatus}}>{status}</span>
                     {nsfw===1 && <span className="nsfw">18+</span>}
