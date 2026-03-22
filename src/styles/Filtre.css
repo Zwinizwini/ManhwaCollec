@@ -1,4 +1,4 @@
-.filtre select {
+.filtre select, .trieSelect {
     border-radius: 5px;
     height: 35px;
     text-align: center;

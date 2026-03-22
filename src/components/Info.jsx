@@ -11,10 +11,12 @@ const Info = ({manhwaList}) => {
     const nbFini = findStatus(manhwaList,"Fini")
     const nbEnCours = findStatus(manhwaList,"En Cours") + findStatus(manhwaList,"Hiatus")
     const nbPasLu = findStatus(manhwaList,"Pas lu")
+    const nbDrop = findStatus(manhwaList,"Drop")
     const nbManhwa = [{nb:manhwaList.length, txt:"Total"},
             {nb:nbFini, txt:"Finis"},
             {nb:nbEnCours, txt:"En Cours"},
-            {nb:nbPasLu, txt:"Pas Lus"}
+            {nb:nbPasLu, txt:"Pas Lus"},
+            {nb:nbDrop, txt:"Drop"}
         ]
 
     return (

@@ -51,18 +51,21 @@
 	transition: all 0.2s ease-in-out;
 }
 
-.status, .nsfw {
+.status, .nsfw, .note-hover {
 	position: absolute;
 	width: 50px;
 	height: 20px;
-	top: 0;
-	right: 0;
+	top: 2px;
+	right: 2px;
 	font-size: 11px;
 	text-align: center;
+	border-radius: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-
 .nsfw {
-	top: 20px;
+	top: 25px;
 	background-color: #A32D2D ;
 }
 
@@ -74,4 +77,11 @@
 	display: flex;
 	justify-content: space-around;
 	width: 100%;
+}
+
+.note-hover {
+	left: 2px;
+	background-color: rgba(0,0,0,0.65);
+	width: 40px;
+	color: #ef9f27;
 }

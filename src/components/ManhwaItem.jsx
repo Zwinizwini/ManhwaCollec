@@ -9,7 +9,7 @@ const styleCouleur = (status) => {
     return '#1D9E75'
 }
 
-const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList, updateManhwalist}) => {
+const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList, updateManhwalist, note}) => {
     const [isPopup, setPopup] = useState(false)
     const dateNow = new Date()
     const [day, month, year] = lastRead.split('/')
@@ -32,6 +32,7 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                         {chapter !== "" && <span>Ch. {chapter}</span>}
                         {lastRead !== "" && lastReadCount !== "" && <span>{lastReadCompter} jours</span>}
                     </div>
+                    {note && <span className='note-hover'>{note}<span>★</span></span>}
                 </div>
             </li>
             {isPopup && 
@@ -51,6 +52,7 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                     id={id}
                     manhwaList={manhwaList}
                     updateManhwalist={updateManhwalist}
+                    note={note}
                 />
             }
         </>

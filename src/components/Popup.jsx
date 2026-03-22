@@ -16,7 +16,7 @@ const styleCouleur = (status) => {
     return '#1D9E75'
 }
 
-const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist}) => {
+const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note}) => {
     useEffect(() => {
         if (isPopup) {
                 document.body.style.overflow = "hidden"
@@ -50,6 +50,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, descri
                 </div>
                 <div className='snd-container'>
                     <h2>{title}</h2>
+                    {note && <div className='note'><span style={{fontSize:"22px"}}>{note}</span><span style={{fontSize:"12px", color:"#888"}}>/10</span></div>}
                     {description && <p className='description'>{description}</p>
                     }
 
@@ -79,6 +80,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, descri
                     manhwaList={manhwaList}
                     id={id}
                     updateManhwalist={updateManhwalist}
+                    note={note}
                 />}
             </div>
         </div>

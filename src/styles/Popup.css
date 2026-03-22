@@ -153,6 +153,10 @@ h2 {
     padding: 5px 10px;
 }
 
+.snd-container h2, .snd-container .note {
+    margin-bottom: 15px;
+}
+
 
 #changeTitle {
     padding: 10px;

@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Searchbar from './Searchbar'
 import Info from './Info'
 import FormAjout from './FormAjout'
+import Sort from './Sort'
 
 
 const handleClick = (manhwaList) => {
@@ -43,9 +44,10 @@ const ManhwaList = ({manhwaList, updateManhwalist, activeList, setActiveList, se
                     <button className='ajouter-manhwa' onClick={() => setForm(true)}>+ Ajouter</button>
                     {isForm && <FormAjout isForm={isForm} setForm={setForm} manhwaList={manhwaList} updateManhwalist={updateManhwalist} setAjoutList={setAjoutList}/>}
                 </div>
+                <Sort manhwaList={manhwaList} updateManhwalist={updateManhwalist}/>
             </div>
             <ul className='manhwa-list'>
-                {activeList.map(({id, title, chapter, status, lastRead, lastReadCount, nsfw, cover,description,link, maxChapter}) => (
+                {activeList.map(({id, title, chapter, status, lastRead, lastReadCount, nsfw, cover,description,link, maxChapter, note}) => (
                     (!filtreStatus || filtreStatus === status) && (parseInt(isNsfw) === 2 || parseInt(isNsfw) === nsfw) ? 
                         <div key={id}>
                             <ManhwaItem 
@@ -62,6 +64,7 @@ const ManhwaList = ({manhwaList, updateManhwalist, activeList, setActiveList, se
                                 maxChapter={maxChapter}
                                 manhwaList={manhwaList}
                                 updateManhwalist={updateManhwalist}
+                                note={note}
                             />
                         </div>
                     : null ) 

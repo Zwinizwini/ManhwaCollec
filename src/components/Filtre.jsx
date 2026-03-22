@@ -17,8 +17,7 @@ const Filtre = ({filtreStatus, setStatus, statusList, isNsfw, setIsNsfw}) => {
                 value={isNsfw}
                 onChange={(e) => {
                     setIsNsfw(e.target.value)
-                    console.log(`Nouvelle valeur ${e.target.value}`)
-                }}
+                    }}
                 name='nsfw' 
             >
                 <option value={2}>All</option>

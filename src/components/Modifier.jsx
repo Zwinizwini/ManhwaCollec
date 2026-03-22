@@ -13,7 +13,7 @@ const styleCouleur = (status) => {
     return '#1D9E75'
 }
 
-const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, setModifier, maxChapter, manhwaList, updateManhwalist}) => {
+const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, setModifier, maxChapter, manhwaList, updateManhwalist, note}) => {
     useEffect(() => {
         const handleKey = (e) => {
             if (e.key === 'Escape') setModifier(false)
@@ -34,7 +34,8 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                 link: updateURL,
                 status: updateStatus,
                 lastRead: updateChapter !== chapter ? new Date().toLocaleDateString('fr-FR') : m.lastRead,
-                lastReadCount: "0"
+                lastReadCount: "0",
+                note: parseFloat(noteM)
             } : m
         ))
         updateManhwalist(updateList)
@@ -48,12 +49,25 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
     const [updateTitle, setTitle] = useState(title)
     const [updateURL, setURL] = useState(link)
     const [updateStatus, setUpdateStatus] = useState(status)
+    const [noteM, setNote] = useState(note)
     
 
 
     return (
         <div className='popupBackground'>
             <div className="popup">
+                <input type="number" min="0" max="10"
+                    value={noteM}
+                    onChange={(e) => {
+                        if (e.target.value > 10) {
+                            setNote(10)
+                        } else if (e.target.value < 0) {
+                            setNote(0)
+                        } else {
+                            setNote(e.target.value)
+                        }
+                    }}    
+                />
                 <div className='container-hover' id='container-popup'>
                     <img src={cover} alt={`Cover de ${title}`} className="manhwa-item-cover"/>
                     <span className="status" style={{background:couleurStatus}}>{status}</span>
