@@ -62,10 +62,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, descri
                     </div>
                     {link && <a href={link+chapter} className='bouton-chap' target='__blank'>Voir le lien de lecture</a>}
                 </div>
-                <div className='closePopup' onClick={() => setPopup(false)}>
-                    <div className='gauche'></div>
-                    <div className='droite'></div>
-                </div>
+                <div className='closePopup' onClick={() => setPopup(false)}></div>
                 <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>
                 {modifier && <Modifier 
                     title={title}

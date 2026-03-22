@@ -234,30 +234,37 @@
     display: none;
 }
 
-.closeAjout .gaucheAjout, .closeAjout .droiteAjout {
-    width: 3px;
-    height: 25px;
-    background-color: rgb(161, 161, 161);
-    border-radius: 5px;
-}
-
 .closeAjout {
     background: #16191f;
     border: 1px solid #555;
     border-radius: 10px;
-    padding: 5px;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
+    position: relative;
 }
 
-.gaucheAjout {
-    transform: translate(2px) rotate(45deg);
+.closeAjout::before,
+.closeAjout::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 2px;
+  background: #888;
+  border-radius: 2px;
 }
 
-.droiteAjout {
-    transform: rotate(-45deg);
+.closeAjout::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.closeAjout::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.closeAjout:hover::before,
+.closeAjout:hover::after {
+  background: #e8e8f0;
 }

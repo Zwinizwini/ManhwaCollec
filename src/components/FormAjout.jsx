@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import '../styles/FormAjout.css'
+import croix from '../assets/croix.png'
 
 const FormAjout = ({isForm, setForm, manhwaList, updateManhwalist, setAjoutList}) => {
 
@@ -67,10 +68,7 @@ const FormAjout = ({isForm, setForm, manhwaList, updateManhwalist, setAjoutList}
             <div className="popupAjout">
                 <div className="head">
                     <h2>Ajouter un manhwa</h2>
-                    <div onClick={() => setForm(false)} className="closeAjout">
-                        <div className="gaucheAjout"></div>
-                        <div className="droiteAjout"></div>
-                    </div>
+                    <div onClick={() => setForm(false)} className="closeAjout"></div>
                 </div>
                 <div className="ajout-body">
                     <label>
