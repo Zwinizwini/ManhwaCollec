@@ -58,6 +58,10 @@
     height: 350px;
 }
 
+#img-popup {
+    height: 100%;
+}
+
 .description {
     width: 500px;
     font-size: 13px;

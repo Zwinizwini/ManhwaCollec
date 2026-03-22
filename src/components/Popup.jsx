@@ -44,7 +44,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, descri
         <div className='popupBackground'>
             <div className="popup">
                 <div className='container-hover' id='container-popup'>
-                    <img src={cover} alt={`Cover de ${title}`} className="manhwa-item-cover"/>
+                    <img src={cover} alt={`Cover de ${title}`} className="manhwa-item-cover" id='img-popup'/>
                     <span className="status" style={{background:couleurStatus}}>{status}</span>
                     {nsfw===1 && <span className="nsfw">18+</span>}
                 </div>
