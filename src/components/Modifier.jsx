@@ -35,7 +35,7 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                 status: updateStatus,
                 lastRead: updateChapter !== chapter ? new Date().toLocaleDateString('fr-FR') : m.lastRead,
                 lastReadCount: "0",
-                note: parseFloat(noteM)
+                note: noteM && parseFloat(noteM)
             } : m
         ))
         updateManhwalist(updateList)
