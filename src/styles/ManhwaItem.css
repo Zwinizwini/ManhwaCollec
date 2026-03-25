@@ -42,7 +42,7 @@
 }
 
 .container-hover:hover {
-	box-shadow: #2a2d35 5px 1px 5px, #2a2d35 -5px -1px 5px;
+	border: 1px solid #7f77dd;
 	transition: all 0.2s ease-in-out;
 }
 
