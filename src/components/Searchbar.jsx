@@ -1,15 +1,12 @@
-import { useState } from "react"
 import '../styles/Searchbar.css'
 
-const Searchbar = ({activeList, setActiveList, manhwaList}) => {
-    const [inputValue, setInputValue] = useState('')
+const Searchbar = ({search, setSearch}) => {
     return (
         <input 
             placeholder="Rechercher un manhwa"
-            value={inputValue}
+            value={search}
             onChange={(e) => {
-                setInputValue(e.target.value)
-                setActiveList(manhwaList.filter((manhwa) => manhwa.title.toLowerCase().includes(e.target.value.toLowerCase())))
+                setSearch(e.target.value)
             }}
         />
 

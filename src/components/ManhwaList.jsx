@@ -8,18 +8,17 @@ import FormAjout from './FormAjout'
 import Sort from './Sort'
 
 
-const handleClick = (manhwaList) => {
-    localStorage.setItem("manhwaList", JSON.stringify(manhwaList))
-}
-
-const ManhwaList = ({manhwaList, updateManhwalist, activeList, setActiveList, setAjoutList}) => {
+const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
     const [filtreStatus, setStatus] = useState('')
     const [isForm, setForm] = useState(false)
     const [isNsfw, setIsNsfw] = useState(2)
+    const [search, setSearch] = useState('')
+
     const statusList = manhwaList.reduce(
         (acc, manhwa) => acc.includes(manhwa.status) ? acc : acc.concat(manhwa.status),
         []
     )
+    const activeList = manhwaList.filter(m => m.title.toLowerCase().includes(search.toLocaleLowerCase()))
 
 
     return (
@@ -30,9 +29,8 @@ const ManhwaList = ({manhwaList, updateManhwalist, activeList, setActiveList, se
                 />
                 <div className="filtre">
                     <Searchbar
-                        activeList={activeList}
-                        setActiveList={setActiveList}
-                        manhwaList={manhwaList}
+                        search={search}
+                        setSearch={setSearch}
                     />
                     <Filtre 
                         filtreStatus={filtreStatus}

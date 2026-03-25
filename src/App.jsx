@@ -7,7 +7,6 @@ import PopupToast from './components/PopupToast'
 function App() {
   const manhwaListStorage = localStorage.getItem("manhwaList")
   const [manhwaList, updateManhwalist] = useState(manhwaListStorage ? JSON.parse(manhwaListStorage) : [])
-  const [activeList, setActiveList] = useState(manhwaList)
   const [ajoutList, setAjoutList] = useState(false)
 
   useEffect(() => {
@@ -21,7 +20,6 @@ function App() {
   useEffect(() => {
       const manhwaListString = JSON.stringify(manhwaList)
       localStorage.setItem('manhwaList', manhwaListString)
-      setActiveList(manhwaList)     
   }, [manhwaList])
   
 
@@ -32,8 +30,6 @@ function App() {
       <ManhwaList 
         manhwaList={manhwaList} 
         updateManhwalist={updateManhwalist} 
-        activeList={activeList} 
-        setActiveList={setActiveList}
         setAjoutList={setAjoutList}
       />
       {ajoutList && <PopupToast manhwaList={manhwaList}/>}
