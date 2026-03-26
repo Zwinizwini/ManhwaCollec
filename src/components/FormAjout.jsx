@@ -1,13 +1,40 @@
 import { useState, useEffect, useContext } from "react"
 import '../styles/FormAjout.css'
 import { ManhwaContext } from "../utils/Context"
+import styled from "styled-components"
+import colors from "../datas/colors"
+
+const BtnHead = styled.button`
+    background-color: ${({rapid}) =>
+        rapid ? colors.violet : '#23262c'};
+    color: ${({rapid}) =>
+        rapid ? 'white' : '#888'};
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+    border: 1px solid ${({rapid}) =>
+        rapid ? colors.violet : '#888'};
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+`
 
 const FormAjout = ({isForm, setForm, setAjoutList}) => {
 
     const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
 
+    async function recupManhwa(id) {
+        try {
+            const response = await fetch(`https://api.jikan.moe/v4/manga/${id}`)
+            const {data} = await response.json()
+            ajoutManhwa(data) 
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     const btnAjout = () => {
-        ajoutManhwa()
+        idMAL ? recupManhwa(idMAL) : ajoutManhwa()
         setForm(false)
     }
 
@@ -16,25 +43,38 @@ const FormAjout = ({isForm, setForm, setAjoutList}) => {
         return iti.reduce((acc, mot) => acc + mot[0], "").toLocaleUpperCase()
     }
 
-    const ajoutManhwa = () => {
+    const ajoutManhwa = (data) => {
         let dateJour = ""
+        let maxChapterFinal, titre, image
         const maxChapterCond = maxChapter < chapter ? chapter : maxChapter
         if (statusAjout !== "Pas lu") {
             dateJour = new Date().toLocaleDateString('fr-FR')
         }
+        if (data) {
+            maxChapterFinal = data.chapters ? data.chapters : maxChapterCond
+            titre = data.titles[0].title ? data.titles[0].title : title
+            image = data.images.jpg.image_url ? data.images.jpg.image_url : cover
+        } else {
+            maxChapterFinal = maxChapterCond
+            titre = title
+            image = cover
+        }
         const manhwaObj = {
-            id: initialManhwa(title)+manhwaList.length,
-            title: `${title}`,
+            id: initialManhwa(titre)+manhwaList.length,
+            title: `${titre}`,
             chapter: `${chapter}`,
-            maxChapter: maxChapterCond,
+            maxChapter: `${maxChapterFinal}`,
             status: statusAjout,
             link: `${urlChapt}`,
             lastReadCount: "",
             lastRead: `${dateJour}`,
             description: `${desc}`,
             nsfw: nsfw,
-            cover: `${cover}`
+            cover: `${image}`,
+            ...(idMAL && { idmal: idMAL })
         }
+        console.log(manhwaObj);
+        
         const newList = [...manhwaList, manhwaObj]
         saveManhwaList(newList)
         setAjoutList(true)
@@ -64,6 +104,8 @@ const FormAjout = ({isForm, setForm, setAjoutList}) => {
     const [desc, setDesc] = useState('')
     const [statusAjout, setStatusAjout] = useState('Pas lu')
     const [nsfw, setNSFW] = useState(0)
+    const [idMAL, setIdMAL] = useState('')
+    const [rapid, setRapid] = useState(true)
 
     return (
         <div className="popupAjoutBack">
@@ -73,12 +115,23 @@ const FormAjout = ({isForm, setForm, setAjoutList}) => {
                     <div onClick={() => setForm(false)} className="closeAjout"></div>
                 </div>
                 <div className="ajout-body">
-                    <label>
-                        Titre <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Ex: My Bias..."/>
-                    </label>
-                    <label>
-                        URL de la cover <input type="text" value={cover} onChange={(e) => setCover(e.target.value)} placeholder="https://..."/>
-                    </label>
+                    <BtnHead onClick={() => setRapid(true)} rapid={rapid}>Par Id</BtnHead>
+                    <BtnHead onClick={() => setRapid(false)} rapid={!rapid}>Manuel</BtnHead>
+                    <div>
+                        {rapid ? <label>
+                            Id Mal <input type="number" value={idMAL} onChange={(e) => setIdMAL(e.target.value)} placeholder="https://myanimelist.net/manga/--->178671<---"/>
+                        </label>
+                        :
+                        <>
+                        <label>
+                            Titre <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Ex: My Bias..."/>
+                        </label>
+                        <label>
+                            URL de la cover <input type="text" value={cover} onChange={(e) => setCover(e.target.value)} placeholder="https://..."/>
+                        </label>
+                        </>
+                        }
+                    </div>
                     <div className="radio-status">
                         <label className="bleu">
                             <input type="radio" name="radioStatus" value="En Cours" onClick={() => setStatusAjout("En Cours")}/> En Cours
