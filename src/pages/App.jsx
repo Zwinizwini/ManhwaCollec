@@ -4,6 +4,7 @@ import PopupToast from '../components/PopupToast'
 import { ManhwaContext } from '../utils/Context'
 
 function App() {
+  //netoyage
   const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
   const [ajoutList, setAjoutList] = useState(false)
 
