@@ -15,7 +15,7 @@ code {
 .CC {
   position: absolute;
   width: 60px;
-  top: 2px;
+  top: 4px;
   left: 50%;
   transform: translate(-50%);
 }

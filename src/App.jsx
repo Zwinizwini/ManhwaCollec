@@ -1,6 +1,4 @@
-import Banner from './components/Banner'
 import ManhwaList from './components/ManhwaList'
-import CC from './assets/CC.png'
 import { useState, useEffect } from 'react'
 import PopupToast from './components/PopupToast'
 
@@ -24,9 +22,7 @@ function App() {
   
 
   return (
-    <>
-      <Banner />
-      <img src={CC} alt="tkt" className='CC'/>
+    <>      
       <ManhwaList 
         manhwaList={manhwaList} 
         updateManhwalist={updateManhwalist} 

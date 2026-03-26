@@ -1,9 +1,12 @@
 .banner {
   background-color: #16191f;
-  margin-top: 0px;
   padding: 20px;
+  margin-bottom: 21px;
   color: white;
   border-bottom: 1px solid #2a2d35;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #violet {
