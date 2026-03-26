@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { ManhwaContext } from "../utils/Context"
 
 
-const Sort = ({manhwaList, updateManhwalist}) => {
+const Sort = () => {
+    const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
     const trierLocal = localStorage.getItem("trier")
     const [trierState, setTrierState] = useState(trierLocal ? JSON.parse(trierLocal) : 0)
 
@@ -11,7 +13,7 @@ const Sort = ({manhwaList, updateManhwalist}) => {
 
     const trier = (e) => {
         if (e === "1") {           
-            updateManhwalist(manhwaList.toSorted((a,b) => {
+            saveManhwaList(manhwaList.toSorted((a,b) => {
                 const noteA = a.note ? a.note : 0
                 const noteB = b.note ? b.note : 0
                 if (noteA < noteB) return 1
@@ -19,7 +21,7 @@ const Sort = ({manhwaList, updateManhwalist}) => {
                 return 0
             }))
         } else if (e === "2") {
-            updateManhwalist(manhwaList.toSorted((a,b) => {
+            saveManhwaList(manhwaList.toSorted((a,b) => {
                 const noteA = a.note ? a.note : 0
                 const noteB = b.note ? b.note : 0
                 if (noteA < noteB) return -1

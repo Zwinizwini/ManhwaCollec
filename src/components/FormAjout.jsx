@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import '../styles/FormAjout.css'
-import croix from '../assets/croix.png'
+import { ManhwaContext } from "../utils/Context"
 
-const FormAjout = ({isForm, setForm, manhwaList, updateManhwalist, setAjoutList}) => {
+const FormAjout = ({isForm, setForm, setAjoutList}) => {
+
+    const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
 
     const btnAjout = () => {
         ajoutManhwa()
@@ -34,7 +36,7 @@ const FormAjout = ({isForm, setForm, manhwaList, updateManhwalist, setAjoutList}
             cover: `${cover}`
         }
         const newList = [...manhwaList, manhwaObj]
-        updateManhwalist(newList)
+        saveManhwaList(newList)
         setAjoutList(true)
     }
 

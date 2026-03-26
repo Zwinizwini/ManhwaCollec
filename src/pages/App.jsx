@@ -1,10 +1,10 @@
-import ManhwaList from './components/ManhwaList'
-import { useState, useEffect } from 'react'
-import PopupToast from './components/PopupToast'
+import ManhwaList from '../components/ManhwaList'
+import { useState, useEffect, useContext } from 'react'
+import PopupToast from '../components/PopupToast'
+import { ManhwaContext } from '../utils/Context'
 
 function App() {
-  const manhwaListStorage = localStorage.getItem("manhwaList")
-  const [manhwaList, updateManhwalist] = useState(manhwaListStorage ? JSON.parse(manhwaListStorage) : [])
+  const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
   const [ajoutList, setAjoutList] = useState(false)
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function App() {
     <>      
       <ManhwaList 
         manhwaList={manhwaList} 
-        updateManhwalist={updateManhwalist} 
+        updateManhwalist={saveManhwaList} 
         setAjoutList={setAjoutList}
       />
       {ajoutList && <PopupToast manhwaList={manhwaList}/>}

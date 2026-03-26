@@ -1,4 +1,6 @@
+import { useContext } from 'react'
 import '../styles/Info.css'
+import { ManhwaContext } from '../utils/Context'
 
 function findStatus(manhwaList, status) {
     return manhwaList.reduce(
@@ -7,7 +9,8 @@ function findStatus(manhwaList, status) {
     )
 }
 
-const Info = ({manhwaList}) => {
+const Info = () => {
+    const {manhwaList} = useContext(ManhwaContext)
     const nbFini = findStatus(manhwaList,"Fini")
     const nbEnCours = findStatus(manhwaList,"En Cours") + findStatus(manhwaList,"Hiatus")
     const nbPasLu = findStatus(manhwaList,"Pas lu")

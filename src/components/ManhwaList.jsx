@@ -24,9 +24,7 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
     return (
         <div className='container'>
             <div className='menu'>
-                <Info 
-                    manhwaList={manhwaList}    
-                />
+                <Info />
                 <div className="filtre">
                     <Searchbar
                         search={search}
@@ -40,9 +38,9 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
                         setIsNsfw={setIsNsfw}
                     />
                     <button className='ajouter-manhwa' onClick={() => setForm(true)}>+ Ajouter</button>
-                    {isForm && <FormAjout isForm={isForm} setForm={setForm} manhwaList={manhwaList} updateManhwalist={updateManhwalist} setAjoutList={setAjoutList}/>}
+                    {isForm && <FormAjout isForm={isForm} setForm={setForm} setAjoutList={setAjoutList}/>}
                 </div>
-                <Sort manhwaList={manhwaList} updateManhwalist={updateManhwalist}/>
+                <Sort />
             </div>
             <ul className='manhwa-list'>
                 {activeList.map(({id, title, chapter, status, lastRead, lastReadCount, nsfw, cover,description,link, maxChapter, note}) => (
