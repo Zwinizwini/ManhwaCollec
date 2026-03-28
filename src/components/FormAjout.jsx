@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react"
 import '../styles/FormAjout.css'
 import { ManhwaContext } from "../utils/Context"
 import styled from "styled-components"
-import colors from "../datas/colors"
+import {colors} from "../utils/colors"
 
 const BtnHead = styled.button`
     background-color: ${({rapid}) =>

@@ -2,19 +2,13 @@ import { useEffect, useState } from 'react'
 import '../styles/Popup.css'
 import PopupInfo from './PopupInfo'
 import Modifier from './Modifier'
+import { styleCouleur } from '../utils/colors'
 
 //Permet de tranformer le nom du manhwa en ses initial
 // const initialManhwa = (manhwa) => {
 //     const iti = manhwa.split(" ")
 //     return iti.reduce((acc, mot) => acc + mot[0], "").toLocaleUpperCase()
 // }
-
-const styleCouleur = (status) => {
-    if (status === "En Cours" || status === "Hiatus") return '#378ADD'
-    if (status === "Pas lu") return '#555555'
-    if (status === "Drop") return '#791F1F'
-    return '#1D9E75'
-}
 
 const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note}) => {
     useEffect(() => {

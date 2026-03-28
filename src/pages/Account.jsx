@@ -1,6 +1,6 @@
 import WIP from '../assets/WIP.gif'
 import styled from 'styled-components'
-import colors from '../datas/colors'
+import {colors} from '../utils/colors'
 
 const ImgStyled = styled.img`
     margin-top: 20px;

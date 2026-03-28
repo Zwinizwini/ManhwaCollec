@@ -1,13 +1,7 @@
 import { useState } from 'react'
 import '../styles/ManhwaItem.css'
 import Popup from './Popup'
-
-const styleCouleur = (status) => {
-    if (status === "En Cours" || status === "Hiatus") return '#378ADD'
-    if (status === "Pas lu") return '#555555'
-    if (status === "Drop") return '#791F1F'
-    return '#1D9E75'
-}
+import { styleCouleur, colors } from '../utils/colors'
 
 const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList, updateManhwalist, note}) => {
     const [isPopup, setPopup] = useState(false)
@@ -15,8 +9,13 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
     const [day, month, year] = lastRead.split('/')
     const lastReadDate = new Date(`${year}-${month}-${day}`)
     const lastReadCompter = Math.floor((dateNow - lastReadDate) / (1000 * 60 * 60 * 24))
-    const couleurStatus = styleCouleur(status)
     const gradientSeuil = Math.round((parseInt(chapter)/maxChapter) * 100)
+
+    const progressionBar = () => {
+        if (gradientSeuil < 100) return '#378ADD'
+        if (lastReadCompter >= "7" && status !== "Fini") return colors.violet
+        return '#1D9E75'
+    }
 
     return (
         <>
@@ -27,14 +26,14 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                 >
                     {cover && <img src={cover} alt={`Cover de ${title}`} className="manhwa-item-cover" id='img-item'/>}
                     <span className="name-hover">{title}</span>
-                    <span className="status" style={{background:couleurStatus}}>{status}</span>
+                    <span className="status" style={{background:styleCouleur(status)}}>{status}</span>
                     {nsfw===1 && <span className="nsfw">18+</span>}
                     <div className='info-hover'>
                         <div>
                             {chapter !== "" && <span>Ch. {chapter}</span>}
                             {lastRead !== "" && lastReadCount !== "" && <span>{lastReadCompter} jours</span>}
                         </div>
-                        <div className='progression-bar' style={{background: `linear-gradient(to right,#39FF14 ${gradientSeuil}%, black ${gradientSeuil}%)`}}></div>
+                        <div className='progression-bar' style={{background: `linear-gradient(to right, ${progressionBar()} ${gradientSeuil}%, black ${gradientSeuil}%)`}}></div>
                     </div>
                     {note && <span className='note-hover'>{note}<span>★</span></span>}
                 </div>

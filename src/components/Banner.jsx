@@ -2,7 +2,7 @@ import '../styles/Banner.css'
 import CC from '../assets/CC.png'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import colors from '../datas/colors'
+import {colors} from '../utils/colors'
 
 const StyledLink = styled(Link)`
     font-size: 2em;
