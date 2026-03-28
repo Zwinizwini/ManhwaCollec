@@ -3,14 +3,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #111318;
-    font-family: 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif;
 
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
 .CC {
   position: absolute;

@@ -29,7 +29,7 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                 title: updateTitle,
                 description: desc,
                 chapter: updateChapter,
-                maxChapter: updateChapter > maxChapter ? updateChapter : maxChapter,
+                maxChapter: updateChapter > updateMaxChap ? updateChapter : updateMaxChap,
                 cover: urlCover,
                 link: updateURL,
                 status: updateStatus,
@@ -50,6 +50,7 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
     const [updateURL, setURL] = useState(link)
     const [updateStatus, setUpdateStatus] = useState(status)
     const [noteM, setNote] = useState(note)
+    const [updateMaxChap, setMaxChap] = useState(maxChapter)
     
 
 
@@ -79,8 +80,8 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
 
                     <div className='popupInfo'>
                         <div>
-                            <p>URL</p>
-                            <input type="text" value={updateURL} onChange={(e) => setURL(e.target.value)}/>
+                            <p>Max Chapter</p>
+                            <input type="number" value={updateMaxChap} onChange={(e) => setMaxChap(e.target.value)}/>
                         </div>
                         <div>
                             <p>Dernier Lu</p>
@@ -102,6 +103,10 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                                 <option value="Pas lu">Pas lu</option>
                                 <option value="Drop">Drop</option>
                             </select>
+                        </div>
+                        <div>
+                            <p>URL Lecture</p>
+                            <input type="text" value={updateURL} onChange={(e) => setURL(e.target.value)}/>
                         </div>
                     </div>
                     <button onClick={() => handleMAJ()} className='btn-modif'>Mettre à Jour</button>

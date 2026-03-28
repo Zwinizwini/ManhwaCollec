@@ -1,4 +1,5 @@
-.filtre select, .trieSelect {
+.filtre select,
+.trieSelect {
     border-radius: 5px;
     height: 35px;
     text-align: center;
@@ -7,6 +8,9 @@
     background-color: #1c1f27;
     border: 1px solid #2a2d35;
     box-shadow: #2a2d35 1px 1px 5px;
+    width: 110px;
+    display: flex;
+    align-items: center;
 }
 
 .sous-filtre {
@@ -14,4 +18,32 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
+}
+
+.filtre select,
+.filtre select::picker(select),
+.trieSelect,
+.trieSelect::picker(select) {
+	appearance: base-select;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+}
+
+
+.filtre select::picker(select),
+.trieSelect::picker(select) {
+	appearance: base-select;
+	background-color: #1c1f27;
+    border: 1px solid #7F77DD;
+    box-shadow: #7F77DD 1px 1px 5px;
+    border-radius: 0 0 10px 10px;
+    color: #888;
+    padding: 5px 0;
+}
+
+.filtre select:focus-within,
+.trieSelect:focus-within {
+    border: 1px solid #7F77DD;
+    box-shadow: #7F77DD 1px 1px 5px;
+    border-radius: 5px 5px 0 0;
 }
