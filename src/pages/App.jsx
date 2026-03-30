@@ -65,6 +65,46 @@ function App() {
   }
 
 
+    const trier = (e, data) => {
+        if (e === "1") {  
+            saveManhwaList(data.toSorted((a,b) => {
+                const noteA = a.note ? a.note : 0
+                const noteB = b.note ? b.note : 0
+                if (noteA < noteB) return 1
+                if (noteA > noteB) return -1
+                return 0
+            }))
+        } else if (e === "2") {
+            saveManhwaList(data.toSorted((a,b) => {
+                const noteA = a.note ? a.note : 0
+                const noteB = b.note ? b.note : 0
+                if (noteA < noteB) return -1
+                if (noteA > noteB) return 1
+                return 0
+            }))
+        } else {
+            console.log("dernier if trier")
+            console.log(data)
+            saveManhwaList(data)
+            console.log(manhwaList)
+
+        }
+    }
+
+    useEffect(() => {
+        const getManhwas = async () => {
+            const { data, error } = await supabase
+                .from('manhwas')
+                .select('*')
+            
+            if (error) console.error(error)
+            if (data) {
+                const trieLocal = localStorage.getItem("trier")
+                trier(trieLocal ? JSON.parse(trieLocal) : "0", data)
+            }
+        }
+        getManhwas()
+    }, [])
   
 
   return (

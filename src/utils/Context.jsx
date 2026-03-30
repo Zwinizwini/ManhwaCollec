@@ -1,5 +1,4 @@
-import { useState, createContext, useEffect } from "react";
-import { supabase } from "../supabase";
+import { useState, createContext} from "react";
 import {styled, keyframes} from 'styled-components'
 import { colors } from '../utils/colors'
 
@@ -30,49 +29,6 @@ export const ManhwaProvider = ({children}) => {
     // const [manhwaList, updateManhwalist] = useState(manhwaListStorage ? JSON.parse(manhwaListStorage) : [])
 
     const [manhwaList, updateManhwalist] = useState([])
-    const [loading, setLoading] = useState(true)
-
-    const trier = (e, data) => {
-        if (e === "1") {  
-            updateManhwalist(data.toSorted((a,b) => {
-                const noteA = a.note ? a.note : 0
-                const noteB = b.note ? b.note : 0
-                if (noteA < noteB) return 1
-                if (noteA > noteB) return -1
-                return 0
-            }))
-        } else if (e === "2") {
-            updateManhwalist(data.toSorted((a,b) => {
-                const noteA = a.note ? a.note : 0
-                const noteB = b.note ? b.note : 0
-                if (noteA < noteB) return -1
-                if (noteA > noteB) return 1
-                return 0
-            }))
-        } else {
-            console.log("dernier if trier")
-            console.log(data)
-            console.log(manhwaList)
-            updateManhwalist(data)
-        }
-    }
-
-    useEffect(() => {
-        const getManhwas = async () => {
-            setLoading(true)
-            const { data, error } = await supabase
-                .from('manhwas')
-                .select('*')
-            
-            if (error) console.error(error)
-            if (data) {
-                setLoading(false)
-                const trieLocal = localStorage.getItem("trier")
-                trier(trieLocal ? JSON.parse(trieLocal) : "0", data)
-            }
-        }
-        getManhwas()
-    }, [])
     
     const saveManhwaList = (ml) => {
         updateManhwalist(ml)
@@ -80,7 +36,7 @@ export const ManhwaProvider = ({children}) => {
 
     return (
         <ManhwaContext.Provider value={{manhwaList, saveManhwaList}}>
-            {loading ? <Loader/> : children}
+            {children}
         </ManhwaContext.Provider>
     )
 }
