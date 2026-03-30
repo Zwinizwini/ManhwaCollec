@@ -49,6 +49,8 @@ export const ManhwaProvider = ({children}) => {
                 if (noteA > noteB) return 1
                 return 0
             }))
+        } else {
+            console.log("dernier if trier")
         }
     }
 
