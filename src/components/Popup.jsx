@@ -10,7 +10,7 @@ import { styleCouleur } from '../utils/colors'
 //     return iti.reduce((acc, mot) => acc + mot[0], "").toLocaleUpperCase()
 // }
 
-const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note}) => {
+const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note}) => {
     useEffect(() => {
         if (isPopup) {
                 document.body.style.overflow = "hidden"
@@ -72,6 +72,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, descri
                     id={id}
                     updateManhwalist={updateManhwalist}
                     note={note}
+                    lastRead={lastRead}
                 />}
             </div>
         </div>

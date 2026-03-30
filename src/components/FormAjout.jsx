@@ -3,6 +3,7 @@ import '../styles/FormAjout.css'
 import { ManhwaContext } from "../utils/Context"
 import styled from "styled-components"
 import {colors} from "../utils/colors"
+import { supabase } from "../supabase"
 
 const BtnHead = styled.button`
     background-color: ${({rapid}) =>
@@ -19,8 +20,7 @@ const BtnHead = styled.button`
     cursor: pointer;
 `
 
-const FormAjout = ({isForm, setForm, setAjoutList}) => {
-
+const FormAjout = ({isForm, setForm, setAjoutList, user}) => {
     const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
 
     async function recupManhwa(id) {
@@ -38,18 +38,18 @@ const FormAjout = ({isForm, setForm, setAjoutList}) => {
         setForm(false)
     }
 
-    const initialManhwa = (manhwa) => {
-        const iti = manhwa.split(" ")
-        return iti.reduce((acc, mot) => acc + mot[0], "").toLocaleUpperCase()
+    const addManhwa = async (manhwa) => {
+        const { data, error } = await supabase
+            .from('manhwas')
+            .insert(manhwa)
+        
+        if (error) console.error(error)
+        return data
     }
 
     const ajoutManhwa = (data) => {
-        let dateJour = ""
         let maxChapterFinal, titre, image
         const maxChapterCond = maxChapter < chapter ? chapter : maxChapter
-        if (statusAjout !== "Pas lu") {
-            dateJour = new Date().toLocaleDateString('fr-FR')
-        }
         if (data) {
             maxChapterFinal = data.chapters ? data.chapters : maxChapterCond
             titre = data.titles[0].title ? data.titles[0].title : title
@@ -60,17 +60,17 @@ const FormAjout = ({isForm, setForm, setAjoutList}) => {
             image = cover
         }
         const manhwaObj = {
-            id: initialManhwa(titre)+manhwaList.length,
-            title: `${titre}`,
-            chapter: `${chapter}`,
-            maxChapter: `${maxChapterFinal}`,
+            title: titre,
+            user_id: user.id,
+            chapter: parseInt(chapter),
+            maxChapter: parseInt(maxChapterFinal),
             status: statusAjout,
-            link: `${urlChapt}`,
+            link: urlChapt,
             lastReadCount: "",
-            lastRead: `${dateJour}`,
-            description: `${desc}`,
+            lastRead: statusAjout !== "Pas lu" ? new Date().toISOString() : null,
+            description: desc,
             nsfw: nsfw,
-            cover: `${image}`,
+            cover: image,
             ...(idMAL && { idmal: idMAL })
         }
         console.log(manhwaObj);
@@ -78,6 +78,7 @@ const FormAjout = ({isForm, setForm, setAjoutList}) => {
         const newList = [...manhwaList, manhwaObj]
         saveManhwaList(newList)
         setAjoutList(true)
+        addManhwa(manhwaObj)
     }
 
     useEffect(() => {

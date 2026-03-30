@@ -1,0 +1,47 @@
+.compte-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+    gap: 15px;
+}
+
+.compte-body label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+}
+
+.compte-body input {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: #30302e;
+    border: 1px solid #888;
+    color: white;
+    height: 30px;
+}
+
+.compte-body button {
+    margin-top: 10px;
+    width: 150px;
+    height: 40px;
+    border: 1px solid #3C3489;
+    background: #7f77dd;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.compte-body button:hover {
+    border: 1px solid #3C3489;
+    background: #26215C;
+    color: #AFA9EC;
+}
+
+.compte-body div {
+    display: flex;
+    gap: 20px;
+}

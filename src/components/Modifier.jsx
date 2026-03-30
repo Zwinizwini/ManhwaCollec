@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import '../styles/Popup.css'
 import { styleCouleur } from '../utils/colors'
+import { supabase } from '../supabase'
 
-const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, setModifier, maxChapter, manhwaList, updateManhwalist, note}) => {
+const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, setModifier, maxChapter, manhwaList, updateManhwalist, note, lastRead}) => {
     useEffect(() => {
         const handleKey = (e) => {
             if (e.key === 'Escape') setModifier(false)
@@ -11,7 +12,31 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
         return () => window.removeEventListener('keydown', handleKey)
     }, [])
 
+    const updateManhwa = async (id, updates) => {
+        const { data, error } = await supabase
+            .from('manhwas')
+            .update(updates)
+            .eq('id', id)
+        
+        if (error) console.error(error)
+        return data
+    }
+
     const handleMAJ = () => {
+        console.log(id);
+        
+        const manhwaUpdate = {
+            title: updateTitle,
+            description: desc,
+            chapter: parseInt(updateChapter),
+            maxChapter: parseInt(updateChapter) > parseInt(updateMaxChap) ? parseInt(updateChapter) : parseInt(updateMaxChap),
+            cover: urlCover,
+            link: updateURL,
+            status: updateStatus,
+            lastRead: updateChapter !== chapter ? new Date().toISOString() : lastRead,
+            lastReadCount: "0",
+            note: noteM && parseFloat(noteM)
+        }
         const updateList = manhwaList.map((m) => (
             m.id === id ? {
                 ...m,
@@ -27,6 +52,7 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                 note: noteM && parseFloat(noteM)
             } : m
         ))
+        updateManhwa(id, manhwaUpdate)
         updateManhwalist(updateList)
         setModifier(false)
     }

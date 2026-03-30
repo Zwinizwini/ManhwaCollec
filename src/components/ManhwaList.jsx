@@ -8,7 +8,7 @@ import FormAjout from './FormAjout'
 import Sort from './Sort'
 
 
-const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
+const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList, user}) => {
     const [filtreStatus, setStatus] = useState('')
     const [isForm, setForm] = useState(false)
     const [isNsfw, setIsNsfw] = useState(2)
@@ -38,7 +38,7 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
                         setIsNsfw={setIsNsfw}
                     />
                     <button className='ajouter-manhwa' onClick={() => setForm(true)}>+ Ajouter</button>
-                    {isForm && <FormAjout isForm={isForm} setForm={setForm} setAjoutList={setAjoutList}/>}
+                    {isForm && <FormAjout isForm={isForm} setForm={setForm} setAjoutList={setAjoutList} user={user}/>}
                 </div>
                 <Sort />
             </div>

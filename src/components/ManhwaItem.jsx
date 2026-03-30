@@ -6,8 +6,7 @@ import { styleCouleur, colors } from '../utils/colors'
 const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList, updateManhwalist, note}) => {
     const [isPopup, setPopup] = useState(false)
     const dateNow = new Date()
-    const [day, month, year] = lastRead.split('/')
-    const lastReadDate = new Date(`${year}-${month}-${day}`)
+    const lastReadDate = lastRead ? new Date(lastRead) : ""
     const lastReadCompter = Math.floor((dateNow - lastReadDate) / (1000 * 60 * 60 * 24))
     const gradientSeuil = Math.round((parseInt(chapter)/maxChapter) * 100)
 
