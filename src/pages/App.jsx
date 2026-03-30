@@ -10,7 +10,6 @@ import Pasco from '../components/Pasco'
 function App() {
   //netoyage
   const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
-  console.log(manhwaList)
   const [ajoutList, setAjoutList] = useState(false)
   const [user, setUser] = useState(null)
 
