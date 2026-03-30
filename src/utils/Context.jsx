@@ -51,6 +51,7 @@ export const ManhwaProvider = ({children}) => {
             }))
         } else {
             console.log("dernier if trier")
+            updateManhwalist(data)
         }
     }
 
