@@ -65,7 +65,7 @@ export const ManhwaProvider = ({children}) => {
             if (data) {
                 setLoading(false)
                 const trieLocal = localStorage.getItem("trier")
-                trier(trieLocal ? JSON.parse(trieLocal) : 0, data)
+                trier(trieLocal ? JSON.parse(trieLocal) : "0", data)
             }
         }
         getManhwas()
