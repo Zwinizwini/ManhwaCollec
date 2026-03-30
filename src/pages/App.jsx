@@ -5,13 +5,14 @@ import { ManhwaContext } from '../utils/Context'
 import { supabase } from '../supabase'
 import { Link } from 'react-router-dom'
 import Pasco from '../components/Pasco'
+import {useAuth} from '../utils/AuthContext'
 
 
 function App() {
   //netoyage
+  const {user} = useAuth()
   const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
   const [ajoutList, setAjoutList] = useState(false)
-  const [user, setUser] = useState(null)
 
   useEffect(() => {
     if (ajoutList) {
@@ -21,18 +22,6 @@ function App() {
     }
   }, [ajoutList])
 
-  useEffect(() => {
-    supabase.auth.getUser().then(({data: {user}}) => {
-      setUser(user)
-    })
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setUser(session?.user ?? null)
-      }
-    )
-    return () => subscription.unsubscribe()
-  }, [])
 
   const trier = (e, data) => {
       if (e === "1") {  
@@ -52,11 +41,7 @@ function App() {
               return 0
           }))
       } else {
-          console.log("dernier if trier")
-          console.log(data)
           saveManhwaList(data)
-          console.log(manhwaList)
-
       }
   }
 
