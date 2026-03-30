@@ -104,7 +104,7 @@ function App() {
             }
         }
         getManhwas()
-    }, [])
+    }, [user])
   
 
   return (
