@@ -3,6 +3,7 @@ import CC from '../assets/CC.png'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import {colors} from '../utils/colors'
+import { useAuth } from '../utils/AuthContext'
 
 const StyledLink = styled(Link)`
     font-size: 2em;
@@ -27,11 +28,17 @@ const AccountLink = styled(Link)`
 `
 
 const Banner = () => {
+    const {user} = useAuth()
+
+    const initialPseudo = () => {
+        return user ? user.user_metadata.pseudo.slice(0,2).toUpperCase() : "ZW"
+    }
+
     return (
     <div className="banner">
         <StyledLink to='/'>Manhwa<span id='violet'>Collec</span></StyledLink>
         <img src={CC} alt="tkt" className='CC'/>
-        <AccountLink to="/account">ZW</AccountLink>
+        <AccountLink to="/account">{initialPseudo()}</AccountLink>
     </div>
 )
 

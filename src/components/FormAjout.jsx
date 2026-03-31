@@ -4,6 +4,7 @@ import { ManhwaContext } from "../utils/Context"
 import styled from "styled-components"
 import {colors} from "../utils/colors"
 import { supabase } from "../supabase"
+import { useAuth } from "../utils/AuthContext"
 
 const BtnHead = styled.button`
     background-color: ${({rapid}) =>
@@ -20,8 +21,9 @@ const BtnHead = styled.button`
     cursor: pointer;
 `
 
-const FormAjout = ({isForm, setForm, setAjoutList, user}) => {
+const FormAjout = ({isForm, setForm, setAjoutList}) => {
     const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
+    const {user} = useAuth()
 
     async function recupManhwa(id) {
         try {
@@ -66,8 +68,8 @@ const FormAjout = ({isForm, setForm, setAjoutList, user}) => {
             maxChapter: parseInt(maxChapterFinal),
             status: statusAjout,
             link: urlChapt,
-            lastReadCount: "",
-            lastRead: statusAjout !== "Pas lu" ? new Date().toISOString() : null,
+            lastReadCount: statusAjout !== "Pas lu" ? "0" : "",
+            lastRead: new Date().toISOString(),
             description: desc,
             nsfw: nsfw,
             cover: image,

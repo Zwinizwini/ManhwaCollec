@@ -24,7 +24,7 @@
     height: 30px;
 }
 
-.compte-body button {
+.compte-body button, .btnDeco {
     margin-top: 10px;
     width: 150px;
     height: 40px;
@@ -35,7 +35,7 @@
     cursor: pointer;
 }
 
-.compte-body button:hover {
+.compte-body button:hover, .btnDeco:hover {
     border: 1px solid #3C3489;
     background: #26215C;
     color: #AFA9EC;

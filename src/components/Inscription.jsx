@@ -13,6 +13,7 @@ const inscription = async (email, mdp, pseudo) => {
         }
     })
     if (error) console.error(error)
+    alert(`Email de confirmation envoyé à l'adress mail : ${email}`)
     return data
 }
 

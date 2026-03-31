@@ -22,9 +22,7 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
         return data
     }
 
-    const handleMAJ = () => {
-        console.log(id);
-        
+    const handleMAJ = () => {        
         const manhwaUpdate = {
             title: updateTitle,
             description: desc,
@@ -47,7 +45,7 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                 cover: urlCover,
                 link: updateURL,
                 status: updateStatus,
-                lastRead: updateChapter !== chapter ? new Date().toLocaleDateString('fr-FR') : m.lastRead,
+                lastRead: updateChapter !== chapter ? new Date().toISOString() : m.lastRead,
                 lastReadCount: "0",
                 note: noteM && parseFloat(noteM)
             } : m

@@ -11,9 +11,6 @@ const connexion = async (email, mdp) => {
     return data
 }
 
-const deconnexion = async () => {
-    await supabase.auth.signOut()
-}
 
 const Connexion = () => {
     const [email, setEmail] = useState("")
@@ -31,7 +28,6 @@ const Connexion = () => {
             </label>
             <div>
                 <button onClick={() => connexion(email, mdp)}>Connexion</button>
-                <button onClick={() => deconnexion()}>Deconnexion</button>
             </div>
         </div>
     )
