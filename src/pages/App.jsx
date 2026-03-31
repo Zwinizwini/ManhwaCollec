@@ -1,7 +1,7 @@
 import ManhwaList from '../components/ManhwaList'
 import { useState, useEffect, useContext } from 'react'
 import PopupToast from '../components/PopupToast'
-import { ManhwaContext } from '../utils/Context'
+import { ManhwaContext, UserContext } from '../utils/Context'
 import { Link } from 'react-router-dom'
 import Pasco from '../components/Pasco'
 import {useAuth} from '../utils/AuthContext'
@@ -10,8 +10,13 @@ import {useAuth} from '../utils/AuthContext'
 function App() {
   //netoyage
   const {user} = useAuth()
+  const {setIsUser} = useContext(UserContext)
   const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
   const [ajoutList, setAjoutList] = useState(false)
+
+  useEffect(() => {
+    setIsUser(false)
+  }, [])
 
   useEffect(() => {
     if (ajoutList) {

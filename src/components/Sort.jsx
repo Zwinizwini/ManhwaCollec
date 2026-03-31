@@ -1,9 +1,7 @@
-import { useContext, useEffect, useState } from "react"
-import { ManhwaContext } from "../utils/Context"
+import { useEffect, useState } from "react"
 
 
-const Sort = () => {
-    const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
+const Sort = ({manhwaList, saveManhwaList}) => {
     const trierLocal = localStorage.getItem("trier")
     const [trierState, setTrierState] = useState(trierLocal ? JSON.parse(trierLocal) : 0)
 

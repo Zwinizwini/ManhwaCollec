@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import '../styles/Popup.css'
 import PopupInfo from './PopupInfo'
 import Modifier from './Modifier'
 import { styleCouleur } from '../utils/colors'
+import { UserContext } from '../utils/Context'
 
 //Permet de tranformer le nom du manhwa en ses initial
 // const initialManhwa = (manhwa) => {
@@ -11,6 +12,8 @@ import { styleCouleur } from '../utils/colors'
 // }
 
 const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note}) => {
+    const {isUser} = useContext(UserContext)
+
     useEffect(() => {
         if (isPopup) {
                 document.body.style.overflow = "hidden"
@@ -32,7 +35,6 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
 
     const couleurStatus = styleCouleur(status)
     const [modifier, setModifier] = useState(false)
-
 
     return (
         <div className='popupBackground'>
@@ -57,7 +59,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
                     {link && <a href={link+chapter} className='bouton-chap' target='__blank'>Voir le lien de lecture</a>}
                 </div>
                 <div className='closePopup' onClick={() => setPopup(false)}></div>
-                <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>
+                {!isUser && <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>}
                 {modifier && <Modifier 
                     title={title}
                     chapter={chapter}

@@ -1,11 +1,12 @@
 import ManhwaItem from './ManhwaItem'
 import '../styles/ManhwaList.css'
 import Filtre from './Filtre'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Searchbar from './Searchbar'
 import Info from './Info'
 import FormAjout from './FormAjout'
 import Sort from './Sort'
+import { UserContext } from '../utils/Context'
 
 
 const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
@@ -13,6 +14,7 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
     const [isForm, setForm] = useState(false)
     const [isNsfw, setIsNsfw] = useState(2)
     const [search, setSearch] = useState('')
+    const {isUser} = useContext(UserContext)
 
     const statusList = manhwaList.reduce(
         (acc, manhwa) => acc.includes(manhwa.status) ? acc : acc.concat(manhwa.status),
@@ -24,7 +26,7 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
     return (
         <div className='container'>
             <div className='menu'>
-                <Info />
+                <Info manhwaList={manhwaList}/>
                 <div className="filtre">
                     <Searchbar
                         search={search}
@@ -37,10 +39,10 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
                         isNsfw={isNsfw}
                         setIsNsfw={setIsNsfw}
                     />
-                    <button className='ajouter-manhwa' onClick={() => setForm(true)}>+ Ajouter</button>
+                    {!isUser && <button className='ajouter-manhwa' onClick={() => setForm(true)}>+ Ajouter</button>}
                     {isForm && <FormAjout isForm={isForm} setForm={setForm} setAjoutList={setAjoutList}/>}
                 </div>
-                <Sort />
+                <Sort manhwaList={manhwaList} saveManhwaList={updateManhwalist}/>
             </div>
             <ul className='manhwa-list'>
                 {activeList.map(({id, title, chapter, status, lastRead, lastReadCount, nsfw, cover,description,link, maxChapter, note}) => (

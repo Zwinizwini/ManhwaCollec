@@ -42,6 +42,7 @@ export const ManhwaProvider = ({children}) => {
             const { data, error } = await supabase
                 .from('manhwas')
                 .select('*')
+                .eq('user_id', user.id)
                 .order('status', {ascending: true})
             
             if (error) console.error(error)
@@ -57,5 +58,16 @@ export const ManhwaProvider = ({children}) => {
         <ManhwaContext.Provider value={{manhwaList, saveManhwaList}}>
             {children}
         </ManhwaContext.Provider>
+    )
+}
+
+export const UserContext = createContext()
+
+export const UserProvider = ({children}) => {
+    const [isUser, setIsUser] = useState(false)
+    return (
+        <UserContext.Provider value={{isUser, setIsUser}}>
+            {children}
+        </UserContext.Provider>
     )
 }

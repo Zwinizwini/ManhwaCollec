@@ -107,6 +107,10 @@ const Account = () => {
     const {manhwaList} = useContext(ManhwaContext)
     const note = noteMoyenne(manhwaList)
 
+    const copieURL = () => {
+        navigator.clipboard.writeText(`http://localhost:5173/user/${user.id}`)
+    }   
+
     return <AccountDiv>
         {user ? 
             <DivProfil>
@@ -128,6 +132,7 @@ const Account = () => {
                     }
                 </DivManhwa>
                 <button className="btnDeco" onClick={() => deconnexion()}>Deconnexion</button>
+                <button onClick={() => copieURL()}>Partager Liste</button>
             </DivProfil> 
         : 
             <DivStyle>
