@@ -131,8 +131,8 @@ const Account = () => {
                     </div>
                     }
                 </DivManhwa>
+                <button className="btnDeco" onClick={() => copieURL()}>Partager Liste</button>
                 <button className="btnDeco" onClick={() => deconnexion()}>Deconnexion</button>
-                <button onClick={() => copieURL()}>Partager Liste</button>
             </DivProfil> 
         : 
             <DivStyle>
