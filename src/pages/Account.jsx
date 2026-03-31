@@ -108,7 +108,7 @@ const Account = () => {
     const note = noteMoyenne(manhwaList)
 
     const copieURL = () => {
-        navigator.clipboard.writeText(`http://localhost:5173/user/${user.id}`)
+        navigator.clipboard.writeText(`https://manhwa-collec.vercel.app/user/${user.id}`)
     }   
 
     return <AccountDiv>
