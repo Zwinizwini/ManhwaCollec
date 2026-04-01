@@ -268,3 +268,9 @@ input:focus, textarea:focus {
 .closeAjout:hover::after {
   background: #e8e8f0;
 }
+
+@media screen and (max-width: 700px) {
+    .popupAjout {
+        width: 95%;
+    }
+}

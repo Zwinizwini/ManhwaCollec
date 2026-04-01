@@ -195,3 +195,30 @@ h2 {
     cursor: pointer;
 }
 
+@media screen and (max-width: 700px) {
+    .popup {
+        width: 90%;
+        padding: 5px 5px 40px 5px;
+        border-radius: 10px;
+        min-height: 400px;
+    }
+    .closePopup, .btn-modif {
+        right: 5px;
+    }
+    .description {
+        width: 95%;
+        font-size: 12px;
+    }
+    .popupInfo div {
+        width: 40%;
+    }
+    #container-popup {
+        height: 200px;
+    }
+    #popupModif {
+        width: 100%;
+    }
+    .snd-container textarea {
+        width: 85%;
+    }
+}

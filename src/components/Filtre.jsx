@@ -2,7 +2,7 @@ import '../styles/Filtre.css'
 
 const Filtre = ({filtreStatus, setStatus, statusList, isNsfw, setIsNsfw}) => {
     return (
-        <div className='sous-filtre'>
+        <>
             <select
                 value={filtreStatus}
                 onChange={(e) => setStatus(e.target.value)}
@@ -24,7 +24,7 @@ const Filtre = ({filtreStatus, setStatus, statusList, isNsfw, setIsNsfw}) => {
                 <option value={1} key="true0">NSFW</option>
                 <option value={0} key="flase1">Tout Public</option>
             </select>
-        </div>
+        </>
     )
 }
 

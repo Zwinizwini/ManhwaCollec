@@ -36,9 +36,9 @@ const Banner = () => {
 
     return (
     <div className="banner">
-        <StyledLink to='/'>Manhwa<span id='violet'>Collec</span></StyledLink>
+        <StyledLink to='/' id="bannerNom">Manhwa<span id='violet'>Collec</span></StyledLink>
         <img src={CC} alt="tkt" className='CC'/>
-        <AccountLink to="/account">{initialPseudo()}</AccountLink>
+        <AccountLink to="/account" id="bannerAccount">{initialPseudo()}</AccountLink>
     </div>
 )
 

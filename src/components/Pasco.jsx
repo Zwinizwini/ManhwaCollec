@@ -4,6 +4,7 @@ import gun from '../assets/gun.gif'
 
 const ImgStyled = styled.img`
     margin-top: 20px;
+    width: 95%;
 `
 
 const AccountDiv = styled.div`
@@ -24,8 +25,8 @@ const AccountDiv = styled.div`
 
 const Pasco = () => {
     return <AccountDiv>
-        <h1 style={{margin:"0"}}>Ah ouais, t'es pas connecté, tu vas gentillement clicker en haut à droite et connecter, merci.</h1>
-        <ImgStyled src={gun} alt="Rien à voir Chef" />
+        <h1 style={{margin:"0"}}>Ah ouais, t'es pas connecté, tu vas gentillement clicker en haut à droite et te connecter, merci.</h1>
+        <ImgStyled src={gun} alt="Rien à voir Chef" id="imgPasCo"/>
     </AccountDiv>
 }
 

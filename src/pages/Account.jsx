@@ -6,6 +6,7 @@ import Connexion from '../components/Connexion'
 import { useAuth } from '../utils/AuthContext'
 import { supabase } from '../supabase'
 import { ManhwaContext } from '../utils/Context'
+import '../styles/Account.css'
 
 const AccountDiv = styled.div`
     width: 600px;
@@ -112,7 +113,7 @@ const Account = () => {
         navigator.clipboard.writeText(`${urlSite}user/${user.id}`)
     }   
 
-    return <AccountDiv>
+    return <AccountDiv className='compte'>
         {user ? 
             <DivProfil>
                 <DivIni>{user.user_metadata.pseudo.slice(0,2).toUpperCase()}</DivIni>

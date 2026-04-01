@@ -45,3 +45,12 @@
     display: flex;
     gap: 20px;
 }
+
+@media screen and (max-width: 700px) {
+    .compte {
+        width: 80% !important;
+    }
+    .compte-body label {
+        width: 90%;
+    }
+}

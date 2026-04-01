@@ -69,7 +69,7 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
 
     return (
         <div className='popupBackground'>
-            <div className="popup">
+            <div className="popup" id='popupModif'>
                 <div className='container-hover' id='container-popup'>
                     <img src={cover} alt={`Cover de ${title}`} className="manhwa-item-cover" id='img-popup'/>
                     <span className="status" style={{background:couleurStatus}}>{status}</span>
