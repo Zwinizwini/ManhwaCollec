@@ -44,9 +44,14 @@ const FormAjout = ({isForm, setForm, setAjoutList}) => {
         const { data, error } = await supabase
             .from('manhwas')
             .insert(manhwa)
+            .select()
         
         if (error) console.error(error)
-        return data
+        
+        manhwa.id = data[0].id
+        const newList = [...manhwaList, manhwa]
+        saveManhwaList(newList)
+        setAjoutList(true)
     }
 
     const ajoutManhwa = (data) => {
@@ -61,7 +66,9 @@ const FormAjout = ({isForm, setForm, setAjoutList}) => {
             titre = title
             image = cover
         }
+        
         const manhwaObj = {
+            
             title: titre,
             user_id: user.id,
             chapter: parseInt(chapter),
@@ -75,12 +82,9 @@ const FormAjout = ({isForm, setForm, setAjoutList}) => {
             cover: image,
             ...(idMAL && { idmal: idMAL })
         }
-        console.log(manhwaObj);
-        
-        const newList = [...manhwaList, manhwaObj]
-        saveManhwaList(newList)
-        setAjoutList(true)
+
         addManhwa(manhwaObj)
+        
     }
 
     useEffect(() => {

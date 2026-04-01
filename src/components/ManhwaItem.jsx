@@ -7,7 +7,8 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
     const [isPopup, setPopup] = useState(false)
     const dateNow = new Date()
     const lastReadDate = lastRead ? new Date(lastRead) : ""
-    const lastReadCompter = Math.floor((dateNow - lastReadDate) / (1000 * 60 * 60 * 24))
+    const dateTest = lastReadDate ? new Date(lastReadDate.getFullYear(), lastReadDate.getMonth(), lastReadDate.getDate()) : ""
+    const lastReadCompter = Math.floor((dateNow - dateTest) / (1000 * 60 * 60 * 24))
     const gradientSeuil = Math.round((parseInt(chapter)/maxChapter) * 100)
 
     const progressionBar = () => {

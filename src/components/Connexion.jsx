@@ -11,6 +11,15 @@ const connexion = async (email, mdp) => {
     return data
 }
 
+// const forgotPassword = async (email) => {
+//     const urlSite = import.meta.env.VITE_URL_ID
+//     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+//         redirectTo: `${urlSite}account/update-password`,
+//     })
+//     if (error) console.log (error)
+//     return data
+// }
+
 
 const Connexion = () => {
     const [email, setEmail] = useState("")
@@ -26,9 +35,8 @@ const Connexion = () => {
                 Mot de passe
                 <input type="password" value={mdp} placeholder="Mot de passe" onChange={(e) => setMdp(e.target.value)}/>
             </label>
-            <div>
-                <button onClick={() => connexion(email, mdp)}>Connexion</button>
-            </div>
+            {/* <button onClick={() => forgotPassword(email)}>mdp perdu</button> */}
+            <button onClick={() => connexion(email, mdp)}>Connexion</button>
         </div>
     )
 }
