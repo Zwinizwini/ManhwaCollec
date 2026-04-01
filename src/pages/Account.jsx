@@ -111,6 +111,7 @@ const Account = () => {
     const copieURL = () => {
         const urlSite = import.meta.env.VITE_URL_ID
         navigator.clipboard.writeText(`${urlSite}user/${user.id}`)
+        alert('Liste copié')
     }   
 
     return <AccountDiv className='compte'>
