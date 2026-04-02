@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 import {colors} from '../utils/colors'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import Inscription from '../components/Inscription'
 import Connexion from '../components/Connexion'
 import { useAuth } from '../utils/AuthContext'
 import { supabase } from '../supabase'
 import { ManhwaContext } from '../utils/Context'
 import '../styles/Account.css'
+import PopupToast from '../components/PopupToast'
 
 const AccountDiv = styled.div`
     width: 600px;
@@ -107,12 +108,20 @@ const Account = () => {
     const {user} = useAuth()
     const {manhwaList} = useContext(ManhwaContext)
     const note = noteMoyenne(manhwaList)
+    const [copier, setCopier] = useState(false)
 
     const copieURL = () => {
         const urlSite = import.meta.env.VITE_URL_ID
         navigator.clipboard.writeText(`${urlSite}user/${user.id}`)
-        alert('Liste copié')
     }   
+
+    useEffect(() => {
+        if (copier) {
+            setTimeout(() => {
+            setCopier(false)
+            }, 2800);
+        }
+    }, [copier])
 
     return <AccountDiv className='compte'>
         {user ? 
@@ -134,8 +143,12 @@ const Account = () => {
                     </div>
                     }
                 </DivManhwa>
-                <button className="btnDeco" onClick={() => copieURL()}>Partager Liste</button>
+                <button className="btnDeco" 
+                    onClick={() => { setCopier(true)
+                        copieURL()}}
+                >Partager Liste</button>
                 <button className="btnDeco" onClick={() => deconnexion()}>Deconnexion</button>
+                {copier && <PopupToast msg={"List copié !"}/>}
             </DivProfil> 
         : 
             <DivStyle>

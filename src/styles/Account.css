@@ -31,14 +31,19 @@
     border: 1px solid #3C3489;
     background: #7f77dd;
     color: white;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: all ease-in-out 0.1s;
 }
 
 .compte-body button:hover, .btnDeco:hover {
     border: 1px solid #3C3489;
     background: #26215C;
     color: #AFA9EC;
+}
+
+.compte-body button:active, .btnDeco:active {
+    transform: scale(0.95);
 }
 
 .compte-body div {

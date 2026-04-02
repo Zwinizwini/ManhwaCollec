@@ -22,7 +22,7 @@ function App() {
     if (ajoutList) {
       setTimeout(() => {
         setAjoutList(false)
-      }, 3000);
+      }, 2800);
     }
   }, [ajoutList])
 
@@ -36,7 +36,7 @@ function App() {
             updateManhwalist={saveManhwaList} 
             setAjoutList={setAjoutList}
           />
-          {ajoutList && <PopupToast manhwaList={manhwaList}/>}
+          {ajoutList && <PopupToast manhwaList={manhwaList} msg={"ajouté à la bibliothèque"}/>}
         </>
       }
     </>

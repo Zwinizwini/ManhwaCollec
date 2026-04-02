@@ -13,6 +13,9 @@
     font-size: 13px;
     overflow: hidden;
     animation: normal slidein 3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @keyframes slidein {
