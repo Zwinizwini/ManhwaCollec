@@ -33,11 +33,14 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
         return () => window.removeEventListener('keydown', handleKey)
     }, [])
 
+
     const couleurStatus = styleCouleur(status)
     const [modifier, setModifier] = useState(false)
 
     return (
-        <div className='popupBackground'>
+        <div className='popupBackground' onClick={(e) => {
+            e.target.className === 'popupBackground' && setPopup(false)
+        }}>
             <div className="popup">
                 <div className='container-hover' id='container-popup'>
                     <img src={cover} alt={`Cover de ${title}`} className="manhwa-item-cover" id='img-popup'/>
