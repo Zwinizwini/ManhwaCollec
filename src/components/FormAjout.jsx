@@ -115,7 +115,9 @@ const FormAjout = ({isForm, setForm, setAjoutList}) => {
     const [rapid, setRapid] = useState(true)
 
     return (
-        <div className="popupAjoutBack">
+        <div className="popupAjoutBack" onClick={(e) => {
+            e.target.className === 'popupAjoutBack' && setForm(false)
+        }}>
             <div className="popupAjout">
                 <div className="head">
                     <h2>Ajouter un manhwa</h2>

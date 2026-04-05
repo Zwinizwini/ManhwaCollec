@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import '../styles/Popup.css'
 import PopupInfo from './PopupInfo'
 import Modifier from './Modifier'
-import { styleCouleur } from '../utils/colors'
+import { styleCouleur, progressionCouleur } from '../utils/colors'
 import { UserContext } from '../utils/Context'
 
 //Permet de tranformer le nom du manhwa en ses initial
@@ -11,7 +11,7 @@ import { UserContext } from '../utils/Context'
 //     return iti.reduce((acc, mot) => acc + mot[0], "").toLocaleUpperCase()
 // }
 
-const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note}) => {
+const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note, gradientSeuil}) => {
     const {isUser} = useContext(UserContext)
 
     useEffect(() => {
@@ -42,27 +42,32 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
             e.target.className === 'popupBackground' && setPopup(false)
         }}>
             <div className="popup">
-                <div className='container-hover' id='container-popup'>
-                    <img src={cover} alt={`Cover de ${title}`} className="manhwa-item-cover" id='img-popup'/>
-                    <span className="status" style={{background:couleurStatus}}>{status}</span>
-                    {nsfw===1 && <span className="nsfw">18+</span>}
+                <div className='img-popup'>
+                    <img src={cover} alt={`Cover de ${title}`}/>
                 </div>
                 <div className='snd-container'>
+                    <div className='status-note'>
+                        <span className="status-popup" style={{background:couleurStatus}}>{status}</span>
+                        {nsfw===1 && <span className="nsfw">18+</span>}
+                        {note && <div className='note'>★ {note}</div>}
+                    </div>
                     <h2>{title}</h2>
-                    {note && <div className='note'><span style={{fontSize:"22px"}}>{note}</span><span style={{fontSize:"12px", color:"#888"}}>/10</span></div>}
                     {description && <p className='description'>{description}</p>
                     }
 
                     <div className='popupInfo'>
-                        <PopupInfo info1={"Chapitre"} info2={`${maxChapter}`}/>
+                        <PopupInfo info1={"Chapitre Max"} info2={`${maxChapter}`}/>
                         <PopupInfo info1={"Dernier Lu"} info2={`Ch. ${chapter}`}/>
                         <PopupInfo info1={"Lu il y a"} info2={`${lastReadCompter ? lastReadCompter : 0} jours`}/>
                         <PopupInfo info1={"Progression"} info2={`${Math.round((parseInt(chapter)/maxChapter) * 100)}%`} />
                     </div>
-                    {link && <a href={link+chapter} className='bouton-chap' target='__blank'>Voir le lien de lecture</a>}
+                    <div className='progression-bar' id='popup-bar' style={{background: `linear-gradient(to right, ${progressionCouleur(gradientSeuil)} ${gradientSeuil}%, black ${gradientSeuil}%)`}}></div>
+                    <div className="divBtn">
+                        {link && <a href={link+chapter} className='bouton-chap' target='__blank'>Voir le lien de lecture</a>}
+                        {!isUser && <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>}
+                    </div>
                 </div>
                 <div className='closePopup' onClick={() => setPopup(false)}></div>
-                {!isUser && <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>}
                 {modifier && <Modifier 
                     title={title}
                     chapter={chapter}

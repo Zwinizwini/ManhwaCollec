@@ -43,6 +43,7 @@
 
 .container-hover:hover {
 	border: 1px solid #7f77dd;
+	box-shadow: #7F77DD 2px 2px 5px, #7F77DD -2px -2px 5px;
 	transition: all 0.2s ease-in-out;
 }
 
@@ -57,7 +58,7 @@
 
 .status, .nsfw, .note-hover {
 	position: absolute;
-	width: 50px;
+	width: 55px;
 	height: 20px;
 	top: 2px;
 	right: 2px;

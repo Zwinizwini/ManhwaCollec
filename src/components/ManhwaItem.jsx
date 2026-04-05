@@ -56,6 +56,7 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                     manhwaList={manhwaList}
                     updateManhwalist={updateManhwalist}
                     note={note}
+                    gradientSeuil={gradientSeuil}
                 />
             }
         </>
