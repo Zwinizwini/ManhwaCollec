@@ -76,7 +76,7 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                 <div className='snd-container'>
                     <div className='status-note'>
                         <span className="status-popup" style={{background:couleurStatus}}>{status}</span>
-                        {nsfw===1 && <span className="nsfw">18+</span>}
+                        {nsfw===1 && <span className="nsfw-popup">18+</span>}
                     </div>
                     <input onChange={(e) => setTitle(e.target.value)} value={updateTitle} id='changeTitle'/>
                     <div className='input-note'><input type="number" min="0" max="10"
