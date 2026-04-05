@@ -48,7 +48,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
                 <div className='snd-container'>
                     <div className='status-note'>
                         <span className="status-popup" style={{background:couleurStatus}}>{status}</span>
-                        {nsfw===1 && <span className="nsfw">18+</span>}
+                        {nsfw===1 && <span className="nsfw-popup">18+</span>}
                         {note && <div className='note'>★ {note}</div>}
                     </div>
                     <h2>{title}</h2>
