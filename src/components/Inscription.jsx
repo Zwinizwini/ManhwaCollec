@@ -17,19 +17,24 @@ const inscription = async (email, mdp, pseudo) => {
     return data
 }
 
-const verifMdp = (mdp1, mdp2) => {
-    if (mdp1 !== mdp2) {
-        document.getElementById('btnInscr').disabled = true
-    } else if (mdp1 === mdp2) {
-        document.getElementById('btnInscr').disabled = false
-    }
-}
-
 const Inscription = () => {
     const [email, setEmail] = useState("")
     const [mdp, setMdp] = useState("")
     const [pseudo, setPseudo] = useState("")
     const [cmdp, setCMdp] = useState("")
+    const [emailCorrect, setCorrect] = useState(false)
+    const [mdpCorrect, setMdpCorrect] = useState(false)
+
+    const verifEmail = (email) => {
+        const emailValide = /.+@.+\..+/
+        const valide = emailValide.test(email)
+        setCorrect(valide)
+    }
+
+    const verifMdp = (mdp1, mdp2) => {
+        const valide = mdp1 === mdp2
+        setMdpCorrect(valide)
+    }
 
     return (
         <div className="compte-body">
@@ -39,7 +44,10 @@ const Inscription = () => {
             </label>
             <label>
                 Email
-                <input type="text" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
+                <input type="text" value={email} placeholder="Email" 
+                    onChange={(e) => setEmail(e.target.value)}
+                    onBlur={(e) => verifEmail(e.target.value)}
+                />
             </label>
             <label>
                 Mot de passe
@@ -51,7 +59,7 @@ const Inscription = () => {
                 onChange={(e) => setCMdp(e.target.value)}
                 onBlur={(e) => verifMdp(e.target.value, mdp)}/>
             </label>
-            <button onClick={() => inscription(email, mdp, pseudo)} id="btnInscr">Inscription</button>
+            <button disabled={!mdpCorrect || !emailCorrect} onClick={() => inscription(email, mdp, pseudo)} id="btnInscr">Inscription</button>
         </div>
     )
 }

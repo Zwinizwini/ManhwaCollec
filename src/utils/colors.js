@@ -18,3 +18,23 @@ export const progressionCouleur = (prog) => {
     if (prog < 100) return '#1D9E75'
     return '#39FF14'
 }
+
+export const trier = (e, list) => {
+    if (e === "1") {           
+        list.toSorted((a,b) => {
+            const noteA = a.note ? a.note : 0
+            const noteB = b.note ? b.note : 0
+            if (noteA < noteB) return 1
+            if (noteA > noteB) return -1
+            return 0
+        })
+    } else if (e === "2") {
+        list.toSorted((a,b) => {
+            const noteA = a.note ? a.note : 0
+            const noteB = b.note ? b.note : 0
+            if (noteA < noteB) return -1
+            if (noteA > noteB) return 1
+            return 0
+        })
+    }
+}

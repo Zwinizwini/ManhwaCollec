@@ -15,12 +15,28 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
     const [isNsfw, setIsNsfw] = useState(2)
     const [search, setSearch] = useState('')
     const {isUser} = useContext(UserContext)
+    const trierLocal = localStorage.getItem("trier")
+    const [trie, setTrie] = useState(trierLocal ? JSON.parse(trierLocal) : 0)
 
     const statusList = manhwaList.reduce(
         (acc, manhwa) => acc.includes(manhwa.status) ? acc : acc.concat(manhwa.status),
         []
     )
-    const activeList = manhwaList.filter(m => m.title.toLowerCase().includes(search.toLocaleLowerCase()))
+
+    const activeList = manhwaList
+        .filter(m => m.title.toLowerCase().includes(search.toLocaleLowerCase()))
+        .sort((a,b) => {
+            if (trie === "1") {
+                const noteA = a.note ? a.note : 0
+                const noteB = b.note ? b.note : 0
+                return noteB - noteA
+            }
+            if (trie === "2") {
+                const noteA = a.note ? a.note : 0
+                const noteB = b.note ? b.note : 0
+                return noteA - noteB
+            }
+    })
 
 
     return (
@@ -40,7 +56,7 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
                             isNsfw={isNsfw}
                             setIsNsfw={setIsNsfw}
                         />
-                        <Sort manhwaList={manhwaList} saveManhwaList={updateManhwalist}/>
+                        <Sort trie={trie} setTrie={setTrie}/>
                     </div>
                 </div>
                 {!isUser && <button className='ajouter-manhwa' onClick={() => setForm(true)}>+ Ajouter</button>}
