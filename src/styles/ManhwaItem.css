@@ -20,6 +20,7 @@
 	overflow: hidden;
 	cursor: pointer;
 	border: #2a2d35 1px solid;
+	transition: all 0.2s ease-in-out;
 }
 
 #img-item {
@@ -43,8 +44,8 @@
 
 .container-hover:hover {
 	border: 1px solid #7f77dd;
-	box-shadow: #7F77DD 2px 2px 5px, #7F77DD -2px -2px 5px;
-	transition: all 0.2s ease-in-out;
+	box-shadow: black 0 8px 24px;
+	transform: translateY(-10px);
 }
 
 .container-hover:hover span {

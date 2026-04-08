@@ -140,7 +140,7 @@
 input:focus, textarea:focus {
     border: 1px solid #7F77DD;
     outline: none;
-    box-shadow: #7F77DD 1px 5px 10px;
+    box-shadow: #7F77DD 0 0 10px;
 }
 
 .ajout-body textarea {
