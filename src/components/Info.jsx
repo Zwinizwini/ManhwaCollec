@@ -18,7 +18,7 @@ const Info = ({manhwaList}) => {
             {nb:nbEnCours, txt:"En Cours"},
             {nb:nbPasLu, txt:"Pas Lus"},
             {nb:nbDrop, txt:"Drop"}
-        ]
+    ]
 
     return (
         <div className="menu-info">

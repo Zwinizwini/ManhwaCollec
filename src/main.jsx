@@ -8,6 +8,7 @@ import Account from './pages/Account.jsx'
 import { ManhwaProvider, UserProvider } from './utils/Context.jsx'
 import { AuthProvider } from './utils/AuthContext.jsx'
 import User from './pages/User.jsx'
+import Stat from './pages/Stat.jsx'
 // import UpdatePassword from './pages/UpdatePassword.jsx'
 
 
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')).render(
             <Banner />
             <Routes>
               <Route path='/' element={<App />}/>
+              <Route path='/stat/:id?' element={<Stat />}/>
               <Route path="/account" element={<Account />}/>
               <Route path="/user/:id" element={<User />}/>
               {/* <Route path="/account/update-password" element={<UpdatePassword />}/> */}

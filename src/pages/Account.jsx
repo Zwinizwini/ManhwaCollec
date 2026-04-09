@@ -102,12 +102,21 @@ const noteMoyenne = (manhwaList) => {
     return noteTotal > 0 && nbNote > 0 ? (noteTotal/nbNote).toFixed(2) : 0
 }
 
+const totalChap = (manhwaList) => {
+    const total = manhwaList.reduce(
+        (acc, manhwa) => acc + manhwa.chapter,
+        0
+    )
+    return total
+}
+
 
 const Account = () => {
     const [connexion, setConnexion] = useState(true)
     const {user} = useAuth()
     const {manhwaList} = useContext(ManhwaContext)
     const note = noteMoyenne(manhwaList)
+    const totalchap = totalChap(manhwaList)
     const [copier, setCopier] = useState(false)
 
     const copieURL = () => {
@@ -140,6 +149,12 @@ const Account = () => {
                     <div>
                         <HManhwa $isNote>{note}</HManhwa>
                         <p style={{fontSize: "12px", margin:0}}>Note moy.</p>
+                    </div>
+                    }
+                    {totalchap !== 0 && 
+                    <div>
+                        <HManhwa>{totalchap}</HManhwa>
+                        <p style={{fontSize: "12px", margin:0}}>Total Chap.</p>
                     </div>
                     }
                 </DivManhwa>

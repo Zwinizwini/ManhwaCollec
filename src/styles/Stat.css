@@ -1,0 +1,62 @@
+.stat, .container-legend, .legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.container-legend {
+    margin-top: 10px;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding-right: 10px;
+}
+
+.legend {
+    gap: 3px;
+}
+
+.container-gauche, .container-droite {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    flex-direction: column;
+    width: 40%;
+    max-width: 550px;
+}
+
+.container-droite {
+    gap: 10px;
+}
+
+.container-droite h5 {
+    color: white;
+}
+
+.statInfo {
+    border-radius: 10px;
+    background: #1c1f27;
+    padding: 20px;
+    width: 100%;
+}
+
+.statInfo p {
+    margin-bottom: 5px;
+}
+
+.statInfo svg {
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.stat svg {
+    margin-top: 10px;
+}
+
+.legend div {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+}
+
