@@ -18,7 +18,7 @@ const StatBtn = styled(Link)`
   font-size: 13px;
   font-weight: 500;
   text-decoration: none;
-  border: 1px solid #2a2d35;
+  border: 1px solid #3C3489;
   cursor: pointer;
   transition: opacity .15s, transform .1s;
   
