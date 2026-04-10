@@ -7,11 +7,11 @@ import { Tooltip } from "react-tooltip"
 const CamembertLec = ({manhwaList, totalManhwa}) => {
     const [hovered2, setHovered2] = useState(null)
     const totalChapterLu = manhwaList.reduce(
-        (acc, m) => acc + parseInt(m.chapter)
+        (acc, m) => m.chapter ? acc + parseInt(m.chapter) : acc
         , 0
     )
     const totalChapter = manhwaList.reduce(
-        (acc, m) => acc + parseInt(m.maxChapter)
+        (acc, m) => m.maxChapter ? acc + parseInt(m.maxChapter) : acc
         , 0
     ) 
     const nbNsfw = manhwaList.filter((manhwa) => manhwa.nsfw === 1).length

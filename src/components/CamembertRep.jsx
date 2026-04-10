@@ -51,6 +51,7 @@ const CamembertRep = ({manhwaList, totalManhwa}) => {
                     data={dataStatus}
                     label={({ dataEntry }) => `${dataEntry.ch} %`}
                     labelStyle={{fontSize: '5px', fill: "white"}}
+                    labelPosition={85}
                     animate={true}
                     animationDuration={600}
                     animationEasing="ease-in-out"
