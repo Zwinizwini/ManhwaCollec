@@ -15,6 +15,7 @@ const CamembertLec = ({manhwaList, totalManhwa}) => {
         , 0
     ) 
     const nbNsfw = manhwaList.filter((manhwa) => manhwa.nsfw === 1).length
+    const nbPasLu = manhwaList.filter((manhwa => manhwa.status === 'Pas lu')).length
 
     const dataLuHover = ['#4d3ef5','#c5c1ac']
     const dataLuTemp = [
@@ -34,7 +35,7 @@ const CamembertLec = ({manhwaList, totalManhwa}) => {
     return (
         <div className="container-droite">
             <StatInfo info1={"Chapitres lus au total"} info2={totalChapterLu}/>
-            <StatInfo info1={"Moyenne chap. lu"} info2={Math.round(totalChapterLu/totalManhwa)}/>
+            <StatInfo info1={"Moyenne chap. lu"} info2={Math.round(totalChapterLu/(totalManhwa-nbPasLu))}/>
             <StatInfo info1={"Contenus adulte"} info2={`${Math.round((nbNsfw/totalManhwa) * 100)} %`}/>
             <div className="statInfo">
                 <p>Avancement global</p>
