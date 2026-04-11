@@ -69,12 +69,12 @@ function App() {
       {!user ? <Link to='/account'><Pasco/></Link> 
       : <>
           <div className='container-btnStat'style={{width:'98%', display:'flex', justifyContent: 'end', marginBottom:'10px'}}>
-            <StatBtn to='/stat'>
+            <Link className='btnNav' to='/stat'>
               <Bars>
                 {BAR_DATA.map((h, i) => <Bar key={i} h={h} />)}
               </Bars>
               Stat
-            </StatBtn> 
+            </Link> 
           </div> 
           <ManhwaList 
             manhwaList={manhwaList} 

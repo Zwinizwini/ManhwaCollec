@@ -6,27 +6,6 @@ import { UserContext } from '../utils/Context'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-
-const StatBtn = styled(Link)`
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #1c1f27;
-  color: #fff;
-  border-radius: 10px;
-  padding: 7px 14px 7px 10px;
-  font-size: 13px;
-  font-weight: 500;
-  text-decoration: none;
-  border: 1px solid #3C3489;
-  cursor: pointer;
-  transition: opacity .15s, transform .1s;
-  
-
-  &:hover { opacity: .85; }
-  &:active { transform: scale(0.95); }
-`
-
 const Bars = styled.div`
   display: flex;
   align-items: flex-end;
@@ -93,12 +72,12 @@ function User() {
   return (
     <>      
         <div className='container-btnStat'style={{width:'98%', display:'flex', justifyContent: 'end', marginBottom:'10px'}}>
-            <StatBtn to={`/stat/${id}`} state={{ manhwaList }}>
+            <Link className='btnNav' to={`/stat/${id}`} state={{ manhwaList }}>
               <Bars>
                 {BAR_DATA.map((h, i) => <Bar key={i} h={h} />)}
               </Bars>
               Stat
-            </StatBtn> 
+            </Link> 
           </div>   
         <ManhwaList 
         manhwaList={manhwaList} 
