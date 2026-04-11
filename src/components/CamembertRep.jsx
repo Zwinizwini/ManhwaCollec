@@ -53,7 +53,7 @@ const CamembertRep = ({manhwaList, totalManhwa}) => {
                 <PieStyle
                     data={dataStatus}
                     label={({ dataEntry }) => `${dataEntry.valueP} %`}
-                    labelStyle={{fontSize: '6px', fill: "white"}}
+                    labelStyle={{fontSize: '5px', fill: "white"}}
                     labelPosition={80}
                     animate={true}
                     animationDuration={600}
