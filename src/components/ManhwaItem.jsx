@@ -35,7 +35,7 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                         </div>
                         <div className='progression-bar' style={{background: `linear-gradient(to right, ${progressionBar()} ${gradientSeuil}%, black ${gradientSeuil}%)`}}></div>
                     </div>
-                    {note && <span className='note-hover'>{note}<span>★</span></span>}
+                    {note != null && <span className='note-hover'>{note}★</span>}
                 </div>
             </li>
             {isPopup && 

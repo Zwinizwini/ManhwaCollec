@@ -21,6 +21,7 @@ const Sort = ({trie, setTrie}) => {
             <option value="0">Par Default</option>
             <option value="1">Note ↓</option>
             <option value="2">Note ↑</option>
+            <option value="3">Nb Chap</option>
         </select>
     )
 }

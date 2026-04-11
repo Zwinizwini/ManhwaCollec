@@ -27,14 +27,13 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
         .filter(m => m.title.toLowerCase().includes(search.toLocaleLowerCase()))
         .sort((a,b) => {
             if (trie === "1") {
-                const noteA = a.note ? a.note : 0
-                const noteB = b.note ? b.note : 0
-                return noteB - noteA
+                return (b?.note ?? 0) - (a?.note ?? 0)
             }
-            if (trie === "2") {
-                const noteA = a.note ? a.note : 0
-                const noteB = b.note ? b.note : 0
-                return noteA - noteB
+            else if (trie === "2") {
+                return (a?.note ?? 0) - (b?.note ?? 0)
+            }
+            else if (trie === "3") {
+                return (b.maxChapter - b.chapter) - (a.maxChapter - a.chapter)
             }
     })
 
