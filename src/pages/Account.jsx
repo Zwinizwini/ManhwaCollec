@@ -8,11 +8,11 @@ import { supabase } from '../supabase'
 import { ManhwaContext } from '../utils/Context'
 import '../styles/Account.css'
 import PopupToast from '../components/PopupToast'
+import BtnNav from '../components/BtnNav'
 
 const AccountDiv = styled.div`
     width: 600px;
     margin: auto;
-    margin-top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -132,49 +132,54 @@ const Account = () => {
         }
     }, [copier])
 
-    return <AccountDiv className='compte'>
-        {user ? 
-            <DivProfil>
-                <DivIni>{user.user_metadata.pseudo.slice(0,2).toUpperCase()}</DivIni>
-                <div style={{marginTop: "15px", marginBottom: "15px"}}>
-                    <h2 style={{margin:0, color: "white"}}>{user.user_metadata.pseudo}</h2>
-                    <p style={{fontSize: "12px", margin:0}}>{user.email}</p>
-                </div>
-                <DivManhwa>
-                    <div>
-                        <HManhwa>{manhwaList.length}</HManhwa>
-                        <p style={{fontSize: "12px", margin:0}}>Total</p>
+    return (
+        <>
+        <BtnNav/>
+        <AccountDiv className='compte'>
+            {user ? 
+                <DivProfil>
+                    <DivIni>{user.user_metadata.pseudo.slice(0,2).toUpperCase()}</DivIni>
+                    <div style={{marginTop: "15px", marginBottom: "15px"}}>
+                        <h2 style={{margin:0, color: "white"}}>{user.user_metadata.pseudo}</h2>
+                        <p style={{fontSize: "12px", margin:0}}>{user.email}</p>
                     </div>
-                    {note !== 0 && 
-                    <div>
-                        <HManhwa $isNote>{note}</HManhwa>
-                        <p style={{fontSize: "12px", margin:0}}>Note moy.</p>
-                    </div>
+                    <DivManhwa>
+                        <div>
+                            <HManhwa>{manhwaList.length}</HManhwa>
+                            <p style={{fontSize: "12px", margin:0}}>Total</p>
+                        </div>
+                        {note !== 0 && 
+                        <div>
+                            <HManhwa $isNote>{note}</HManhwa>
+                            <p style={{fontSize: "12px", margin:0}}>Note moy.</p>
+                        </div>
+                        }
+                        {totalchap !== 0 && 
+                        <div>
+                            <HManhwa>{totalchap}</HManhwa>
+                            <p style={{fontSize: "12px", margin:0}}>Total Chap.</p>
+                        </div>
+                        }
+                    </DivManhwa>
+                    <button className="btnDeco" 
+                        onClick={() => { setCopier(true)
+                            copieURL()}}
+                    >Partager Liste</button>
+                    <button className="btnDeco" onClick={() => deconnexion()}>Deconnexion</button>
+                    {copier && <PopupToast msg={"List copié !"}/>}
+                </DivProfil> 
+            : 
+                <DivStyle>
+                    <BtnHead connexion={connexion} onClick={() => setConnexion(true)}>Connexion</BtnHead>
+                    <BtnHead connexion={!connexion} onClick={() => setConnexion(false)}>Inscription</BtnHead>
+                    {connexion ? <Connexion />
+                    : <Inscription />
                     }
-                    {totalchap !== 0 && 
-                    <div>
-                        <HManhwa>{totalchap}</HManhwa>
-                        <p style={{fontSize: "12px", margin:0}}>Total Chap.</p>
-                    </div>
-                    }
-                </DivManhwa>
-                <button className="btnDeco" 
-                    onClick={() => { setCopier(true)
-                        copieURL()}}
-                >Partager Liste</button>
-                <button className="btnDeco" onClick={() => deconnexion()}>Deconnexion</button>
-                {copier && <PopupToast msg={"List copié !"}/>}
-            </DivProfil> 
-        : 
-            <DivStyle>
-                <BtnHead connexion={connexion} onClick={() => setConnexion(true)}>Connexion</BtnHead>
-                <BtnHead connexion={!connexion} onClick={() => setConnexion(false)}>Inscription</BtnHead>
-                {connexion ? <Connexion />
-                : <Inscription />
-                }
-            </DivStyle>
-        }
-    </AccountDiv>
+                </DivStyle>
+            }
+        </AccountDiv>
+        </>
+    )
 }
 
 export default Account

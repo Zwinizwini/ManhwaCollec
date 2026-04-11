@@ -2,6 +2,11 @@ import { useState } from "react"
 import { PieChart } from "react-minimal-pie-chart"
 import StatLegend from "./StatLegend"
 import { Tooltip } from "react-tooltip"
+import styled from "styled-components"
+
+const PieStyle = styled(PieChart)`
+
+`
 
 const CamembertRep = ({manhwaList, totalManhwa}) => {
     const [hovered1, setHovered1] = useState(null)
@@ -18,25 +23,23 @@ const CamembertRep = ({manhwaList, totalManhwa}) => {
     const nbHiatusP = Math.round((nbHiatus/totalManhwa) * 100)
     
     
-    const dataHover = [
-        {c: '#00a873', value: nbFini},
-        {c: '#4d3ef5', value: nbEnCours},
-        {c: '#28e1a4', value: nbPasLu},
-        {c: '#7d7c71', value: nbDrop},
-        {c: '#7c70fc', value: nbHiatus}
-    ].sort((a,b) => b.value - a.value)
     const dataStatusTemp = [
-        { title: 'Fini', value: nbFini, color: '#1D9E75', ch: nbFiniP },
-        { title: 'En Cours', value: nbEnCours, color: '#7F77DD', ch: nbEnCoursP },
-        { title: 'Pas Lu', value: nbPasLu, color: '#5DCAA5', ch: nbPasLuP },
-        { title: 'Drop', value: nbDrop, color: '#888780', ch: nbDropP },
-        { title: 'Hiatus', value: nbHiatus, color: '#AFA9EC', ch:nbHiatusP },
+        { title: 'Fini', value: nbFini, color: '#1D9E75', valueP: nbFiniP, colorHover: '#00a873'},
+        { title: 'En Cours', value: nbEnCours, color: '#7F77DD', valueP: nbEnCoursP, colorHover: '#4d3ef5'},
+        { title: 'Pas Lu', value: nbPasLu, color: '#5DCAA5', valueP: nbPasLuP, colorHover: '#28e1a4'},
+        { title: 'Drop', value: nbDrop, color: '#888780', valueP: nbDropP, colorHover: '#7d7c71'},
+        { title: 'Hiatus', value: nbHiatus, color: '#AFA9EC', valueP:nbHiatusP, colorHover: '#7c70fc'},
     ].sort((a,b) => b.value - a.value)
+    .reduce(
+        (acc, elem) => elem.value > 0 ? acc.concat(elem) : acc
+        , []
+    )
+
     const dataStatus = dataStatusTemp.map((entry, index) => {
         if (hovered1 === index) {
             return {
                 ...entry,
-                color: dataHover[index].c
+                color: entry.colorHover
             }
         }
         return entry
@@ -47,11 +50,10 @@ const CamembertRep = ({manhwaList, totalManhwa}) => {
             <h2 style={{margin:0, color: 'white', textAlign: 'left', width:'100%'}}>liste de manhwa</h2>
             <p style={{color: "#ccc", textAlign: 'left', width:'100%'}}>{totalManhwa} manhwa au total</p>
             <div id="anchor-hover">
-                <PieChart
+                <PieStyle
                     data={dataStatus}
-                    label={({ dataEntry }) => `${dataEntry.ch} %`}
-                    labelStyle={{fontSize: '5px', fill: "white"}}
-                    labelPosition={85}
+                    label={({ dataEntry }) => `${dataEntry.valueP} %`}
+                    labelStyle={{fontSize: '6px', fill: "white"}}
                     animate={true}
                     animationDuration={600}
                     animationEasing="ease-in-out"
@@ -66,18 +68,18 @@ const CamembertRep = ({manhwaList, totalManhwa}) => {
                 />
                 <Tooltip
                     anchorSelect="#anchor-hover"
-                    border={typeof hovered1 === 'number' && `1px solid ${dataHover[hovered1].c}`}
+                    border={typeof hovered1 === 'number' && `1px solid ${dataStatus[hovered1].colorHover}`}
                     style={{background: '#08090a'}}
                     opacity={1}
                     content= {typeof hovered1 === 'number' && `${dataStatus[hovered1].title} : ${dataStatus[hovered1].value}`}
                 />
             </div>
             <div className="container-legend">
-                <StatLegend info1={'#7F77DD'} info2={'En Cours'}/>
-                <StatLegend info1={'#1D9E75'} info2={'Fini'} />
-                <StatLegend info1={'#5DCAA5'} info2={'Pas Lu'} />
-                <StatLegend info1={'#AFA9EC'} info2={'Hiatus'} />
-                <StatLegend info1={'#888780'} info2={'Drop'} />
+                {dataStatus.map((status) => (
+                    <div key={status.title}>
+                        <StatLegend info1={status.color} info2={status.title}/>
+                    </div>
+                ))}
             </div>
         </div>
 )

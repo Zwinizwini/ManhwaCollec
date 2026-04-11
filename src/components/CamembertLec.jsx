@@ -17,16 +17,18 @@ const CamembertLec = ({manhwaList, totalManhwa}) => {
     const nbNsfw = manhwaList.filter((manhwa) => manhwa.nsfw === 1).length
     const nbPasLu = manhwaList.filter((manhwa => manhwa.status === 'Pas lu')).length
 
-    const dataLuHover = ['#4d3ef5','#c5c1ac']
     const dataLuTemp = [
-        { title: 'Lus', value: Math.round((totalChapterLu/totalChapter) * 100), color: '#7F77DD' },
-        { title: 'Restants', value: Math.round(((totalChapter-totalChapterLu)/totalChapter) * 100), color: '#D3D1C7' }
-    ]
+        { title: 'Lus', value: Math.round((totalChapterLu/totalChapter) * 100), color: '#7F77DD', colorHover: '#4d3ef5'},
+        { title: 'Restants', value: Math.round(((totalChapter-totalChapterLu)/totalChapter) * 100), color: '#D3D1C7', colorHover: '#c5c1ac'}
+    ].reduce(
+        (acc, elem) => elem.value > 0 ? acc.concat(elem) : acc
+        , []
+    )
     const dataLu = dataLuTemp.map((entry, index) => {
         if (hovered2 === index) {
             return {
                 ...entry,
-                color: dataLuHover[index]
+                color: entry.colorHover
             }
         }
         return entry
@@ -56,7 +58,7 @@ const CamembertLec = ({manhwaList, totalManhwa}) => {
                     />
                     <Tooltip
                         anchorSelect="#anchor-hover2"
-                        border={typeof hovered2 === 'number' && `1px solid ${dataLuHover[hovered2]}`}
+                        border={typeof hovered2 === 'number' && `1px solid ${dataLu[hovered2].colorHover}`}
                         style={{background: '#08090a'}}
                         content= {typeof hovered2 === 'number' && `${dataLu[hovered2].title} : ${dataLu[hovered2].value} %`}
                     />
