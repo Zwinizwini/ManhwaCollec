@@ -5,23 +5,24 @@ import Modifier from './Modifier'
 import { styleCouleur, progressionCouleur } from '../utils/colors'
 import { UserContext } from '../utils/Context'
 
-//Permet de tranformer le nom du manhwa en ses initial
-// const initialManhwa = (manhwa) => {
-//     const iti = manhwa.split(" ")
-//     return iti.reduce((acc, mot) => acc + mot[0], "").toLocaleUpperCase()
-// }
+const changeLink = (link, chapter) => {
+    let changeLink
+    const ChapCond1 = /chapter\/\d+/
+    const ChapCond2 = /ch\d+/
+    const ChapCondF = /\d+/
+    if (ChapCond1.test(link)) changeLink = link.replace(ChapCond1, `chapter/${chapter}`)
+    else if (ChapCond2.test(link)) changeLink = link.replace(ChapCond2, `ch${chapter}`)
+    else changeLink = link.replace(ChapCondF, chapter)
+    return changeLink
+}
 
 const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note, gradientSeuil}) => {
     const {isUser} = useContext(UserContext)
 
     useEffect(() => {
         if (isPopup) {
-                document.body.style.overflow = "hidden"
-                
-
-            } else { 
-                document.body.style.overflow = ""
-            }
+            document.body.style.overflow = "hidden"
+        } 
         return () => {document.body.style.overflow = ""}
     }, [isPopup])
 
@@ -33,6 +34,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
         return () => window.removeEventListener('keydown', handleKey)
     }, [])
 
+    
 
     const couleurStatus = styleCouleur(status)
     const [modifier, setModifier] = useState(false)
@@ -63,7 +65,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
                     </div>
                     <div className='progression-bar' id='popup-bar' style={{background: `linear-gradient(to right, ${progressionCouleur(gradientSeuil)} ${gradientSeuil}%, black ${gradientSeuil}%)`}}></div>
                     <div className="divBtn">
-                        {link && <a href={link+chapter} className='bouton-chap' target='__blank'>Voir le lien de lecture</a>}
+                        {link && <a href={changeLink(link, chapter)} className='bouton-chap' target='__blank'>Voir le lien de lecture</a>}
                         {!isUser && <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>}
                     </div>
                 </div>
