@@ -81,6 +81,7 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
                                 updateManhwalist={updateManhwalist}
                                 note={note}
                                 lastCheck={lastCheck}
+                                isUser={isUser}
                             />
                         </div>
                     : null ) 

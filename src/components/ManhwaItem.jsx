@@ -27,7 +27,7 @@ const Loader = styled.div`
   left: 2px;
 `
 
-const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList, updateManhwalist, note, lastCheck}) => {
+const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList, updateManhwalist, note, lastCheck, isUser}) => {
     const [isPopup, setPopup] = useState(false)
     const [receiveData, setRData] = useState(false)
     const [chaptUpdate, setChapUpdate] = useState(maxChapter)
@@ -95,12 +95,14 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                     )
                     const chapterAPI = chapList.length > 0 ? Math.round(Math.max(...chapList)) : maxChapter
                     const chapterF = chapterAPI < maxChapter ? maxChapter : chapterAPI
+                    console.log(data)
+                    console.log(resultList)
                     setChapUpdate(chapterF)
                     handleMAJ(chapterF)
                 }
             }
         }
-        apiCall()
+        !isUser && apiCall()
     }, [id])
 
     return (
