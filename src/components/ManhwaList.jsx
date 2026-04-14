@@ -62,7 +62,7 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
                 {isForm && <FormAjout isForm={isForm} setForm={setForm} setAjoutList={setAjoutList}/>}
             </div>
             <ul className='manhwa-list'>
-                {activeList.map(({id, title, chapter, status, lastRead, lastReadCount, nsfw, cover,description,link, maxChapter, note}) => (
+                {activeList.map(({id, title, chapter, status, lastRead, lastReadCount, nsfw, cover,description,link, maxChapter, note, lastCheck}) => (
                     (!filtreStatus || filtreStatus === status) && (parseInt(isNsfw) === 2 || parseInt(isNsfw) === nsfw) ? 
                         <div key={id}>
                             <ManhwaItem 
@@ -80,6 +80,7 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
                                 manhwaList={manhwaList}
                                 updateManhwalist={updateManhwalist}
                                 note={note}
+                                lastCheck={lastCheck}
                             />
                         </div>
                     : null ) 

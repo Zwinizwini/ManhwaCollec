@@ -34,8 +34,6 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
         return () => window.removeEventListener('keydown', handleKey)
     }, [])
 
-    
-
     const couleurStatus = styleCouleur(status)
     const [modifier, setModifier] = useState(false)
 
