@@ -16,7 +16,7 @@ const changeLink = (link, chapter) => {
     return changeLink
 }
 
-const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note, gradientSeuil}) => {
+const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note, gradientSeuil, setChapUpdate}) => {
     const {isUser} = useContext(UserContext)
 
     useEffect(() => {
@@ -83,6 +83,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
                     updateManhwalist={updateManhwalist}
                     note={note}
                     lastRead={lastRead}
+                    setChapUpdate={setChapUpdate}
                 />}
             </div>
         </div>

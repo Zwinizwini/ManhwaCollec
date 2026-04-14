@@ -3,7 +3,7 @@ import '../styles/Popup.css'
 import { styleCouleur } from '../utils/colors'
 import { supabase } from '../supabase'
 
-const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, setModifier, maxChapter, manhwaList, updateManhwalist, note, lastRead}) => {
+const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, setModifier, maxChapter, manhwaList, updateManhwalist, note, lastRead, setChapUpdate}) => {
     useEffect(() => {
         const handleKey = (e) => {
             if (e.key === 'Escape') setModifier(false)
@@ -50,6 +50,7 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                 note: noteM && parseFloat(noteM)
             } : m
         ))
+        setChapUpdate(parseInt(updateChapter) > parseInt(updateMaxChap) ? updateChapter : updateMaxChap)
         updateManhwa(id, manhwaUpdate)
         updateManhwalist(updateList)
         setModifier(false)

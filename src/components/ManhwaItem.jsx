@@ -90,12 +90,13 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                     )
                     setRData(true)
                     const chapList = resultList.reduce(
-                        (acc, site) => site.title.toLowerCase().replaceAll(" ","").includes(title.toLowerCase().replaceAll(" ","")) ? acc.concat(site.latestChapter) : acc
+                        (acc, site) => site.title.toLowerCase().replaceAll(" ","") === title.toLowerCase().replaceAll(" ","") ? acc.concat(site.latestChapter) : acc
                         , []
                     )
                     const chapterAPI = chapList.length > 0 ? Math.round(Math.max(...chapList)) : maxChapter
-                    setChapUpdate(chapterAPI)
-                    handleMAJ(chapterAPI)
+                    const chapterF = chapterAPI < maxChapter ? maxChapter : chapterAPI
+                    setChapUpdate(chapterF)
+                    handleMAJ(chapterF)
                 }
             }
         }
@@ -143,6 +144,7 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                     updateManhwalist={updateManhwalist}
                     note={note}
                     gradientSeuil={gradientSeuil}
+                    setChapUpdate={setChapUpdate}
                 />
             }
         </>
