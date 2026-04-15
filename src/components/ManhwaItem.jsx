@@ -27,20 +27,25 @@ const Loader = styled.div`
   left: 2px;
 `
 
+const getDateDiff = (date1, needHours) => {
+    const dateNow = new Date()
+    const lastReadDate = date1 ? new Date(date1) : ""
+
+    if (needHours) return Math.floor((dateNow - (lastReadDate)) / (1000 * 60 * 60))
+    
+    const dateTest = lastReadDate ? new Date(lastReadDate.getFullYear(), lastReadDate.getMonth(), lastReadDate.getDate()) : ""
+    const lastReadCompter = Math.floor((dateNow - (needHours ? lastReadDate : dateTest)) / (1000 * 60 * 60 * 24))
+    return lastReadCompter
+}
+
 const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList, updateManhwalist, note, lastCheck, isUser}) => {
     const [isPopup, setPopup] = useState(false)
     const [receiveData, setRData] = useState(false)
     const [chaptUpdate, setChapUpdate] = useState(maxChapter)
     const [isLoading, setLoading] = useState(false)
 
-    const dateNow = new Date()
-    const lastReadDate = lastRead ? new Date(lastRead) : ""
-    const dateTest = lastReadDate ? new Date(lastReadDate.getFullYear(), lastReadDate.getMonth(), lastReadDate.getDate()) : ""
-    const lastReadCompter = Math.floor((dateNow - dateTest) / (1000 * 60 * 60 * 24))
-
-    const lastCheckDate = lastCheck ? new Date(lastCheck) : ""
-    const dateLastCheck = lastCheckDate ? new Date(lastCheckDate.getFullYear(), lastCheckDate.getMonth(), lastCheckDate.getDate()) : ""
-    const lastCheckDiff = Math.floor((dateNow - dateLastCheck) / (1000 * 60 * 60 * 24))
+    const lastReadCompter = getDateDiff(lastRead, false)
+    const lastCheckDiff = getDateDiff(lastCheck, true)
 
     const gradientSeuil = Math.round((parseInt(chapter)/chaptUpdate) * 100)
 
@@ -78,7 +83,7 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
 
     useEffect(() => {
         const apiCall = async () => {
-            if (lastCheckDiff > 0 && (status === "En Cours" || status === "Hiatus") && nsfw === 0) {
+            if (lastCheckDiff > 1 && (status === "En Cours" || status === "Hiatus") && nsfw === 0) {
                 setLoading(true)
                 console.log(`Passage API pour ${title}`)
                 if (!receiveData) {
