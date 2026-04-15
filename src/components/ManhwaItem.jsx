@@ -95,7 +95,7 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
                     )
                     setRData(true)
                     const chapList = resultList.reduce(
-                        (acc, site) => site.title.toLowerCase().replaceAll(" ","") === title.toLowerCase().replaceAll(" ","") ? acc.concat(site.latestChapter) : acc
+                        (acc, site) => (site.title.toLowerCase().replaceAll(" ","") === title.toLowerCase().replaceAll(" ","")) && (site.latestChapter < 10000) ? acc.concat(site.latestChapter) : acc
                         , []
                     )
                     const chapterAPI = chapList.length > 0 ? Math.round(Math.max(...chapList)) : maxChapter
