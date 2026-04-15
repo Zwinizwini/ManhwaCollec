@@ -83,7 +83,7 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
 
     useEffect(() => {
         const apiCall = async () => {
-            if (lastCheckDiff > 1 && (status === "En Cours" || status === "Hiatus") && nsfw === 0) {
+            if (lastCheckDiff > 1 && (status !== "Fini") && nsfw === 0) {
                 setLoading(true)
                 console.log(`Passage API pour ${title}`)
                 if (!receiveData) {
