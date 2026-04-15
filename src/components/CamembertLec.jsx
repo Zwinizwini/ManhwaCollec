@@ -33,6 +33,11 @@ const CamembertLec = ({manhwaList, totalManhwa}) => {
         }
         return entry
     })
+    console.log(totalChapter)
+    console.log(totalChapterLu)
+    console.log(dataLuTemp)
+    console.log(dataLuTemp)
+
 
     return (
         <div className="container-droite">
