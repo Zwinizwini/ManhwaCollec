@@ -1,7 +1,7 @@
 import ManhwaList from '../components/ManhwaList'
 import { useState, useEffect, useContext } from 'react'
 import PopupToast from '../components/PopupToast'
-import { ManhwaContext, UserContext } from '../utils/Context'
+import { AjoutListContext, ManhwaContext, UserContext } from '../utils/Context'
 import { Link } from 'react-router-dom'
 import Pasco from '../components/Pasco'
 import {useAuth} from '../utils/AuthContext'
@@ -47,7 +47,7 @@ function App() {
   const {user} = useAuth()
   const {setIsUser} = useContext(UserContext)
   const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
-  const [ajoutList, setAjoutList] = useState(false)
+  const {ajoutList, setAjoutList} = useContext(AjoutListContext)
 
   const BAR_DATA = [5,11,8,14,6]
 
@@ -79,7 +79,6 @@ function App() {
           <ManhwaList 
             manhwaList={manhwaList} 
             updateManhwalist={saveManhwaList} 
-            setAjoutList={setAjoutList}
           />
           {ajoutList && <PopupToast manhwaList={manhwaList} msg={"ajouté à la bibliothèque"}/>}
         </>

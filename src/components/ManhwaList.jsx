@@ -9,7 +9,7 @@ import Sort from './Sort'
 import { UserContext } from '../utils/Context'
 
 
-const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
+const ManhwaList = ({manhwaList, updateManhwalist}) => {
     const [filtreStatus, setStatus] = useState('')
     const [isForm, setForm] = useState(false)
     const [isNsfw, setIsNsfw] = useState(2)
@@ -24,7 +24,7 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
     )
 
     const activeList = manhwaList
-        .filter(m => m.title.toLowerCase().includes(search.toLocaleLowerCase()))
+        .filter(m => m.title.toLowerCase().includes(search.toLowerCase()))
         .sort((a,b) => {
             if (trie === "1") {
                 return (b?.note ?? 0) - (a?.note ?? 0)
@@ -59,7 +59,7 @@ const ManhwaList = ({manhwaList, updateManhwalist, setAjoutList}) => {
                     </div>
                 </div>
                 {!isUser && <button className='ajouter-manhwa' onClick={() => setForm(true)}>+ Ajouter</button>}
-                {isForm && <FormAjout isForm={isForm} setForm={setForm} setAjoutList={setAjoutList}/>}
+                {isForm && <FormAjout isForm={isForm} setForm={setForm}/>}
             </div>
             <ul className='manhwa-list'>
                 {activeList.map(({id, title, chapter, status, lastRead, lastReadCount, nsfw, cover,description,link, maxChapter, note, lastCheck}) => (

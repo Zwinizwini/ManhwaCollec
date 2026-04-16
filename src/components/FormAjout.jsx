@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from "react"
 import '../styles/FormAjout.css'
-import { ManhwaContext } from "../utils/Context"
+import { AjoutListContext, ManhwaContext } from "../utils/Context"
 import styled from "styled-components"
 import {colors} from "../utils/colors"
 import { supabase } from "../supabase"
 import { useAuth } from "../utils/AuthContext"
+import SuggestionInput from "./SuggestionInput"
 
 const BtnHead = styled.button`
     background-color: ${({rapid}) =>
@@ -21,9 +22,10 @@ const BtnHead = styled.button`
     cursor: pointer;
 `
 
-const FormAjout = ({isForm, setForm, setAjoutList}) => {
+const FormAjout = ({isForm, setForm}) => {
     const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
     const {user} = useAuth()
+    const {setAjoutList} = useContext(AjoutListContext)
 
     async function recupManhwa(id) {
         try {
@@ -133,7 +135,7 @@ const FormAjout = ({isForm, setForm, setAjoutList}) => {
                         :
                         <>
                         <label>
-                            Titre <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Ex: My Bias..."/>
+                            Titre <SuggestionInput title={title} setTitle={setTitle} setCover={setCover} setMaxChapter={setMaxChapter}/>
                         </label>
                         <label>
                             URL de la cover <input type="text" value={cover} onChange={(e) => setCover(e.target.value)} placeholder="https://..."/>

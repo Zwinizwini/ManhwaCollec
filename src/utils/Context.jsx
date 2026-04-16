@@ -48,3 +48,48 @@ export const UserProvider = ({children}) => {
         </UserContext.Provider>
     )
 }
+
+export const AjoutListContext = createContext()
+
+export const AjoutListProvider = ({children}) => {
+    const [ajoutList, setAjoutList] = useState(false)
+    return (
+        <AjoutListContext.Provider value={{ajoutList, setAjoutList}}>
+            {children}
+        </AjoutListContext.Provider>
+    )
+}
+
+
+export const OtherManhwaContext = createContext()
+
+export const OtherManhwaProvider = ({children}) => {
+    const [otherManhwaList, setOtherManhwa] = useState([])
+    const {user} = useAuth()
+
+    const saveOtherManhwaList = (ml) => {
+        setOtherManhwa(ml)
+    }
+
+    useEffect(() => {
+        const getManhwas = async () => {
+            const { data, error } = await supabase
+                .from('manhwas')
+                .select('title, cover, maxChapter')
+                .neq('user_id', user.id)
+                .order('status', {ascending: true})
+            
+            if (error) console.error(error)
+            if (data) {
+                saveOtherManhwaList(data)
+            }
+        }
+        getManhwas()
+    }, [user])
+
+    return (
+        <OtherManhwaContext.Provider value={{otherManhwaList, saveOtherManhwaList}}>
+            {children}
+        </OtherManhwaContext.Provider>
+    )
+}

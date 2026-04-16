@@ -4,6 +4,7 @@ import PopupInfo from './PopupInfo'
 import Modifier from './Modifier'
 import { styleCouleur, progressionCouleur } from '../utils/colors'
 import { UserContext } from '../utils/Context'
+import BtnAjouter from './BtnAjouter'
 
 const changeLink = (link, chapter) => {
     let changeLink
@@ -65,6 +66,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
                     <div className="divBtn">
                         {link && <a href={changeLink(link, chapter)} className='bouton-chap' target='__blank'>Voir le lien de lecture</a>}
                         {!isUser && <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>}
+                        {isUser && <BtnAjouter title={title} maxChapter={maxChapter} cover={cover}/>}
                     </div>
                 </div>
                 <div className='closePopup' onClick={() => setPopup(false)}></div>

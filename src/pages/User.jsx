@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import ManhwaList from '../components/ManhwaList'
 import { useParams } from 'react-router-dom'
 import { supabase } from '../supabase'
-import { UserContext } from '../utils/Context'
+import { AjoutListContext, UserContext } from '../utils/Context'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
