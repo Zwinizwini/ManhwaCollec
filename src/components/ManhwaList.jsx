@@ -6,7 +6,7 @@ import Searchbar from './Searchbar'
 import Info from './Info'
 import FormAjout from './FormAjout'
 import Sort from './Sort'
-import { UserContext } from '../utils/Context'
+import { UserContext, ManhwaContext } from '../utils/Context'
 
 
 const ManhwaList = ({manhwaList, updateManhwalist}) => {
@@ -17,6 +17,8 @@ const ManhwaList = ({manhwaList, updateManhwalist}) => {
     const {isUser} = useContext(UserContext)
     const trierLocal = localStorage.getItem("trier")
     const [trie, setTrie] = useState(trierLocal ? JSON.parse(trierLocal) : 0)
+    const {manhwaList : manhwwaListOwner} = useContext(ManhwaContext)
+    const manhwaListName = manhwwaListOwner.map((manhwa) => manhwa.title.toLowerCase().replaceAll(" ", ""))
 
     const statusList = manhwaList.reduce(
         (acc, manhwa) => acc.includes(manhwa.status) ? acc : acc.concat(manhwa.status),
@@ -82,6 +84,7 @@ const ManhwaList = ({manhwaList, updateManhwalist}) => {
                                 note={note}
                                 lastCheck={lastCheck}
                                 isUser={isUser}
+                                manhwaListName={manhwaListName}
                             />
                         </div>
                     : null ) 

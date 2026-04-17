@@ -17,7 +17,7 @@ const changeLink = (link, chapter) => {
     return changeLink
 }
 
-const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note, gradientSeuil, setChapUpdate}) => {
+const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note, gradientSeuil, setChapUpdate, manhwaListName}) => {
     const {isUser} = useContext(UserContext)
 
     useEffect(() => {
@@ -66,7 +66,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
                     <div className="divBtn">
                         {link && <a href={changeLink(link, chapter)} className='bouton-chap' target='__blank'>Voir le lien de lecture</a>}
                         {!isUser && <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>}
-                        {isUser && <BtnAjouter title={title} maxChapter={maxChapter} cover={cover}/>}
+                        {isUser && <BtnAjouter title={title} maxChapter={maxChapter} cover={cover} manhwaListName={manhwaListName}/>}
                     </div>
                 </div>
                 <div className='closePopup' onClick={() => setPopup(false)}></div>

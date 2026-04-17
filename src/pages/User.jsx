@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import ManhwaList from '../components/ManhwaList'
 import { useParams } from 'react-router-dom'
 import { supabase } from '../supabase'
-import { AjoutListContext, UserContext } from '../utils/Context'
+import { AjoutListContext, ManhwaContext, UserContext } from '../utils/Context'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -25,6 +25,7 @@ function User() {
     const [manhwaList, saveManhwaList] = useState([])
     const {id} = useParams()
     const {setIsUser} = useContext(UserContext)
+
 
     const BAR_DATA = [5,11,8,14,6]
 
@@ -80,8 +81,8 @@ function User() {
             </Link> 
           </div>   
         <ManhwaList 
-        manhwaList={manhwaList} 
-        updateManhwalist={saveManhwaList}
+            manhwaList={manhwaList} 
+            updateManhwalist={saveManhwaList}
         />
     </>
   )

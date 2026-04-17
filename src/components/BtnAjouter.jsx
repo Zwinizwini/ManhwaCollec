@@ -2,20 +2,13 @@ import { useContext, useEffect } from "react"
 import { supabase } from "../supabase"
 import { AjoutListContext, ManhwaContext } from "../utils/Context"
 import { useAuth } from "../utils/AuthContext"
-import styled from "styled-components"
-
-const BtnAjout = styled.button`
-    background-color: ${({ajoutList}) =>
-        ajoutList ? '#085041' : '#16191f'};
-    border: 1px solid ${({ajoutList}) =>
-        ajoutList ? '#1d9e75' : '#7F77DD'};
-`
 
 
-const BtnAjouter = ({title, cover, maxChapter}) => {
+const BtnAjouter = ({title, cover, maxChapter, manhwaListName}) => {
     const { manhwaList, saveManhwaList } = useContext(ManhwaContext)
     const { ajoutList, setAjoutList } = useContext(AjoutListContext)
     const { user } = useAuth()
+    const isValid = !manhwaListName.includes(title.toLowerCase().replaceAll(" ", ""))
 
     useEffect(() => {
         if (ajoutList) {
@@ -56,7 +49,10 @@ const BtnAjouter = ({title, cover, maxChapter}) => {
     }
 
     return (
-        <BtnAjout onClick={() => {ajoutManhwa()}} className="bouton-chap" ajoutList={ajoutList} id="btnAjoutAutre">{!ajoutList ? 'Ajouter +' : 'Ajouté'}</BtnAjout>
+        <>
+            {isValid && <button onClick={() => {ajoutManhwa()}} className="bouton-chap" id="btnAjoutAutre">Ajouter +</button>}
+            {ajoutList && <button className="bouton-chap" style={{background: '#085041', border: '1px solid #1d9e75'}}>Ajouté</button>}
+        </>
     )
 }
 
