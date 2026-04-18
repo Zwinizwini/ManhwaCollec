@@ -6,6 +6,7 @@ import { Tooltip } from "react-tooltip"
 
 const CamembertLec = ({manhwaList, totalManhwa}) => {
     const [hovered2, setHovered2] = useState(null)
+    const [pos, setPos] = useState({x: 0, y:0})
     const totalChapterLu = manhwaList.reduce(
         (acc, m) => m.chapter ? acc + parseInt(m.chapter) : acc
         , 0
@@ -33,10 +34,6 @@ const CamembertLec = ({manhwaList, totalManhwa}) => {
         }
         return entry
     })
-    console.log(totalChapter)
-    console.log(totalChapterLu)
-    console.log(dataLuTemp)
-    console.log(dataLuTemp)
 
 
     return (
@@ -46,7 +43,7 @@ const CamembertLec = ({manhwaList, totalManhwa}) => {
             <StatInfo info1={"Contenus adulte"} info2={`${Math.round((nbNsfw/totalManhwa) * 100)} %`}/>
             <div className="statInfo">
                 <p>Avancement global</p>
-                <div id='anchor-hover2'>
+                <div id='anchor-hover2' onMouseMove={(e) => {setPos({x: e.clientX, y: e.clientY})}}>
                     <PieChart
                         data={dataLu}
                         lineWidth={30}
@@ -66,6 +63,7 @@ const CamembertLec = ({manhwaList, totalManhwa}) => {
                         border={typeof hovered2 === 'number' && `1px solid ${dataLu[hovered2].colorHover}`}
                         style={{background: '#08090a'}}
                         content= {typeof hovered2 === 'number' && `${dataLu[hovered2].title} : ${dataLu[hovered2].value} %`}
+                        position={{x: pos.x, y: pos.y}}
                     />
                 </div>
             </div>

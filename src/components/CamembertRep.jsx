@@ -2,14 +2,11 @@ import { useState } from "react"
 import { PieChart } from "react-minimal-pie-chart"
 import StatLegend from "./StatLegend"
 import { Tooltip } from "react-tooltip"
-import styled from "styled-components"
 
-const PieStyle = styled(PieChart)`
-
-`
 
 const CamembertRep = ({manhwaList, totalManhwa}) => {
     const [hovered1, setHovered1] = useState(null)
+    const [pos, setPos] = useState({x:0,y:0})
 
     const nbFini = manhwaList.filter((manhwa => manhwa.status === 'Fini')).length
     const nbFiniP = Math.round((nbFini/totalManhwa) * 100)
@@ -49,8 +46,8 @@ const CamembertRep = ({manhwaList, totalManhwa}) => {
         <div className="container-gauche">
             <h2 style={{margin:0, color: 'white', textAlign: 'left', width:'100%'}}>liste de manhwa</h2>
             <p style={{color: "#ccc", textAlign: 'left', width:'100%'}}>{totalManhwa} manhwa au total</p>
-            <div id="anchor-hover">
-                <PieStyle
+            <div id="anchor-hover" onMouseMove={(e) => {setPos({x: e.clientX, y: e.clientY})}}>
+                <PieChart
                     data={dataStatus}
                     label={({ dataEntry }) => `${dataEntry.valueP} %`}
                     labelStyle={{fontSize: '5px', fill: "white"}}
@@ -72,6 +69,7 @@ const CamembertRep = ({manhwaList, totalManhwa}) => {
                     border={typeof hovered1 === 'number' && `1px solid ${dataStatus[hovered1].colorHover}`}
                     style={{background: '#08090a'}}
                     opacity={1}
+                    position={{x: pos.x, y: pos.y}}
                     content= {typeof hovered1 === 'number' && `${dataStatus[hovered1].title} : ${dataStatus[hovered1].value}`}
                 />
             </div>
