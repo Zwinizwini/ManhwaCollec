@@ -11,6 +11,7 @@
     width: 110px;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .sous-filtre {
@@ -39,11 +40,47 @@
     border-radius: 0 0 10px 10px;
     color: #888;
     padding: 5px 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: all .2s allow-discrete;
 }
 
-.filtre select:focus-within,
-.trieSelect:focus-within {
+option {
+    transition: all .2s ease;
+    &:hover {
+        background-color: #7F77DD;
+        color: white;
+    }
+    &:checked {
+        font-weight: bold;
+    }
+}
+
+.filtre select:open,
+.trieSelect:open {
     border: 1px solid #7F77DD;
     box-shadow: #7F77DD 1px 1px 5px;
     border-radius: 5px 5px 0 0;
+}
+
+.filtre select::picker-icon,
+.trieSelect::picker-icon {
+    transition: rotate .4s ease-in-out;
+}
+
+.filtre select:open::picker-icon,
+.trieSelect:open::picker-icon {
+    rotate: 180deg;
+}
+
+.filtre select::picker(select):popover-open,
+.trieSelect::picker(select):popover-open {
+    transform: scaleY(1);
+}
+
+@starting-style {
+    .filtre select::picker(select):popover-open,
+    .trieSelect::picker(select):popover-open {
+        transform: scaleY(0);
+    }
 }
