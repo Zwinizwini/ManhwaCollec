@@ -110,6 +110,7 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
         !isUser && apiCall()
     }, [id])
 
+    //ajout animation apparition
     return (
         <>
             <li className="manhwa-item" style={{animationDelay: `${index*0.05}s`}}>
