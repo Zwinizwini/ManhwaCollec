@@ -38,7 +38,7 @@ const getDateDiff = (date1, needHours) => {
     return lastReadCompter
 }
 
-const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList, updateManhwalist, note, lastCheck, isUser, manhwaListName}) => {
+const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList, updateManhwalist, note, lastCheck, isUser, manhwaListName}) => {
     const [isPopup, setPopup] = useState(false)
     const [receiveData, setRData] = useState(false)
     const [chaptUpdate, setChapUpdate] = useState(maxChapter)
@@ -112,7 +112,7 @@ const ManhwaItem = ({id, title, chapter, status, lastRead, nsfw, cover, lastRead
 
     return (
         <>
-            <li className="manhwa-item">
+            <li className="manhwa-item" style={{animationDelay: `${index*0.05}s`}}>
                 <div
                     className='container-hover'
                     onClick={() => setPopup(true)}
