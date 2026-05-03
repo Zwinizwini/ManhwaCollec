@@ -44,7 +44,6 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
     const [chaptUpdate, setChapUpdate] = useState(maxChapter)
     const [isLoading, setLoading] = useState(false)
     const itemnLoc = useRef(null)
-    const item = itemnLoc.current.getBoundingClientRect()
 
     const lastReadCompter = getDateDiff(lastRead, false)
     const lastCheckDiff = getDateDiff(lastCheck, true)
@@ -161,7 +160,7 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
                     gradientSeuil={gradientSeuil}
                     setChapUpdate={setChapUpdate}
                     manhwaListName={manhwaListName}
-                    coor={{x: item.x + (item.width/2), y: item.y + (item.height/2)}}
+                    coor={{x: itemnLoc.current.getBoundingClientRect().x + (itemnLoc.current.getBoundingClientRect().width/2), y: itemnLoc.current.getBoundingClientRect().y + (itemnLoc.current.getBoundingClientRect().height/2)}}
                 />
             }
         </>
