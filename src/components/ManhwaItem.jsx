@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import '../styles/ManhwaItem.css'
 import Popup from './Popup'
 import { styleCouleur, colors } from '../utils/colors'
@@ -43,6 +43,8 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
     const [receiveData, setRData] = useState(false)
     const [chaptUpdate, setChapUpdate] = useState(maxChapter)
     const [isLoading, setLoading] = useState(false)
+    const itemnLoc = useRef(null)
+    const item = itemnLoc.current.getBoundingClientRect()
 
     const lastReadCompter = getDateDiff(lastRead, false)
     const lastCheckDiff = getDateDiff(lastCheck, true)
@@ -110,10 +112,15 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
         !isUser && apiCall()
     }, [id])
 
+
     //ajout animation apparition
     return (
         <>
-            <li className="manhwa-item" style={{animationDelay: `${index*0.05}s`}}>
+            <li 
+                className="manhwa-item" 
+                style={{animationDelay: `${index*0.05}s`}} 
+                ref={itemnLoc}
+            >
                 <div
                     className='container-hover'
                     onClick={() => setPopup(true)}
@@ -154,6 +161,7 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
                     gradientSeuil={gradientSeuil}
                     setChapUpdate={setChapUpdate}
                     manhwaListName={manhwaListName}
+                    coor={{x: item.x + (item.width/2), y: item.y + (item.height/2)}}
                 />
             }
         </>

@@ -17,7 +17,7 @@ const changeLink = (link, chapter) => {
     return changeLink
 }
 
-const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note, gradientSeuil, setChapUpdate, manhwaListName}) => {
+const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note, gradientSeuil, setChapUpdate, manhwaListName, coor}) => {
     const {isUser} = useContext(UserContext)
 
     useEffect(() => {
@@ -37,12 +37,17 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
 
     const couleurStatus = styleCouleur(status)
     const [modifier, setModifier] = useState(false)
+    const [isClose, setIsClose] = useState(false)
+
 
     return (
         <div className='popupBackground' onClick={(e) => {
-            e.target.className === 'popupBackground' && setPopup(false)
+            if (e.target.className === 'popupBackground') {
+                setIsClose(true)
+                setTimeout(() => setPopup(false), 300)
+            }
         }}>
-            <div className="popup">
+            <div className="popup" style={{left: coor.x, top: coor.y, animation: isClose ? 'fermeture .3s ease-in-out both' : 'ouverture .3s ease-in-out both'}}>
                 <div className='img-popup'>
                     <img src={cover} alt={`Cover de ${title}`}/>
                 </div>
@@ -69,7 +74,11 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
                         {isUser && <BtnAjouter title={title} maxChapter={maxChapter} cover={cover} manhwaListName={manhwaListName}/>}
                     </div>
                 </div>
-                <div className='closePopup' onClick={() => setPopup(false)}></div>
+                <div className='closePopup' onClick={() => {
+                        setIsClose(true)
+                        setTimeout(() => setPopup(false), 300)
+                    }}>
+                </div>
                 {modifier && <Modifier 
                     title={title}
                     chapter={chapter}

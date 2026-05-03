@@ -12,8 +12,6 @@
 
 .popup {
     position: absolute;
-    top: 50%;
-    left: 50%;
     align-items: center;
     width: 800px;
     padding: 15px;
@@ -29,12 +27,27 @@
     text-align: left;
     gap: 20px;
     border: 1px solid #262624;
-    animation: popup .2s ease-in-out both;
+    transform-origin: top left;
 }
 
-@keyframes popup {
-    from {transform: scale(0) translate(-50%, -50%);}
-    to {transform: scale(1) translate(-50%, -50%);}
+@keyframes ouverture {
+    from {transform: scale(0)}
+    to {
+        top: 50%;
+        left: 50%;
+        transform: scale(1) translate(-50%, -50%);
+    }
+}
+
+@keyframes fermeture {
+    from {
+        top: 50%;
+        left: 50%;
+        transform: scale(1) translate(-50%, -50%);
+    }
+    to {
+        transform: scale(0);
+    }
 }
 
 .closePopup {
