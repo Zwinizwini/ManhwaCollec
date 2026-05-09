@@ -47,7 +47,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
                 setTimeout(() => setPopup(false), 300)
             }
         }}>
-            <div className="popup" style={{left: coor.x, top: coor.y, animation: isClose ? 'fermeture .3s ease-in-out both' : 'ouverture .3s ease-in-out both'}}>
+            <div className="popup" style={{left: coor.x, top: coor.y, animation: isClose ? 'fermeture .3s ease-in-out both' : 'ouverture .3s ease-in-out both'}} id='popupLec'>
                 <div className='img-popup'>
                     <img src={cover} alt={`Cover de ${title}`}/>
                 </div>

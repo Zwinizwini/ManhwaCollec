@@ -25,7 +25,8 @@
     overflow: hidden;
     text-align: left;
     gap: 20px;
-    border: 1px solid #262624;
+}
+#popupLec {
     transform: translate(-50%, -50%);
 }
 
