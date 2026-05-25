@@ -10,17 +10,8 @@
 	text-transform: capitalize;
 	color: white;
 	height: 280px;
-	animation: fadeIn 1.5s ease-in-out both;
 }
 
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
 
 .container-hover {
 	position: relative;
