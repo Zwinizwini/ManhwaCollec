@@ -10,6 +10,7 @@ export const ManhwaProvider = ({children}) => {
 
     const [manhwaList, updateManhwalist] = useState([])
     const {user} = useAuth()
+    const [loading, isLoading] = useState(true)
     
     const saveManhwaList = (ml) => {
         updateManhwalist(ml)
@@ -25,6 +26,7 @@ export const ManhwaProvider = ({children}) => {
             
             if (error) console.error(error)
             if (data) {
+                isLoading(false)
                 saveManhwaList(data)
             }
         }
@@ -32,7 +34,7 @@ export const ManhwaProvider = ({children}) => {
     }, [user])
 
     return (
-        <ManhwaContext.Provider value={{manhwaList, saveManhwaList}}>
+        <ManhwaContext.Provider value={{manhwaList, saveManhwaList, loading}}>
             {children}
         </ManhwaContext.Provider>
     )

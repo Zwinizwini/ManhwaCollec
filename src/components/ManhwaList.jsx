@@ -17,7 +17,7 @@ const ManhwaList = ({manhwaList, updateManhwalist}) => {
     const {isUser} = useContext(UserContext)
     const trierLocal = localStorage.getItem("trier")
     const [trie, setTrie] = useState(trierLocal ? JSON.parse(trierLocal) : 0)
-    const {manhwaList : manhwwaListOwner} = useContext(ManhwaContext)
+    const {manhwaList : manhwwaListOwner, loading} = useContext(ManhwaContext)
     const manhwaListName = manhwwaListOwner.map((manhwa) => manhwa.title.toLowerCase().replaceAll(" ", ""))
 
     const statusList = manhwaList.reduce(
@@ -63,34 +63,38 @@ const ManhwaList = ({manhwaList, updateManhwalist}) => {
                 {!isUser && <button className='ajouter-manhwa' onClick={() => setForm(true)}>+ Ajouter</button>}
                 {isForm && <FormAjout isForm={isForm} setForm={setForm}/>}
             </div>
-            <ul className='manhwa-list'>
-                {activeList.map(({id, title, chapter, status, lastRead, lastReadCount, nsfw, cover,description,link, maxChapter, note, lastCheck}, index) => (
-                    (!filtreStatus || filtreStatus === status) && (parseInt(isNsfw) === 2 || parseInt(isNsfw) === nsfw) ? 
-                        <div key={id}>
-                            <ManhwaItem 
-                                id={id}
-                                title={title}
-                                chapter={chapter}
-                                status={status}
-                                lastRead={lastRead}
-                                lastReadCount={lastReadCount}
-                                nsfw={nsfw}
-                                cover={cover}
-                                description={description}
-                                link={link}
-                                maxChapter={maxChapter}
-                                manhwaList={manhwaList}
-                                updateManhwalist={updateManhwalist}
-                                note={note}
-                                lastCheck={lastCheck}
-                                isUser={isUser}
-                                manhwaListName={manhwaListName}
-                                index={index}
-                            />
-                        </div>
-                    : null ) 
-                )}
-            </ul>
+            {
+                loading ? <div class="loader"></div>
+                : 
+                <ul className='manhwa-list'>
+                    {activeList.map(({id, title, chapter, status, lastRead, lastReadCount, nsfw, cover,description,link, maxChapter, note, lastCheck}, index) => (
+                        (!filtreStatus || filtreStatus === status) && (parseInt(isNsfw) === 2 || parseInt(isNsfw) === nsfw) ? 
+                            <div key={id}>
+                                <ManhwaItem 
+                                    id={id}
+                                    title={title}
+                                    chapter={chapter}
+                                    status={status}
+                                    lastRead={lastRead}
+                                    lastReadCount={lastReadCount}
+                                    nsfw={nsfw}
+                                    cover={cover}
+                                    description={description}
+                                    link={link}
+                                    maxChapter={maxChapter}
+                                    manhwaList={manhwaList}
+                                    updateManhwalist={updateManhwalist}
+                                    note={note}
+                                    lastCheck={lastCheck}
+                                    isUser={isUser}
+                                    manhwaListName={manhwaListName}
+                                    index={index}
+                                />
+                            </div>
+                        : null ) 
+                    )}
+                </ul>
+            }
         </div>
     ) 
 }
