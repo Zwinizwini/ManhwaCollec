@@ -23,6 +23,7 @@ export const ManhwaProvider = ({children}) => {
                 .select('*')
                 .eq('user_id', user.id)
                 .order('status', {ascending: true})
+                .order('title', {ascending: true})
             
             if (error) console.error(error)
             if (data) {
