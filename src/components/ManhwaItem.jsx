@@ -86,9 +86,8 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
         const apiCall = async () => {
             if (lastCheckDiff > 1 && (status !== "Fini") && nsfw === 0) {
                 setLoading(true)
-                console.log(`Passage API pour ${title}`)
                 if (!receiveData) {
-                    const response = await fetch(`/api/test?name=${title}`)
+                    const response = await fetch(`/api/test?name=${encodeURIComponent(title)}`)
                     const data = await response.json()
                     const resultList = data.reduce(
                         (acc, site) => !site.done ? acc.concat(site.results) : acc
@@ -101,8 +100,6 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
                     )
                     const chapterAPI = chapList.length > 0 ? Math.round(Math.max(...chapList)) : maxChapter
                     const chapterF = chapterAPI < maxChapter ? maxChapter : chapterAPI
-                    console.log(data)
-                    console.log(resultList)
                     setChapUpdate(chapterF)
                     handleMAJ(chapterF)
                 }
