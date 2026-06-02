@@ -10,5 +10,8 @@ export default defineConfig({
   },
   build: {
     cssMinify: false
+  },
+  optimizeDeps: {
+    include: ['recharts']
   }
 })
