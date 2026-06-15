@@ -4,6 +4,7 @@ import { supabase } from "../supabase";
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+
 const handleClick = async (manhwaList, isLoading) => {
     isLoading(true)
     for (const manhwa of manhwaList) {
@@ -11,8 +12,9 @@ const handleClick = async (manhwaList, isLoading) => {
             try {
             const response = await fetch(`https://api.jikan.moe/v4/manga?q=${encodeURIComponent(manhwa.title)}`)
             const {data} = await response.json()
+            const donnee = data.find(d => d.title.toLowerCase().replaceAll(" ","") === manhwa.title.toLowerCase().replaceAll(" ",""))
 
-            const tagListe = [...data[0].genres, ...data[0].themes]
+            const tagListe = [...donnee.genres, ...donnee.themes]
 
             const tag = tagListe.reduce(
                 (acc, current) => acc.concat(current.name),
