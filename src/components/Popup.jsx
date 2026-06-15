@@ -17,8 +17,10 @@ const changeLink = (link, chapter) => {
     return changeLink
 }
 
-const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note, gradientSeuil, setChapUpdate, manhwaListName, coor}) => {
+const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note, gradientSeuil, setChapUpdate, manhwaListName, coor, tag}) => {
     const {isUser} = useContext(UserContext)
+    const tagList = tag && tag.split(/\s*(?:,|$)\s*/)
+
 
     useEffect(() => {
         if (isPopup) {
@@ -58,7 +60,13 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
                         {note && <div className='note'>★ {note}</div>}
                     </div>
                     <h2>{title}</h2>
-                    {description && <p className='description'>{description}</p>
+                    {description && <p className='description'>{description}</p>}
+                    {tagList && 
+                        <div className='tag-list'>
+                            {tagList.map(t => 
+                                <p key={t}>{t}</p>
+                            )}
+                        </div>
                     }
 
                     <div className='popupInfo'>

@@ -67,7 +67,7 @@ const ManhwaList = ({manhwaList, updateManhwalist}) => {
                 loading ? <div class="loader"></div>
                 : 
                 <ul className='manhwa-list'>
-                    {activeList.map(({id, title, chapter, status, lastRead, lastReadCount, nsfw, cover,description,link, maxChapter, note, lastCheck}, index) => (
+                    {activeList.map(({id, title, chapter, status, lastRead, lastReadCount, nsfw, cover,description,link, maxChapter, note, lastCheck, tag}, index) => (
                         (!filtreStatus || filtreStatus === status) && (parseInt(isNsfw) === 2 || parseInt(isNsfw) === nsfw) ? 
                             <div key={id}>
                                 <ManhwaItem 
@@ -89,6 +89,7 @@ const ManhwaList = ({manhwaList, updateManhwalist}) => {
                                     isUser={isUser}
                                     manhwaListName={manhwaListName}
                                     index={index}
+                                    tag={tag}
                                 />
                             </div>
                         : null ) 

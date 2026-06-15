@@ -38,7 +38,7 @@ const getDateDiff = (date1, needHours) => {
     return lastReadCompter
 }
 
-const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList, updateManhwalist, note, lastCheck, isUser, manhwaListName}) => {
+const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList, updateManhwalist, note, lastCheck, isUser, manhwaListName, tag}) => {
     const [isPopup, setPopup] = useState(false)
     const [receiveData, setRData] = useState(false)
     const [chaptUpdate, setChapUpdate] = useState(maxChapter)
@@ -109,7 +109,6 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
     }, [id])
 
 
-    //ajout animation apparition
     return (
         <>
             <li 
@@ -157,6 +156,7 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
                     gradientSeuil={gradientSeuil}
                     setChapUpdate={setChapUpdate}
                     manhwaListName={manhwaListName}
+                    tag={tag}
                     coor={{x: itemnLoc.current.getBoundingClientRect().x + (itemnLoc.current.getBoundingClientRect().width/2), y: itemnLoc.current.getBoundingClientRect().y + (itemnLoc.current.getBoundingClientRect().height/2)}}
                 />
             }
