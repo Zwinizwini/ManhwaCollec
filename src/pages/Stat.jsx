@@ -5,6 +5,7 @@ import CamembertRep from "../components/CamembertRep"
 import CamembertLec from "../components/CamembertLec"
 import { useLocation } from "react-router-dom"
 import BtnNav from "../components/BtnNav"
+import CamembertTag from "../components/CamembertTag"
 
 const Stat = () => {
     const {state} = useLocation()
@@ -19,6 +20,9 @@ const Stat = () => {
             <div className="stat">
                 <CamembertRep manhwaList={manhwaList} totalManhwa={totalManhwa}/>
                 <CamembertLec manhwaList={manhwaList} totalManhwa={totalManhwa}/>
+            </div>
+            <div className="stat"  style={{marginTop: '50px'}}>
+                <CamembertTag manhwaList={manhwaList} totalManhwa={totalManhwa}/>
             </div>
         </>
     )

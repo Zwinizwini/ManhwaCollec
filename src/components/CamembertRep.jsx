@@ -49,9 +49,6 @@ const CamembertRep = ({manhwaList, totalManhwa}) => {
             <div id="anchor-hover" onMouseMove={(e) => {setPos({x: e.clientX, y: e.clientY})}}>
                 <PieChart
                     data={dataStatus}
-                    label={({ dataEntry }) => `${dataEntry.valueP} %`}
-                    labelStyle={{fontSize: '5px', fill: "white"}}
-                    labelPosition={80}
                     animate={true}
                     animationDuration={600}
                     animationEasing="ease-in-out"
