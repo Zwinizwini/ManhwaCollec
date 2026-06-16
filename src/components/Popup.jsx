@@ -19,7 +19,7 @@ const changeLink = (link, chapter) => {
 
 const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note, gradientSeuil, setChapUpdate, manhwaListName, coor, tag}) => {
     const {isUser} = useContext(UserContext)
-    const tagList = tag && tag.split(/\s*(?:,|$)\s*/)
+    const tagList = tag?.split(/\s*(?:,|$)\s*/) ?? []
 
 
     useEffect(() => {
@@ -103,6 +103,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
                     note={note}
                     lastRead={lastRead}
                     setChapUpdate={setChapUpdate}
+                    tag={tagList}
                 />}
             </div>
         </div>

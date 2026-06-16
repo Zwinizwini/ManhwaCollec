@@ -22,7 +22,6 @@
     border-radius: 15px;
     z-index: 3;
     display: flex;
-    overflow: hidden;
     text-align: left;
     gap: 20px;
 }
@@ -145,12 +144,87 @@ h2 {
     margin-bottom: 15px;
 }
 
-.popupInfo div {
+.popupInfo .divInvo {
     width: 45%;
     height: 35px;
     background-color: #16191f;
     padding: 8px;
     border-radius: 5px;
+}
+
+.select-btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.tag-setlist {
+    display: none;
+    height: 150px;
+    background: #16191f;
+    overflow-y: auto;
+    margin-top: 15px;
+    border-radius: 10px;
+	box-shadow: black 0 8px 24px;
+
+}
+
+.tag-setlist .tag-item {
+    list-style: none;
+    display: flex;
+    padding: 2px 0;
+    align-items: center;
+    font-size: 15px;
+    cursor: pointer;
+    & input {
+        display: none;
+    }
+    & label {
+        cursor: pointer;
+        width: 80%;
+    }
+    &:hover {
+        background-color: #2a2d35;
+    }
+    & .checkbox {
+        width: 15px;
+        height: 15px;
+        background: #555;
+        margin-left: 10%;
+        margin-right: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3px;
+        & span {
+            transform: scale(0);
+            transition: all .2s ease-in-out;
+        }
+    }
+    & input:checked ~ .checkbox {
+        background: #7F77DD;
+    }
+    & input:checked ~ .checkbox span {
+        transform: scale(1);
+    }
+}
+
+.arrow-dwn {
+    transition: all .3s ease-in-out;
+    color: #7F77DD;
+}
+
+.select-tag.openTag {
+    & .tag-setlist{
+        display: block;
+        padding: 0;
+    }
+    & .arrow-dwn {
+        transform: rotate(-180deg);
+    }
 }
 
 .popupInfo p {
@@ -255,10 +329,11 @@ h2 {
 
 .tag-list {
     display: flex;
+    flex-wrap: wrap;
     gap: 5px;
+    margin-bottom: 15px;
     & p {
         font-size: 12px;
-        margin-bottom: 15px;
         background: #16191f;
         border-radius: 10px;
         padding: 5px 10px;

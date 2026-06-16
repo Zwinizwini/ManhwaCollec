@@ -38,3 +38,10 @@ export const trier = (e, list) => {
         })
     }
 }
+
+export const allTagList = ['Military','Psychological','Time Travel','Gag Humor','Historical','Parody','Samurai','Gore','Survival','School','Childcare','Strategy Game','Mecha','Super Power',       'Medical',
+  'Adult Cast','Isekai','Combat Sports','Team Sports','CGDCT','Music','Vampire','Performing Arts','Space','Iyashikei','Delinquents','Workplace','Reincarnation','Mythology','Anthropomorphic',
+  'Organized Crime', 'Love Polygon','Detective','Showbiz','Urban Fantasy','Otaku Culture','Martial Arts','Love Status Quo','Racing','Mahou Shoujo','Visual Arts','Idols (Male)','Crossdressing',   'High Stakes Game',  'Reverse Harem',
+  'Video Game','Magical Sex Shift','Harem','Idols (Female)','Pets','Educational','Villainess','Adventure','Drama','Fantasy','Action','Sci-Fi','Suspense','Comedy','Romance','Supernatural',  'Award Winning',
+  'Mystery','Sports','Slice of Life', 'Ecchi','Gourmet','Horror','Avant Garde','Boys Love','Girls Love','Erotica','Hentai'
+].sort()

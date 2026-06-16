@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import '../styles/Popup.css'
 import { styleCouleur } from '../utils/colors'
 import { supabase } from '../supabase'
+import ModifTag from './ModifTag'
 
-const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, setModifier, maxChapter, manhwaList, updateManhwalist, note, lastRead, setChapUpdate}) => {
+const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, setModifier, maxChapter, manhwaList, updateManhwalist, note, lastRead, setChapUpdate, tag}) => {
     useEffect(() => {
         const handleKey = (e) => {
             if (e.key === 'Escape') setModifier(false)
@@ -33,7 +34,8 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
             status: updateStatus,
             lastRead: updateChapter !== chapter ? new Date().toISOString() : lastRead,
             lastReadCount: "0",
-            note: noteM && parseFloat(noteM)
+            note: noteM && parseFloat(noteM),
+            tag: tagUpdate.toString()
         }
         const updateList = manhwaList.map((m) => (
             m.id === id ? {
@@ -47,7 +49,8 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                 status: updateStatus,
                 lastRead: updateChapter !== chapter ? new Date().toISOString() : m.lastRead,
                 lastReadCount: "0",
-                note: noteM && parseFloat(noteM)
+                note: noteM && parseFloat(noteM),
+                tag: tagUpdate.toString()
             } : m
         ))
         setChapUpdate(parseInt(updateChapter) > parseInt(updateMaxChap) ? updateChapter : updateMaxChap)
@@ -65,6 +68,7 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
     const [updateStatus, setUpdateStatus] = useState(status)
     const [noteM, setNote] = useState(note)
     const [updateMaxChap, setMaxChap] = useState(maxChapter)
+    const [tagUpdate, setTagUpdate] = useState(tag)
     
 
 
@@ -95,19 +99,19 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                     <textarea onChange={(e) => setDesc(e.target.value)} value={desc} placeholder='Description'/>
 
                     <div className='popupInfo'>
-                        <div>
+                        <div className='divInvo'>
                             <p>Max Chapter</p>
                             <input type="number" value={updateMaxChap} onChange={(e) => setMaxChap(e.target.value)}/>
                         </div>
-                        <div>
+                        <div className='divInvo'>
                             <p>Dernier Lu</p>
                             <input type="number" value={updateChapter} onChange={(e) => setChapter(e.target.value)}/>
                         </div>
-                        <div>
+                        <div className='divInvo'>
                             <p>URL Cover</p>
                             <input type="text" value={urlCover} onChange={(e) => setURLCoser(e.target.value)}/>
                         </div>
-                        <div>
+                        <div className='divInvo'>
                             <p>Status</p>
                             <select value={updateStatus}
                                     onChange={(e) => setUpdateStatus(e.target.value)}
@@ -120,9 +124,13 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                                 <option value="Drop">Drop</option>
                             </select>
                         </div>
-                        <div>
+                        <div className='divInvo'>
                             <p>URL Lecture</p>
                             <input type="text" value={updateURL} onChange={(e) => setURL(e.target.value)}/>
+                        </div>
+                        <div className='divInvo'>
+                            <p>Tag Liste</p>
+                            <ModifTag tagList={tagUpdate} setTagUpdate={setTagUpdate}/>
                         </div>
                     </div>
                     <button onClick={() => handleMAJ()} className='btn-modif'>Mettre à Jour</button>

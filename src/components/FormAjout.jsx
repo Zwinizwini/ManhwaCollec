@@ -57,16 +57,23 @@ const FormAjout = ({isForm, setForm}) => {
     }
 
     const ajoutManhwa = (data) => {
-        let maxChapterFinal, titre, image
+        let maxChapterFinal, titre, image, tag
         const maxChapterCond = maxChapter < chapter ? chapter : maxChapter
         if (data) {
             maxChapterFinal = data.chapters ? data.chapters : maxChapterCond
             titre = data.titles[0].title ? data.titles[0].title : title
             image = data.images.jpg.image_url ? data.images.jpg.image_url : cover
+            const tagListe = [...data.genres, ...data.themes]
+
+            tag = tagListe.reduce(
+                (acc, current) => acc.concat(current.name),
+                []
+            ).toString()
         } else {
             maxChapterFinal = maxChapterCond
             titre = title
             image = cover
+            tag = ''
         }
         
         const manhwaObj = {
@@ -82,6 +89,7 @@ const FormAjout = ({isForm, setForm}) => {
             description: desc,
             nsfw: nsfw,
             cover: image,
+            tag: tag,
             ...(idMAL && { idmal: idMAL })
         }
 

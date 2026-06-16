@@ -10,7 +10,7 @@ const PopupInfo = ({info1, info2}) => {
     }
 
     return (
-        <div>
+        <div className='divInvo'>
             <p>{info1}</p>
             <h5 style={{color: couleur}}>{info2}</h5>
         </div>
