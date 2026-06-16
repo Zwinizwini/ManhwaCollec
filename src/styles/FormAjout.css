@@ -171,7 +171,7 @@ input:focus, textarea:focus {
     margin-left: 10px;
 }
 
-.switchNSFW {
+.switchNSFW, .switchLecture {
     width: 60px;
     height: 20px;
     border-radius: 10px;
@@ -184,7 +184,7 @@ input:focus, textarea:focus {
     transition: all 0.3s ease-in-out;
 }
 
-.switchNSFW div {
+.switchNSFW div, .switchLecture div {
     background: #555;
     border-radius: 50%;
     width: 18px;
@@ -206,6 +206,22 @@ input:focus, textarea:focus {
     left: -50px;
     transition: all 0.4s ease-in-out;
 } */
+
+.lectureTag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.lectureTag:has(input:checked) .switchLecture div {
+    transform: translateX(42px);
+    background-color: #3C3489;
+}
+.lectureTag:has(input:checked) .switchLecture {
+    background-color: #7F77DD;
+}
 
 .divNsfw:has(input:checked) .switchNSFW div {
     transform: translateX(42px);
