@@ -394,11 +394,15 @@ h2 {
         width: 95%;
         font-size: 12px;
     }
-    .popupInfo div {
+    .popupInfo .divInvo {
         width: 40%;
     }
     .img-popup {
         height: 200px;
+    }
+    .select-tag.openTag .tag-setlist {
+        width: 200px;
+        transform: translateX(-50%);
     }
     #popupModif {
         width: 100%;
