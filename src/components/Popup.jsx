@@ -5,6 +5,7 @@ import Modifier from './Modifier'
 import { styleCouleur, progressionCouleur } from '../utils/colors'
 import { UserContext } from '../utils/Context'
 import BtnAjouter from './BtnAjouter'
+import { supabase } from '../supabase'
 
 const changeLink = (link, chapter) => {
     let changeLink
@@ -40,6 +41,16 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
     const couleurStatus = styleCouleur(status)
     const [modifier, setModifier] = useState(false)
     const [isClose, setIsClose] = useState(false)
+
+    const supprManhwa = async () => {
+        const { error } = await supabase
+            .from('manhwas')
+            .delete()
+            .eq('id',id)
+        if ( error ) console.error(error)
+        updateManhwalist(manhwaList.filter(manhwa => manhwa.id !== id))
+        setPopup(false)
+    }
 
 
     return (
@@ -80,6 +91,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
                         {link && <a href={changeLink(link, chapter)} className='bouton-chap' target='__blank'>Voir le lien de lecture</a>}
                         {!isUser && <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>}
                         {isUser && <BtnAjouter title={title} maxChapter={maxChapter} cover={cover} manhwaListName={manhwaListName}/>}
+                        {!isUser && <button onClick={() => supprManhwa()} className='btn-modif' id='btn-suppr'>Supprimer</button>}
                     </div>
                 </div>
                 <div className='closePopup' onClick={() => {
