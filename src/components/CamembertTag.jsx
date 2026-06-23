@@ -2,7 +2,6 @@ import { useState } from "react"
 import { PieChart } from "react-minimal-pie-chart"
 import { Tooltip } from "react-tooltip"
 import StatLegend from "./StatLegend"
-import { Link } from "react-router-dom"
 
 
 const CamembertTag = ({manhwaList}) => {
@@ -56,7 +55,7 @@ const CamembertTag = ({manhwaList}) => {
                     <input type="checkbox" id="inputNsfw"/>
                 </label>
                 
-                <Link to={typeof hovered3 === 'number' ? `/${dataTag[hovered3].title}` : `/`} id="anchor-hover3" onMouseMove={(e) => {setPos({x: e.clientX, y: e.clientY})}}>
+                <div id="anchor-hover3" onMouseMove={(e) => {setPos({x: e.clientX, y: e.clientY})}}>
                     <PieChart
                         data={dataTag}
                         animate={true}
@@ -78,7 +77,7 @@ const CamembertTag = ({manhwaList}) => {
                         position={{x: pos.x, y: pos.y}}
                         content= {typeof hovered3 === 'number' && `${dataTag[hovered3].title} : ${dataTag[hovered3].value}`}
                     />
-                </Link>
+                </div>
             </div>
 
             <div className="container-droite statInfo" style={{alignItems:'start', justifyContent:"start", flexWrap:"wrap", maxHeight: '450px'}}>
