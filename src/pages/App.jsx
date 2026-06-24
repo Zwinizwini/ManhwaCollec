@@ -8,6 +8,7 @@ import {useAuth} from '../utils/AuthContext'
 import styled from 'styled-components'
 import BtnAjoutTag from '../components/BtnAjoutTag'
 import Audio from '../components/Audio'
+import uwu from '../assets/uwu.mp3'
 
 
 const StatBtn = styled(Link)`
@@ -83,7 +84,11 @@ function App() {
             manhwaList={manhwaList} 
             updateManhwalist={saveManhwaList} 
           />
-          {ajoutList && <PopupToast manhwaList={manhwaList} msg={"ajouté à la bibliothèque"}/>}
+          {ajoutList && <>
+            <PopupToast manhwaList={manhwaList} msg={"ajouté à la bibliothèque"}/>
+            <Audio isPlaying={ajoutList} audio={uwu}/>
+          </>
+          }
         </>
       }
     </>
