@@ -5,7 +5,7 @@ import App from './pages/App.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Banner from './components/Banner'
 import Account from './pages/Account.jsx'
-import { AjoutListProvider, ManhwaProvider, OtherManhwaProvider, UserProvider } from './utils/Context.jsx'
+import { AjoutListProvider, IsPlayingProvider, ManhwaProvider, OtherManhwaProvider, UserProvider } from './utils/Context.jsx'
 import { AuthProvider } from './utils/AuthContext.jsx'
 import User from './pages/User.jsx'
 import Stat from './pages/Stat.jsx'
@@ -22,15 +22,17 @@ createRoot(document.getElementById('root')).render(
           <UserProvider>
             <OtherManhwaProvider>
               <AjoutListProvider>
-                <Banner />
-                <Routes>
-                  <Route path='/:title?' element={<App />}/>
-                  <Route path='/stat/:id?' element={<Stat />}/>
-                  <Route path="/account" element={<Account />}/>
-                  <Route path="/user/:id" element={<User />}/>
-                  <Route path="/*" element={<Error />}/>
-                  {/* <Route path="/account/update-password" element={<UpdatePassword />}/> */}
-                </Routes>
+                <IsPlayingProvider>
+                  <Banner />
+                  <Routes>
+                    <Route path='/:title?' element={<App />}/>
+                    <Route path='/stat/:id?' element={<Stat />}/>
+                    <Route path="/account" element={<Account />}/>
+                    <Route path="/user/:id" element={<User />}/>
+                    <Route path="/*" element={<Error />}/>
+                    {/* <Route path="/account/update-password" element={<UpdatePassword />}/> */}
+                  </Routes>
+                </IsPlayingProvider>
               </AjoutListProvider>
             </OtherManhwaProvider>
           </UserProvider>

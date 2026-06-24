@@ -8,7 +8,18 @@
     z-index: 2;
 }
 
+.popupBackground:has(#btn-suppr:hover) {
+    animation: infinite .5s pulse-suppr alternate;
+}
 
+@keyframes pulse-suppr{
+    0% {
+        box-shadow: 0 0 0px inset #c52626;
+    }
+    100% {
+        box-shadow: 0 0 50px inset #c52626;
+    }
+}
 
 .popup {
     position: absolute;
@@ -274,7 +285,20 @@ h2 {
 #btn-suppr {
     background-color: #A32D2D;
     border: transparent;
+    &:hover {
+        animation: .3s horizontal-shaking infinite;
+    }
+    
 }
+
+@keyframes horizontal-shaking {
+ 0% { transform: translateX(0) }
+ 25% { transform: translateX(5px) }
+ 50% { transform: translateX(-5px) }
+ 75% { transform: translateX(5px) }
+ 100% { transform: translateX(0) }
+}
+
 
 .bouton-chap:hover, .btn-modif:hover {
     background-color: #262624;

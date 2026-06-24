@@ -6,6 +6,7 @@ import { styleCouleur, progressionCouleur } from '../utils/colors'
 import { UserContext } from '../utils/Context'
 import BtnAjouter from './BtnAjouter'
 import { supabase } from '../supabase'
+import Audio from './Audio'
 
 const changeLink = (link, chapter) => {
     let changeLink
@@ -17,10 +18,16 @@ const changeLink = (link, chapter) => {
     else changeLink = link.replace(ChapCondF, chapter)
     return changeLink
 }
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 
 const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRead, description, link, setPopup, isPopup, maxChapter, manhwaList, updateManhwalist, note, gradientSeuil, setChapUpdate, manhwaListName, coor, tag}) => {
     const {isUser} = useContext(UserContext)
+    const [isPlayingHover, setIPH] = useState(false)
     const tagList = tag?.split(/\s*(?:,|$)\s*/) ?? []
+    const audioSuppr = ['src/assets/btnsupprsound/nowait.mp3', 'src/assets/btnsupprsound/nodont.mp3']
+    const randomSound = getRandomInt(2)
 
 
     useEffect(() => {
@@ -91,7 +98,17 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
                         {link && <a href={changeLink(link, chapter)} className='bouton-chap' target='__blank'>Voir le lien de lecture</a>}
                         {!isUser && <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>}
                         {isUser && <BtnAjouter title={title} maxChapter={maxChapter} cover={cover} manhwaListName={manhwaListName}/>}
-                        {!isUser && <button onClick={() => supprManhwa()} className='btn-modif' id='btn-suppr'>Supprimer</button>}
+                        {!isUser && <>
+                            <button 
+                                onClick={() => supprManhwa()} 
+                                className='btn-modif' 
+                                id='btn-suppr' 
+                                onMouseEnter={() => setIPH(true)}
+                                onMouseLeave={() => setIPH(false)}
+                            >Supprimer</button>
+                            <Audio isPlaying={isPlayingHover} audio={audioSuppr[randomSound]}/>
+                        </>
+                        }
                     </div>
                 </div>
                 <div className='closePopup' onClick={() => {

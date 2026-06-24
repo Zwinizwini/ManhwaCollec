@@ -96,3 +96,18 @@ export const OtherManhwaProvider = ({children}) => {
         </OtherManhwaContext.Provider>
     )
 }
+
+export const IsPlayingContext = createContext()
+
+export const IsPlayingProvider = ({children}) => {
+    const [isPlaying, setIsPlaying] = useState(false)
+    const togglePlaying = () => {
+        return setIsPlaying(!isPlaying)
+    }
+
+    return (
+        <IsPlayingContext.Provider value={{isPlaying, togglePlaying}}>
+            {children}
+        </IsPlayingContext.Provider>
+    )
+}

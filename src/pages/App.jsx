@@ -7,6 +7,7 @@ import Pasco from '../components/Pasco'
 import {useAuth} from '../utils/AuthContext'
 import styled from 'styled-components'
 import BtnAjoutTag from '../components/BtnAjoutTag'
+import Audio from '../components/Audio'
 
 
 const StatBtn = styled(Link)`
