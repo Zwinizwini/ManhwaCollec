@@ -7,6 +7,8 @@ import { UserContext } from '../utils/Context'
 import BtnAjouter from './BtnAjouter'
 import { supabase } from '../supabase'
 import Audio from './Audio'
+import nowait from '../assets/btnsupprsound/nowait.mp3'
+import nodont from '../assets/btnsupprsound/nodont.mp3'
 
 const changeLink = (link, chapter) => {
     let changeLink
@@ -26,7 +28,7 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
     const {isUser} = useContext(UserContext)
     const [isPlayingHover, setIPH] = useState(false)
     const tagList = tag?.split(/\s*(?:,|$)\s*/) ?? []
-    const audioSuppr = ['src/assets/btnsupprsound/nowait.mp3', 'src/assets/btnsupprsound/nodont.mp3']
+    const audioSuppr = [nowait, nodont]
     const randomSound = getRandomInt(2)
 
 
