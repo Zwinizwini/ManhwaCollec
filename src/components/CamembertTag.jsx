@@ -80,7 +80,7 @@ const CamembertTag = ({manhwaList}) => {
                 </div>
             </div>
 
-            <div className="container-droite statInfo" style={{alignItems:'start', justifyContent:"start", flexWrap:"wrap", maxHeight: '450px'}}>
+            <div className="container-droite statInfoTag" style={{alignItems:'start', justifyContent:"start", flexWrap:"wrap", maxHeight: '450px'}}>
                 {dataTag.map((status) => (
                     <div key={status.title}>
                         <StatLegend info1={status.color} info2={status.title}/>

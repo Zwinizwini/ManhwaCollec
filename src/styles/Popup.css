@@ -161,7 +161,19 @@ h2 {
     background-color: #16191f;
     padding: 8px;
     border-radius: 5px;
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #7F77DD;
+        transition: all .3s ease-in-out
+    }
 }
+
 
 .select-btn {
     width: 100%;
@@ -328,9 +340,12 @@ h2 {
 }
 
 .snd-container input:focus, .snd-container textarea:focus {
-    border: 1px solid #7F77DD;
     outline: none;
-    box-shadow: #7F77DD 1px 5px 10px;
+}
+
+.snd-container div:focus-within::after {
+    width: 100%;
+    box-shadow: #7F77DD 0px 0px 5px;
 }
 
 .snd-container textarea {
