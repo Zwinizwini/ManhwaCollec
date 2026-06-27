@@ -25,7 +25,9 @@
 .filtre select,
 .filtre select::picker(select),
 .trieSelect,
-.trieSelect::picker(select) {
+.trieSelect::picker(select),
+.divInvo select,
+.divInvo select::picker(select) {
 	appearance: base-select;
     font-size: 13px;
     font-family: 'Inter', sans-serif;
@@ -33,9 +35,9 @@
 
 
 .filtre select::picker(select),
-.trieSelect::picker(select) {
+.trieSelect::picker(select),
+.divInvo select::picker(select) {
 	appearance: base-select;
-	background-color: #1c1f27;
     border: 1px solid #7F77DD;
     box-shadow: #7F77DD 1px 1px 5px;
     border-radius: 0 0 10px 10px;
@@ -44,6 +46,15 @@
     transform: scaleY(0);
     transform-origin: top;
     transition: all .2s allow-discrete;
+}
+
+.filtre select::picker(select),
+.trieSelect::picker(select) {
+    background-color: #1c1f27;
+}
+
+.divInvo select::picker(select) {
+    background-color: #16191f;
 }
 
 option {
@@ -58,30 +69,39 @@ option {
 }
 
 .filtre select:open,
-.trieSelect:open {
+.trieSelect:open,
+.divInvo select:open {
     border: 1px solid #7F77DD;
     box-shadow: #7F77DD 1px 1px 5px;
     border-radius: 5px 5px 0 0;
 }
 
 .filtre select::picker-icon,
-.trieSelect::picker-icon {
+.trieSelect::picker-icon,
+.divInvo select::picker-icon {
     transition: rotate .4s ease-in-out;
 }
 
+.divInvo select::picker-icon {
+    color: #7F77DD;
+}
+
 .filtre select:open::picker-icon,
-.trieSelect:open::picker-icon {
+.trieSelect:open::picker-icon,
+.divInvo select:open::picker-icon {
     rotate: 180deg;
 }
 
 .filtre select::picker(select):popover-open,
-.trieSelect::picker(select):popover-open {
+.trieSelect::picker(select):popover-open,
+.divInvo select::picker(select):popover-open {
     transform: scaleY(1);
 }
 
 @starting-style {
     .filtre select::picker(select):popover-open,
-    .trieSelect::picker(select):popover-open {
+    .trieSelect::picker(select):popover-open,
+    .divInvo select::picker(select):popover-open {
         transform: scaleY(0);
     }
 }

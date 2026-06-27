@@ -4,6 +4,12 @@ import { styleCouleur } from '../utils/colors'
 import { supabase } from '../supabase'
 import ModifTag from './ModifTag'
 
+
+const clickSelectTag = () => {
+    document.querySelector('.select-tag').classList.toggle('openTag')
+}
+
+
 const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, setModifier, maxChapter, manhwaList, updateManhwalist, note, lastRead, setChapUpdate, tag}) => {
     useEffect(() => {
         const handleKey = (e) => {
@@ -83,39 +89,47 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                         <span className="status-popup" style={{background:couleurStatus}}>{status}</span>
                         {nsfw===1 && <span className="nsfw-popup">18+</span>}
                     </div>
-                    <input onChange={(e) => setTitle(e.target.value)} value={updateTitle} id='changeTitle'/>
-                    <div className='input-note'><input type="number" min="0" max="10"
-                        value={noteM}
-                        onChange={(e) => {
-                            if (e.target.value > 10) {
-                                setNote(10)
-                            } else if (e.target.value < 0) {
-                                setNote(0)
-                            } else {
-                                setNote(e.target.value)
-                            }
-                        }}    
-                    />/10</div>
-                    <textarea onChange={(e) => setDesc(e.target.value)} value={desc} placeholder='Description'/>
+                    <div className="popupInfo">
+                        <label className="divInvo">
+                            <p>Titre</p>
+                            <input onChange={(e) => setTitle(e.target.value)} value={updateTitle}/>
+                        </label>
+                        <label className="divInvo">
+                            <p>Note</p>
+                            <div className='input-note'><input type="number" min="0" max="10"
+                                value={noteM}
+                                onChange={(e) => {
+                                    if (e.target.value > 10) {
+                                        setNote(10)
+                                    } else if (e.target.value < 0) {
+                                        setNote(0)
+                                    } else {
+                                        setNote(e.target.value)
+                                    }
+                                }}    
+                            />/10</div>
+                        </label>
+                        <textarea onChange={(e) => setDesc(e.target.value)} value={desc} placeholder='Description'/>
+                    </div>
 
                     <div className='popupInfo'>
-                        <div className='divInvo'>
+                        <label className='divInvo'>
                             <p>Max Chapter</p>
                             <input type="number" value={updateMaxChap} onChange={(e) => setMaxChap(e.target.value)}/>
-                        </div>
-                        <div className='divInvo'>
+                        </label>
+                        <label className='divInvo'>
                             <p>Dernier Lu</p>
                             <input type="number" value={updateChapter} onChange={(e) => setChapter(e.target.value)}/>
-                        </div>
-                        <div className='divInvo'>
+                        </label>
+                        <label className='divInvo'>
                             <p>URL Cover</p>
                             <input type="text" value={urlCover} onChange={(e) => setURLCoser(e.target.value)}/>
-                        </div>
+                        </label>
                         <div className='divInvo'>
                             <p>Status</p>
                             <select value={updateStatus}
-                                    onChange={(e) => setUpdateStatus(e.target.value)}
-                                    name='status'
+                                onChange={(e) => setUpdateStatus(e.target.value)}
+                                name='status'
                             >
                                 <option value="Fini">Fini</option>
                                 <option value="En Cours">En Cours</option>
@@ -124,11 +138,11 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                                 <option value="Drop">Drop</option>
                             </select>
                         </div>
-                        <div className='divInvo'>
+                        <label className='divInvo'>
                             <p>URL Lecture</p>
                             <input type="text" value={updateURL} onChange={(e) => setURL(e.target.value)}/>
-                        </div>
-                        <div className='divInvo'>
+                        </label>
+                        <div className='divInvo' onClick={() => clickSelectTag()}>
                             <p>Tag Liste</p>
                             <ModifTag tagList={tagUpdate} setTagUpdate={setTagUpdate}/>
                         </div>

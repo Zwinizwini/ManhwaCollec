@@ -1,12 +1,5 @@
 import { allTagList } from "../utils/colors"
 
-
-const clickSelectTag = () => {
-    document.querySelector('.select-tag').classList.toggle('openTag')
-}
-
-
-
 const ModifTag = ({tagList, setTagUpdate}) => {
 
     const clickItemTag = (e, tag) => {
@@ -15,7 +8,7 @@ const ModifTag = ({tagList, setTagUpdate}) => {
 
     return (
         <div className='select-tag'>
-            <div className="select-btn" onClick={() => clickSelectTag()}>
+            <div className="select-btn">
                 <span className="btn-text">Select Tag</span>
                 <span className='arrow-dwn'>
                     ▼
