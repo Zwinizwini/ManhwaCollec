@@ -7,6 +7,11 @@
     border: 1px solid #2a2d35;
     box-shadow: #2a2d35 1px 1px 5px;
     padding: 0px 10px;
+    &:focus {
+        border: 1px solid #7F77DD;
+        outline: none;
+        box-shadow: #7F77DD 0 0 10px;
+    }
 }
 
 @media screen and (max-width: 700px) {

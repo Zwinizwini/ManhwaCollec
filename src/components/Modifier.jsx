@@ -85,10 +85,6 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                     <img src={cover} alt={`Cover de ${title}`}/>
                 </div>
                 <div className='snd-container'>
-                    <div className='status-note'>
-                        <span className="status-popup" style={{background:couleurStatus}}>{status}</span>
-                        {nsfw===1 && <span className="nsfw-popup">18+</span>}
-                    </div>
                     <div className="popupInfo">
                         <label className="divInvo">
                             <p>Titre</p>

@@ -2,7 +2,7 @@ import '../styles/Searchbar.css'
 
 const Searchbar = ({search, setSearch}) => {
     return (
-        <input 
+        <input name='searchbar'
             placeholder="Rechercher un manhwa"
             value={search}
             onChange={(e) => {
