@@ -20,14 +20,20 @@ const CamembertTag = ({manhwaList}) => {
             []
         )
 
-        dataTag = tagList.map(((tag,index) => {
-            const hue = (index / tagList.length) * 360
+        const temp = tagList.map(((tag) => {
             return {
                 title: tag,
                 value: manhwaList.filter((manhwa => manhwa.status !== "Pas lu" && manhwa.tag?.includes(tag))).length,
-                color: `hsl(${hue}, 70%, 60%)`
             }
         })).sort((a,b) => b.value - a.value)
+
+        dataTag = temp.map(((obj,index) => {
+            const hue = (index / tagList.length) * 360
+            return {
+                ...obj,
+                color: `hsl(${hue}, 70%, 60%)`
+            }
+        }))
     } else {
         const tagListDuplicate = manhwaList.reduce(
             (acc, current) => acc.concat(current.tag?.split(/\s*(?:,|$)\s*/) ?? []),
@@ -38,14 +44,20 @@ const CamembertTag = ({manhwaList}) => {
             []
         )
 
-        dataTag = tagList.map(((tag,index) => {
-            const hue = (index / tagList.length) * 360
+        const temp = tagList.map(((tag) => {
             return {
                 title: tag,
                 value: manhwaList.filter((manhwa => manhwa.tag?.includes(tag))).length,
-                color: `hsl(${hue}, 70%, 60%)`
             }
         })).sort((a,b) => b.value - a.value)
+
+        dataTag = temp.map(((obj,index) => {
+            const hue = (index / tagList.length) * 360
+            return {
+                ...obj,
+                color: `hsl(${hue}, 70%, 60%)`
+            }
+        }))
     }
 
     return (
