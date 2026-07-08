@@ -172,6 +172,14 @@ h2 {
         background-color: #7F77DD;
         transition: all .3s ease-in-out
     }
+    & input {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+        &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+    }
 }
 
 .divInvo select {
@@ -190,6 +198,35 @@ h2 {
 #popupModif .divInvo:hover {
     box-shadow: 0 0 10px #7F77DD;
     cursor: pointer;
+    & span {
+        opacity: 1;
+    }
+}
+
+.number-style {
+    display: flex;
+    & div {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+    }
+    & span {
+        font-size: 10px;
+        text-align: center;
+        background-color: #7F77DD;
+        width: 20px;
+        opacity: 0;
+        transition: transform .2s ease-in-out;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+    & #spanplus {
+        border-radius: 5px 5px 0 0;
+    }
+    & #spanmoins {
+        border-radius: 0 0 5px 5px;
+    }
 }
 
 .select-btn {

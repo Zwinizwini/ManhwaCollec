@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import '../styles/Popup.css'
-import { styleCouleur } from '../utils/colors'
 import { supabase } from '../supabase'
 import ModifTag from './ModifTag'
 
@@ -10,7 +9,7 @@ const clickSelectTag = () => {
 }
 
 
-const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, setModifier, maxChapter, manhwaList, updateManhwalist, note, lastRead, setChapUpdate, tag}) => {
+const Modifier = ({id, title, chapter, status, cover, description, link, setModifier, maxChapter, manhwaList, updateManhwalist, note, lastRead, setChapUpdate, tag}) => {
     useEffect(() => {
         const handleKey = (e) => {
             if (e.key === 'Escape') setModifier(false)
@@ -65,7 +64,6 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
         setModifier(false)
     }
 
-    const couleurStatus = styleCouleur(status)
     const [desc, setDesc] = useState(description)
     const [urlCover, setURLCoser] = useState(cover)
     const [updateChapter, setChapter] = useState(chapter)
@@ -111,11 +109,23 @@ const Modifier = ({id, title, chapter, status, nsfw, cover, description, link, s
                     <div className='popupInfo'>
                         <label className='divInvo'>
                             <p>Max Chapter</p>
-                            <input type="number" value={updateMaxChap} onChange={(e) => setMaxChap(e.target.value)}/>
+                            <div className="number-style">
+                                <input type="number" value={updateMaxChap} onChange={(e) => setMaxChap(e.target.value)}/>
+                                <div>
+                                    <span id='spanplus' onClick={() => setMaxChap(updateMaxChap+1)}>+</span>
+                                    <span id='spanmoins' onClick={() => setMaxChap(updateMaxChap-1)}>-</span>
+                                </div>
+                            </div>
                         </label>
                         <label className='divInvo'>
                             <p>Dernier Lu</p>
-                            <input type="number" value={updateChapter} onChange={(e) => setChapter(e.target.value)}/>
+                            <div className="number-style">
+                                <input type="number" value={updateChapter} onChange={(e) => setChapter(e.target.value)}/>
+                                <div>
+                                    <span id='spanplus' onClick={() => setChapter(updateChapter+1)}>+</span>
+                                    <span id='spanmoins' onClick={() => setChapter(updateChapter-1)}>-</span>
+                                </div>
+                            </div>
                         </label>
                         <label className='divInvo'>
                             <p>URL Cover</p>

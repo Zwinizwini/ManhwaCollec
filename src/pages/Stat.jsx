@@ -21,7 +21,7 @@ const Stat = () => {
                 <CamembertRep manhwaList={manhwaList} totalManhwa={totalManhwa}/>
                 <CamembertLec manhwaList={manhwaList} totalManhwa={totalManhwa}/>
             </div>
-            <div className="stat"  style={{marginTop: '50px'}}>
+            <div className="stat"  style={{marginTop: '50px', marginBottom: '50px'}}>
                 <CamembertTag manhwaList={manhwaList} totalManhwa={totalManhwa}/>
             </div>
         </>

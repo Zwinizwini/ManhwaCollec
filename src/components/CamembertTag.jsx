@@ -9,15 +9,14 @@ const CamembertTag = ({manhwaList}) => {
     const [lecture, isLecture] = useState(false)
     const [pos, setPos] = useState({x:0,y:0})
 
-    const tagListDuplicate = manhwaList.reduce(
-        (acc, current) => acc.concat(current.tag?.split(/\s*(?:,|$)\s*/) ?? []),
-        []
-    )
-
     let tagList, dataTag
     if (lecture) {
-        tagList = tagListDuplicate.reduce(
-            (acc, current) => current.status !== "Pas lu" && !acc.includes(current) ? acc.concat(current) : acc,
+        const tabListLu = manhwaList.reduce(
+            (acc, current) => current.status !== "Pas lu" ? acc.concat(current.tag?.split(/\s*(?:,|$)\s*/) ?? []) : acc,
+            []
+        )
+        tagList = tabListLu.reduce(
+            (acc, current) => !acc.includes(current) ? acc.concat(current) : acc,
             []
         )
 
@@ -30,6 +29,10 @@ const CamembertTag = ({manhwaList}) => {
             }
         })).sort((a,b) => b.value - a.value)
     } else {
+        const tagListDuplicate = manhwaList.reduce(
+            (acc, current) => acc.concat(current.tag?.split(/\s*(?:,|$)\s*/) ?? []),
+            []
+        )
         tagList = tagListDuplicate.reduce(
             (acc, current) => !acc.includes(current) ? acc.concat(current) : acc,
             []

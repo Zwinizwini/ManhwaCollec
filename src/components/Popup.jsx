@@ -122,7 +122,6 @@ const Popup = ({id, title, chapter, status, nsfw, cover, lastReadCompter, lastRe
                     title={title}
                     chapter={chapter}
                     status={status}
-                    nsfw={nsfw}
                     cover={cover}
                     description={description}
                     link={link}

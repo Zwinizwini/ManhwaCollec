@@ -1,5 +1,5 @@
 import ManhwaList from '../components/ManhwaList'
-import { useState, useEffect, useContext } from 'react'
+import { useEffect, useContext } from 'react'
 import PopupToast from '../components/PopupToast'
 import { AjoutListContext, ManhwaContext, UserContext } from '../utils/Context'
 import { Link } from 'react-router-dom'
@@ -72,7 +72,6 @@ function App() {
       {!user ? <Link to='/account'><Pasco/></Link> 
       : <>
           <div className='container-btnStat'style={{width:'98%', display:'flex', justifyContent: 'end', marginBottom:'10px'}}>
-            <BtnAjoutTag/>
             <Link className='btnNav' to='/stat'>
               <Bars>
                 {BAR_DATA.map((h, i) => <Bar key={i} h={h} />)}
