@@ -9,14 +9,30 @@ const clickSelectTag = () => {
 }
 
 
-const Modifier = ({id, title, chapter, status, cover, description, link, setModifier, maxChapter, manhwaList, updateManhwalist, note, lastRead, setChapUpdate, tag}) => {
+
+
+const Modifier = ({id, title, chapter, status, cover, description, link, modifier, setModifier, maxChapter, manhwaList, updateManhwalist, note, lastRead, tag}) => {
+    const [isClose, setIC] = useState(false)
+
+    const closeModif = () => {
+        setIC(true)
+        setTimeout(() => setModifier(false), 300)
+    }
+
     useEffect(() => {
         const handleKey = (e) => {
-            if (e.key === 'Escape') setModifier(false)
+            if (e.key === 'Escape') closeModif()
         }
         window.addEventListener('keydown', handleKey)
         return () => window.removeEventListener('keydown', handleKey)
     }, [])
+    useEffect(() => {
+        if (modifier) {
+            document.body.style.overflow = "hidden"
+        } 
+        return () => {document.body.style.overflow = ""}
+    }, [modifier])
+
 
     const updateManhwa = async (id, updates) => {
         const { data, error } = await supabase
@@ -58,10 +74,9 @@ const Modifier = ({id, title, chapter, status, cover, description, link, setModi
                 tag: tagUpdate.toString()
             } : m
         ))
-        setChapUpdate(parseInt(updateChapter) > parseInt(updateMaxChap) ? updateChapter : updateMaxChap)
         updateManhwa(id, manhwaUpdate)
         updateManhwalist(updateList)
-        setModifier(false)
+        closeModif()
     }
 
     const [desc, setDesc] = useState(description)
@@ -77,8 +92,10 @@ const Modifier = ({id, title, chapter, status, cover, description, link, setModi
 
 
     return (
-        <div className='popupBackground'>
-            <div className="popup" id='popupModif'>
+        <div className='popupBackground' onClick={(e) => {
+            if (e.target.className === 'popupBackground') closeModif()
+        }}>
+            <div className="popup" id='popupModif' style={{animation: isClose ? 'fermeture .3s ease-in-out both' : 'ouverture .3s ease-in-out both'}}>
                 <div className='img-popup'>
                     <img src={cover} alt={`Cover de ${title}`}/>
                 </div>
@@ -156,7 +173,9 @@ const Modifier = ({id, title, chapter, status, cover, description, link, setModi
                     <button onClick={() => handleMAJ()} className='btn-modif'>Mettre à Jour</button>
                     
                 </div>
-                <div className='closePopup' onClick={() => setModifier(false)}>
+                <div className='closePopup' onClick={() => {
+                        closeModif()
+                    }}>
                     <div className='gauche'></div>
                     <div className='droite'></div>
                 </div>

@@ -11,6 +11,7 @@ import User from './pages/User.jsx'
 import Stat from './pages/Stat.jsx'
 import Error from './pages/Error.jsx'
 import Tag from './pages/Tag.jsx'
+import ManhwaPage from './pages/ManhwaPage.jsx'
 // import UpdatePassword from './pages/UpdatePassword.jsx'
 
 
@@ -29,6 +30,7 @@ createRoot(document.getElementById('root')).render(
                     <Route path='/stat/:id?' element={<Stat />}/>
                     <Route path="/account" element={<Account />}/>
                     <Route path="/user/:id" element={<User />}/>
+                    <Route path='/manhwa/:titre' element={<ManhwaPage />}/>
                     <Route path="/*" element={<Error />}/>
                     {/* <Route path="/account/update-password" element={<UpdatePassword />}/> */}
                   </Routes>

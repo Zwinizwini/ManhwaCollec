@@ -16,7 +16,10 @@ const Audio = ({isPlaying, audio}) => {
   }, [isPlaying])
 
   return (
-    <audio loop src={audio} ref={audioRef}/>
+    <>
+      <div id='boxShadow'></div>
+      <audio loop src={audio} ref={audioRef}/>
+    </>
   )
 }
 

@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import '../styles/ManhwaItem.css'
 import Popup from './Popup'
 import { styleCouleur, colors } from '../utils/colors'
 import { supabase } from '../supabase'
 import {styled, keyframes} from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const rotate = keyframes`
   from {
@@ -38,7 +39,22 @@ const getDateDiff = (date1, needHours) => {
     return lastReadCompter
 }
 
-const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, description,link, maxChapter, manhwaList, updateManhwalist, note, lastCheck, isUser, manhwaListName, tag}) => {
+function createSlug(text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    // 1. Remplace les caractères spéciaux communs par un tiret
+    .replace(/[#/:?&]/g, '-') 
+    // 2. Remplace les espaces multiples ou tirets multiples par un seul tiret
+    .replace(/\s+/g, '-')
+    // 3. Supprime tout ce qui n'est pas une lettre, un chiffre ou un tiret
+    .replace(/[^\w\-]+/g, '')
+    // 4. Nettoie les tirets en début/fin de chaîne
+    .replace(/^-+|-+$/g, '');
+}
+
+const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, maxChapter, manhwaList, manhwaListName, updateManhwalist, note, lastCheck, isUser}) => {
     const [isPopup, setPopup] = useState(false)
     const [receiveData, setRData] = useState(false)
     const [chaptUpdate, setChapUpdate] = useState(maxChapter)
@@ -111,10 +127,12 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
 
     return (
         <>
-            <li 
+            <Link 
                 className="manhwa-item" 
                 style={{animationDelay: `${index*0.05}s`}} 
                 ref={itemnLoc}
+                to={`/manhwa/${createSlug(title)}`}
+                state={{manhwaList: isUser ? manhwaList : null, id, isUser, manhwaListName}}
             >
                 <div
                     className='container-hover'
@@ -134,8 +152,8 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
                     </div>
                     {note != null && <span className='note-hover'>{note}★</span>}
                 </div>
-            </li>
-            {isPopup && 
+            </Link>
+            {/* {isPopup && 
                 <Popup 
                     title={title}
                     chapter={chapter}
@@ -159,7 +177,7 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
                     tag={tag}
                     coor={{x: itemnLoc.current.getBoundingClientRect().x + (itemnLoc.current.getBoundingClientRect().width/2), y: itemnLoc.current.getBoundingClientRect().y + (itemnLoc.current.getBoundingClientRect().height/2)}}
                 />
-            }
+            } */}
         </>
 
     )

@@ -1,0 +1,188 @@
+.manhwaInfo {
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 30px;
+    color: white;
+    & .infoTag {
+        background-color: #1c1f27;
+        border-radius: 10px;
+        width: 302px;
+        & div {
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+    }
+    & .infoSupp {
+        display: flex;
+        width: 40%;
+        max-width: 600px;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #1c1f27;
+        padding: 20px;
+        border-radius: 10px;
+        gap: 10px;
+    }
+    & .first {
+        border-bottom: 1px solid #111318;
+    }
+    & img {
+        border: 1px solid #7F77DD;
+        border-radius: 10px 10px 0 0 ;
+        width: 300px;
+        box-shadow: #7F77DD 0 0 8px;
+    }
+    & h2 {
+        font-size: 28px;
+        margin: 0;
+        font-style: italic;
+        color: #7F77DD;
+    }
+    & .note {
+        font-size: 20px;
+        & span {
+            position: relative;
+            z-index: 1;
+        }
+        & span::after {
+            content: "★";
+            font-size: 24px;
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            z-index: -1;
+            filter: blur(2px);
+        }
+
+    }
+}
+
+#boxShadow {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    animation: infinite .5s pulse-suppr alternate;
+    padding: 0;
+    display: none;
+}
+
+#btn-suppr {
+    z-index: 2;
+}
+
+.divBtn:has(#btn-suppr:hover) #boxShadow {
+    display: block;
+}
+
+@keyframes pulse-suppr{
+    0% {
+        box-shadow: 0 0 0px inset #c52626;
+    }
+    100% {
+        box-shadow: 0 0 50px inset #c52626;
+    }
+}
+
+
+
+.selectChap {
+    margin-top: 20px;
+    & .listeChap {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 400px;
+        margin-top: 10px;
+        & a {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            height: 30px;
+            border-bottom: 1px solid #4b4e57;
+            padding: 5px 20px;
+            width: 92%;
+            color: aliceblue;
+            transition: all .3s ease-in-out;
+            &:hover {
+                background-color: #7F77DD;
+            }
+        }
+    }
+    & .menuChap {
+        display: flex;
+        justify-content: space-between;
+        & .input {
+            width: 75%;
+            border-radius: 5px;
+            border: 1px solid #3C3489;
+            height: 20px;
+            background: #111318;
+            padding: 5px 10px;
+            position: relative;
+            cursor: text;
+            transition: all .2s ease-in-out;
+            &::after, &::before {
+                content: '';
+                position: absolute;
+                width: 0;
+                border-radius: 0 0 5px 5px;
+                height: 3px;
+                left: 0;
+                bottom: 0px;
+                background-color: #7F77DD;
+                transition: all .3s ease-in-out;
+            }
+            &::before {
+                filter: blur(5px);
+            }
+            &:has(input:focus)::after, &:has(input:focus)::before {
+                width: 100%;
+            }
+            &:hover {
+                box-shadow: #7F77DD 0 0 6px;
+            }
+        }
+        & input {
+            background-color: transparent;
+            border: none;
+            color: white;
+            &:focus {
+                outline: none;
+            }
+        }
+        & button {
+            width: 15%;
+            min-width: 65px;
+            background: #1c1f27;
+            color: #fff;
+            border-radius: 10px;
+            padding: 5px 10px;
+            border: 1px solid #3C3489;
+            cursor: pointer;
+            transition: all .3s ease-in-out, transform .1s;
+            &:hover {
+                background-color: #7F77DD;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width:750px) {
+    .manhwaInfo {
+        flex-direction: column;
+        align-items: center;
+        & .infoSupp {
+        width: 80%;
+        }
+    }
+
+}

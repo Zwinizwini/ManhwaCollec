@@ -6,6 +6,9 @@
     width: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .popupBackground:has(#btn-suppr:hover) {
@@ -24,7 +27,8 @@
 .popup {
     position: absolute;
     align-items: center;
-    width: 800px;
+    max-width: 800px;
+    width: 90%;
     padding: 15px;
     color: white;
     font-size: 17px;
@@ -41,22 +45,18 @@
 }
 
 @keyframes ouverture {
-    from {transform: translate(-50%, -50%) scale(0)}
+    from {transform: scale(0)}
     to {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(1);
+        transform: scale(1);
     }
 }
 
 @keyframes fermeture {
     from {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(1);
+        transform: scale(1);
     }
     to {
-        transform: translate(-50%, -50%) scale(0);
+        transform: scale(0);
     }
 }
 
@@ -120,14 +120,15 @@
 }
 
 .status-popup, .nsfw-popup {
-    width: 55px;
-    height: 20px;
-    font-size: 11px;
+    width: 65px;
+    height: 25px;
+    font-size: 12px;
     text-align: center;
     border-radius: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
 }
 
 .nsfw-popup {
@@ -150,13 +151,22 @@ h2 {
 .popupInfo {
     display: flex;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: center;
     gap: 8px;
     margin-bottom: 15px;
 }
 
+#popupModif {
+    & .divInvo {
+        width: 45%;
+    }
+    & .popupInfo {
+        justify-content: start;
+    }
+}
+
 .popupInfo .divInvo {
-    width: 45%;
+    width: 40%;
     height: 35px;
     background-color: #16191f;
     padding: 8px;
@@ -331,7 +341,6 @@ h2 {
 }
 
 .divBtn {
-    margin-top: 15px;
     display: flex;
     gap: 10px;
 }
@@ -391,6 +400,7 @@ h2 {
     color: #ccc;
     font-size: 12px;
     margin-bottom: 15px;
+    text-align: justify;
 }
 
 .snd-container input:focus, .snd-container textarea:focus {
@@ -430,7 +440,6 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    margin-bottom: 15px;
     & p {
         font-size: 12px;
         background: #16191f;
@@ -482,7 +491,7 @@ h2 {
 @media screen and (max-width: 700px) {
     .popup {
         width: 90%;
-        padding: 5px 5px 40px 5px;
+        padding: 5px;
         border-radius: 10px;
         min-height: 400px;
     }
@@ -493,23 +502,21 @@ h2 {
         width: 95%;
         font-size: 12px;
     }
-    .popupInfo .divInvo {
-        width: 40%;
-    }
     .img-popup {
-        height: 200px;
+        display: none;
     }
     .select-tag.openTag .tag-setlist {
         width: 200px;
         transform: translateX(-50%);
     }
-    #popupModif {
+
+    .snd-container {
         width: 100%;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
     }
-    .snd-container textarea {
-        width: 85%;
-    }
-    .divBtn a, .btn-modif {
-        font-size: 12px;
+    #popupModif .divInvo {
+        width: 40%;
     }
 }
