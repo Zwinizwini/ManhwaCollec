@@ -105,29 +105,33 @@ const ManhwaPage = () => {
                     </div>
                 </div>
                 <div className="infoSupp">
-                    <h2>{manhwa.title}</h2>
-                    {manhwa.note && <p className='note'><span>★</span> {manhwa.note}</p>}
-                    {manhwa.description && <p className='description'>{manhwa.description}</p>}
-                    <div className='popupInfo'>
-                        <PopupInfo info1={"Chapitre Max"} info2={`${manhwa.maxChapter}`}/>
-                        <PopupInfo info1={"Dernier Lu"} info2={`Ch. ${manhwa.chapter}`}/>
-                        <PopupInfo info1={"Lu il y a"} info2={`${date ? date : 0} jours`}/>
-                        <PopupInfo info1={"Progression"} info2={`${Math.round((parseInt(manhwa.chapter)/manhwa.maxChapter) * 100)}%`} />
+                    <div className="info">
+                        <h2>{manhwa.title}</h2>
+                        {manhwa.note && <p className='note'><span>★</span> {manhwa.note}</p>}
+                        {manhwa.description && <p className='description'>{manhwa.description}</p>}
+                        <div className='popupInfo'>
+                            <PopupInfo info1={"Chapitre Max"} info2={`${manhwa.maxChapter}`}/>
+                            <PopupInfo info1={"Dernier Lu"} info2={`Ch. ${manhwa.chapter}`}/>
+                            <PopupInfo info1={"Lu il y a"} info2={`${date ? date : 0} jours`}/>
+                            <PopupInfo info1={"Progression"} info2={`${Math.round((parseInt(manhwa.chapter)/manhwa.maxChapter) * 100)}%`} />
+                        </div>
+                        <div 
+                            className='progression-bar' 
+                            id='popup-bar' 
+                            style={{background: `linear-gradient(to right, ${progressionCouleur(gradientSeuil)} ${gradientSeuil}%, black ${gradientSeuil}%)`}} 
+                            onMouseMove={(e) => {setPos({x: e.clientX, y: e.clientY})}}>
+                        </div>
+                        <Tooltip 
+                            anchorSelect="#popup-bar"
+                            style={{background: '#08090a'}}
+                            opacity={1}
+                            position={{x: pos.x, y: pos.y}}
+                            content= {`${gradientSeuil}%`}
+                        />
                     </div>
-                    <div 
-                        className='progression-bar' 
-                        id='popup-bar' 
-                        style={{background: `linear-gradient(to right, ${progressionCouleur(gradientSeuil)} ${gradientSeuil}%, black ${gradientSeuil}%)`}} 
-                        onMouseMove={(e) => {setPos({x: e.clientX, y: e.clientY})}}>
+                    <div className="chapitre">
+                        {manhwa.link && <ListeChap lien={manhwa.link} maxChapter={manhwa.maxChapter}/>}
                     </div>
-                    <Tooltip 
-                        anchorSelect="#popup-bar"
-                        style={{background: '#08090a'}}
-                        opacity={1}
-                        position={{x: pos.x, y: pos.y}}
-                        content= {`${gradientSeuil}%`}
-                    />
-                    {manhwa.link && <ListeChap lien={manhwa.link} maxChapter={manhwa.maxChapter}/>}
                 </div>
             </div>}
             {modifier && <Modifier 
