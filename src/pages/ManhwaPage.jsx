@@ -1,10 +1,10 @@
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import BtnNav from "../components/BtnNav"
 import '../styles/ManhwaPage.css'
 import { styleCouleur, progressionCouleur } from "../utils/colors"
 import PopupInfo from "../components/PopupInfo"
 import { Tooltip } from "react-tooltip"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { ManhwaContext, UserContext } from "../utils/Context"
 import { supabase } from "../supabase"
 import nowait from '../assets/btnsupprsound/nowait.mp3'
@@ -13,6 +13,8 @@ import Audio from "../components/Audio"
 import Modifier from "../components/Modifier"
 import ListeChap from "../components/ListeChap"
 import BtnAjouter from "../components/BtnAjouter"
+import { getDateDiff } from "../utils/colors"
+import { useAuth } from "../utils/AuthContext"
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -21,18 +23,35 @@ function getRandomInt(max) {
 //Vercel aller stp
 
 const ManhwaPage = () => {
-    const {state} = useLocation()
     const navigate = useNavigate()
-    const id = state.id
-    const isUser = state.isUser
-    const manhwaListName = state.manhwaListName
-    const {manhwaList: contextList, saveManhwaList} = useContext(ManhwaContext)
-    const manhwaList = state?.manhwaList ?? contextList
-    const manhwa = manhwaList.find((elem) => elem.id === id)
+    const params = useParams()
+    const id = parseInt(params.id)
+    const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
+    const manhwaListName = manhwaList.map((manhwa) => manhwa.title.toLowerCase().replaceAll(" ", ""))
+    const [manhwa, setManhwa] = useState({})
+    const {user} = useAuth()
+    const [isLoading, setIL] = useState(true)
 
-    const tagList = (manhwa && manhwa.tag) ? manhwa.tag.split(/\s*(?:,|$)\s*/) : []
 
-    const gradientSeuil = (manhwa) && Math.round((parseInt(manhwa.chapter)/manhwa.maxChapter) * 100)
+    useEffect(() => {
+        const getManhwa = async () => {
+            const { data, error } = await supabase
+                .from("manhwas")
+                .select()
+                .eq('id', id)
+            if (error) console.error(error)
+            if (data) {
+                setManhwa(data[0])
+                setIL(false)
+            }
+        } 
+        getManhwa()
+    },[])
+
+    const tagList = (!isLoading && manhwa.tag) ? manhwa.tag.split(/\s*(?:,|$)\s*/) : []
+    const date = (!isLoading) && getDateDiff(manhwa.lastRead, false)
+
+    const gradientSeuil = (!isLoading) && Math.round((parseInt(manhwa.chapter)/manhwa.maxChapter) * 100)
     const [pos, setPos] = useState({x:0,y:0})
     
     const audioSuppr = [nowait, nodont]
@@ -53,7 +72,7 @@ const ManhwaPage = () => {
     return (
         <div>
             <BtnNav/>
-            {!manhwa ? <div class="loader"></div>
+            {isLoading ? <div class="loader"></div>
             :
             <div className="manhwaInfo">
                 <div className="infoTag">
@@ -70,10 +89,9 @@ const ManhwaPage = () => {
                         </div>
                     }
                     <div className="divBtn">
-                        {/* {manhwa.link && <a href={changeLink(manhwa.link, manhwa.chapter)} className='bouton-chap' target='__blank'>Voir le lien de lecture</a>} */}
-                        {!isUser && <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>}
-                        {isUser && <BtnAjouter title={manhwa.title} maxChapter={manhwa.maxChapter} cover={manhwa.cover} manhwaListName={manhwaListName}/>}
-                        {!isUser && <>
+                        {manhwa.user_id ===  user.id && <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>}
+                        {manhwa.user_id !==  user.id && <BtnAjouter title={manhwa.title} maxChapter={manhwa.maxChapter} cover={manhwa.cover} manhwaListName={manhwaListName}/>}
+                        {manhwa.user_id ===  user.id && <>
                             <button 
                                 onClick={() => supprManhwa()} 
                                 className='btn-modif' 
@@ -93,7 +111,7 @@ const ManhwaPage = () => {
                     <div className='popupInfo'>
                         <PopupInfo info1={"Chapitre Max"} info2={`${manhwa.maxChapter}`}/>
                         <PopupInfo info1={"Dernier Lu"} info2={`Ch. ${manhwa.chapter}`}/>
-                        <PopupInfo info1={"Lu il y a"} info2={`${manhwa.lastReadCompter ? manhwa.lastReadCompter : 0} jours`}/>
+                        <PopupInfo info1={"Lu il y a"} info2={`${date ? date : 0} jours`}/>
                         <PopupInfo info1={"Progression"} info2={`${Math.round((parseInt(manhwa.chapter)/manhwa.maxChapter) * 100)}%`} />
                     </div>
                     <div 
@@ -113,21 +131,14 @@ const ManhwaPage = () => {
                 </div>
             </div>}
             {modifier && <Modifier 
-                title={manhwa.title}
-                chapter={manhwa.chapter}
-                status={manhwa.status}
-                cover={manhwa.cover}
-                description={manhwa.description}
-                link={manhwa.link}
-                maxChapter={manhwa.maxChapter}
                 setModifier={setModifier}
                 manhwaList={manhwaList}
                 id={id}
                 updateManhwalist={saveManhwaList}
-                note={manhwa.note}
-                lastRead={manhwa.lastRead}
                 tag={tagList}
                 modifier={modifier}
+                setManhwa={setManhwa}
+                manhwa={manhwa}
             />}
         </div>
     )

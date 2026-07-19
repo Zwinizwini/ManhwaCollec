@@ -30,7 +30,7 @@ createRoot(document.getElementById('root')).render(
                     <Route path='/stat/:id?' element={<Stat />}/>
                     <Route path="/account" element={<Account />}/>
                     <Route path="/user/:id" element={<User />}/>
-                    <Route path='/manhwa/:titre' element={<ManhwaPage />}/>
+                    <Route path='/manhwa/:id/:titre' element={<ManhwaPage />}/>
                     <Route path="/*" element={<Error />}/>
                     {/* <Route path="/account/update-password" element={<UpdatePassword />}/> */}
                   </Routes>

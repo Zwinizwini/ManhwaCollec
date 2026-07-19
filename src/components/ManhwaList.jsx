@@ -10,15 +10,15 @@ import { UserContext, ManhwaContext } from '../utils/Context'
 
 
 const ManhwaList = ({manhwaList, updateManhwalist}) => {
-    const [filtreStatus, setStatus] = useState('')
     const [isForm, setForm] = useState(false)
     const [isNsfw, setIsNsfw] = useState(2)
     const [search, setSearch] = useState('')
     const {isUser} = useContext(UserContext)
     const trierLocal = localStorage.getItem("trier")
     const [trie, setTrie] = useState(trierLocal ? JSON.parse(trierLocal) : 0)
-    const {manhwaList : manhwwaListOwner, loading} = useContext(ManhwaContext)
-    const manhwaListName = manhwwaListOwner.map((manhwa) => manhwa.title.toLowerCase().replaceAll(" ", ""))
+    const filtreLocal = localStorage.getItem("filtre")
+    const [filtreStatus, setStatus] = useState(filtreLocal ? JSON.parse(filtreLocal) : '')
+    const {loading} = useContext(ManhwaContext)
 
     const statusList = manhwaList.reduce(
         (acc, manhwa) => acc.includes(manhwa.status) ? acc : acc.concat(manhwa.status),
@@ -87,7 +87,6 @@ const ManhwaList = ({manhwaList, updateManhwalist}) => {
                                     note={note}
                                     lastCheck={lastCheck}
                                     isUser={isUser}
-                                    manhwaListName={manhwaListName}
                                     index={index}
                                     tag={tag}
                                 />

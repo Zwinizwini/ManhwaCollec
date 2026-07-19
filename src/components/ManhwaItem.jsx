@@ -1,7 +1,7 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import '../styles/ManhwaItem.css'
 import Popup from './Popup'
-import { styleCouleur, colors } from '../utils/colors'
+import { styleCouleur, colors, getDateDiff } from '../utils/colors'
 import { supabase } from '../supabase'
 import {styled, keyframes} from 'styled-components'
 import { Link } from 'react-router-dom'
@@ -28,17 +28,6 @@ const Loader = styled.div`
   left: 2px;
 `
 
-const getDateDiff = (date1, needHours) => {
-    const dateNow = new Date()
-    const lastReadDate = date1 ? new Date(date1) : ""
-
-    if (needHours) return Math.floor((dateNow - (lastReadDate)) / (1000 * 60 * 60))
-    
-    const dateTest = lastReadDate ? new Date(lastReadDate.getFullYear(), lastReadDate.getMonth(), lastReadDate.getDate()) : ""
-    const lastReadCompter = Math.floor((dateNow - (needHours ? lastReadDate : dateTest)) / (1000 * 60 * 60 * 24))
-    return lastReadCompter
-}
-
 function createSlug(text) {
   return text
     .toString()
@@ -54,12 +43,10 @@ function createSlug(text) {
     .replace(/^-+|-+$/g, '');
 }
 
-const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, maxChapter, manhwaList, manhwaListName, updateManhwalist, note, lastCheck, isUser}) => {
-    const [isPopup, setPopup] = useState(false)
+const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, lastReadCount, maxChapter, manhwaList, updateManhwalist, note, lastCheck, isUser}) => {
     const [receiveData, setRData] = useState(false)
     const [chaptUpdate, setChapUpdate] = useState(maxChapter)
     const [isLoading, setLoading] = useState(false)
-    const itemnLoc = useRef(null)
 
     const lastReadCompter = getDateDiff(lastRead, false)
     const lastCheckDiff = getDateDiff(lastCheck, true)
@@ -130,13 +117,10 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
             <Link 
                 className="manhwa-item" 
                 style={{animationDelay: `${index*0.05}s`}} 
-                ref={itemnLoc}
-                to={`/manhwa/${createSlug(title)}`}
-                state={{manhwaList: isUser ? manhwaList : null, id, isUser, manhwaListName}}
+                to={`/manhwa/${id}/${createSlug(title)}`}
             >
                 <div
                     className='container-hover'
-                    onClick={() => setPopup(true)}
                 >
                     {cover && <img src={cover} alt={`Cover de ${title}`} className="manhwa-item-cover" id='img-item'/>}
                     <span className="name-hover">{title}</span>

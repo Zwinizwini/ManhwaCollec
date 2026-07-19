@@ -45,3 +45,14 @@ export const allTagList = ['Military','Psychological','Time Travel','Gag Humor',
   'Video Game','Magical Sex Shift','Harem','Idols (Female)','Pets','Educational','Villainess','Adventure','Drama','Fantasy','Action','Sci-Fi','Suspense','Comedy','Romance','Supernatural',  'Award Winning',
   'Mystery','Sports','Slice of Life', 'Ecchi','Gourmet','Horror','Avant Garde','Boys Love','Girls Love','Erotica','Hentai'
 ].sort()
+
+export const getDateDiff = (date1, needHours) => {
+    const dateNow = new Date()
+    const lastReadDate = date1 ? new Date(date1) : ""
+
+    if (needHours) return Math.floor((dateNow - (lastReadDate)) / (1000 * 60 * 60))
+    
+    const dateTest = lastReadDate ? new Date(lastReadDate.getFullYear(), lastReadDate.getMonth(), lastReadDate.getDate()) : ""
+    const lastReadCompter = Math.floor((dateNow - (needHours ? lastReadDate : dateTest)) / (1000 * 60 * 60 * 24))
+    return lastReadCompter
+}

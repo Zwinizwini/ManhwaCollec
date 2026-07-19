@@ -11,7 +11,7 @@ const clickSelectTag = () => {
 
 
 
-const Modifier = ({id, title, chapter, status, cover, description, link, modifier, setModifier, maxChapter, manhwaList, updateManhwalist, note, lastRead, tag}) => {
+const Modifier = ({id, modifier, setModifier, manhwaList, updateManhwalist, tag, setManhwa, manhwa}) => {
     const [isClose, setIC] = useState(false)
 
     const closeModif = () => {
@@ -44,52 +44,36 @@ const Modifier = ({id, title, chapter, status, cover, description, link, modifie
         return data
     }
 
-    const handleMAJ = () => {        
-        const manhwaUpdate = {
-            title: updateTitle,
-            description: desc,
-            chapter: parseInt(updateChapter),
-            maxChapter: parseInt(updateChapter) > parseInt(updateMaxChap) ? parseInt(updateChapter) : parseInt(updateMaxChap),
-            cover: urlCover,
-            link: updateURL,
-            status: updateStatus,
-            lastRead: updateChapter !== chapter ? new Date().toISOString() : lastRead,
-            lastReadCount: "0",
-            note: noteM && parseFloat(noteM),
-            tag: tagUpdate.toString()
-        }
+    const handleMAJ = () => {     
+        const updateValue = {
+            ...manhwaUpdate,
+            tag: tagUpdate.toString(),
+            maxChapter: manhwaUpdate.maxChapter < manhwaUpdate.chapter ? manhwaUpdate.chapter : manhwaUpdate.maxChapter,
+            lastRead: manhwa.chapter !== manhwaUpdate.chapter ? new Date().toISOString() : manhwaUpdate.lastRead
+        }   
+        setMU(updateValue)
         const updateList = manhwaList.map((m) => (
             m.id === id ? {
-                ...m,
-                title: updateTitle,
-                description: desc,
-                chapter: updateChapter,
-                maxChapter: parseInt(updateChapter) > parseInt(updateMaxChap) ? updateChapter : updateMaxChap,
-                cover: urlCover,
-                link: updateURL,
-                status: updateStatus,
-                lastRead: updateChapter !== chapter ? new Date().toISOString() : m.lastRead,
-                lastReadCount: "0",
-                note: noteM && parseFloat(noteM),
-                tag: tagUpdate.toString()
+                ...updateValue
             } : m
         ))
-        updateManhwa(id, manhwaUpdate)
+        updateManhwa(id, updateValue)
         updateManhwalist(updateList)
+        setManhwa(updateValue)
         closeModif()
     }
 
-    const [desc, setDesc] = useState(description)
-    const [urlCover, setURLCoser] = useState(cover)
-    const [updateChapter, setChapter] = useState(chapter)
-    const [updateTitle, setTitle] = useState(title)
-    const [updateURL, setURL] = useState(link)
-    const [updateStatus, setUpdateStatus] = useState(status)
-    const [noteM, setNote] = useState(note)
-    const [updateMaxChap, setMaxChap] = useState(maxChapter)
     const [tagUpdate, setTagUpdate] = useState(tag)
+    const [manhwaUpdate, setMU] = useState(manhwa)
+
     
 
+    const manhwaMAJ = (e,key) => {
+        setMU(prev => ({
+            ...prev,
+            [key]: e
+        }))
+    }
 
     return (
         <div className='popupBackground' onClick={(e) => {
@@ -97,61 +81,63 @@ const Modifier = ({id, title, chapter, status, cover, description, link, modifie
         }}>
             <div className="popup" id='popupModif' style={{animation: isClose ? 'fermeture .3s ease-in-out both' : 'ouverture .3s ease-in-out both'}}>
                 <div className='img-popup'>
-                    <img src={cover} alt={`Cover de ${title}`}/>
+                    <img src={manhwaUpdate.cover} alt={`Cover de ${manhwaUpdate.title}`}/>
                 </div>
                 <div className='snd-container'>
                     <div className="popupInfo">
                         <label className="divInvo">
                             <p>Titre</p>
-                            <input onChange={(e) => setTitle(e.target.value)} value={updateTitle}/>
+                            <input onChange={(e) => manhwaMAJ(e.target.value, 'title')} value={manhwaUpdate.title}/>
                         </label>
                         <label className="divInvo">
                             <p>Note</p>
                             <div className='input-note'><input type="number" min="0" max="10"
-                                value={noteM}
+                                value={manhwaUpdate.note}
                                 onChange={(e) => {
                                     if (e.target.value > 10) {
-                                        setNote(10)
+                                        manhwaMAJ(10, 'note')
                                     } else if (e.target.value < 0) {
-                                        setNote(0)
+                                        manhwaMAJ(0, 'note')
                                     } else {
-                                        setNote(e.target.value)
+                                        manhwaMAJ(parseFloat(e.target.value), 'note')
                                     }
                                 }}    
                             />/10</div>
                         </label>
-                        <textarea onChange={(e) => setDesc(e.target.value)} value={desc} placeholder='Description'/>
+                        <textarea 
+                            onChange={(e) => manhwaMAJ(e.target.value, 'description')} 
+                            value={manhwaUpdate.description} placeholder='Description'/>
                     </div>
 
                     <div className='popupInfo'>
                         <label className='divInvo'>
                             <p>Max Chapter</p>
                             <div className="number-style">
-                                <input type="number" value={updateMaxChap} onChange={(e) => setMaxChap(e.target.value)}/>
+                                <input type="number" value={manhwaUpdate.maxChapter} onChange={(e) => manhwaMAJ(parseInt(e.target.value), 'maxChapter')}/>
                                 <div>
-                                    <span id='spanplus' onClick={() => setMaxChap(updateMaxChap+1)}>+</span>
-                                    <span id='spanmoins' onClick={() => setMaxChap(updateMaxChap-1)}>-</span>
+                                    <span id='spanplus' onClick={() => manhwaMAJ(parseInt(manhwaUpdate.maxChapter)+1, 'maxChapter')}>+</span>
+                                    <span id='spanmoins' onClick={() => manhwaMAJ(parseInt(manhwaUpdate.maxChapter)-1, 'maxChapter')}>-</span>
                                 </div>
                             </div>
                         </label>
                         <label className='divInvo'>
                             <p>Dernier Lu</p>
                             <div className="number-style">
-                                <input type="number" value={updateChapter} onChange={(e) => setChapter(e.target.value)}/>
+                                <input type="number" value={manhwaUpdate.chapter} onChange={(e) => manhwaMAJ(parseInt(e.target.value), 'chapter')}/>
                                 <div>
-                                    <span id='spanplus' onClick={() => setChapter(updateChapter+1)}>+</span>
-                                    <span id='spanmoins' onClick={() => setChapter(updateChapter-1)}>-</span>
+                                    <span id='spanplus' onClick={() => manhwaMAJ(parseInt(manhwaUpdate.chapter)+1, 'chapter')}>+</span>
+                                    <span id='spanmoins' onClick={() => manhwaMAJ(parseInt(manhwaUpdate.chapter)-1, 'chapter')}>-</span>
                                 </div>
                             </div>
                         </label>
                         <label className='divInvo'>
                             <p>URL Cover</p>
-                            <input type="text" value={urlCover} onChange={(e) => setURLCoser(e.target.value)}/>
+                            <input type="text" value={manhwaUpdate.cover} onChange={(e) => manhwaMAJ(e.target.value, 'cover')}/>
                         </label>
                         <div className='divInvo'>
                             <p>Status</p>
-                            <select value={updateStatus}
-                                onChange={(e) => setUpdateStatus(e.target.value)}
+                            <select value={manhwaUpdate.status}
+                                onChange={(e) => manhwaMAJ(e.target.value, 'status')}
                                 name='status'
                             >
                                 <option value="Fini">Fini</option>
@@ -163,7 +149,7 @@ const Modifier = ({id, title, chapter, status, cover, description, link, modifie
                         </div>
                         <label className='divInvo'>
                             <p>URL Lecture</p>
-                            <input type="text" value={updateURL} onChange={(e) => setURL(e.target.value)}/>
+                            <input type="text" value={manhwaUpdate.link} onChange={(e) => manhwaMAJ(e.target.value, 'link')}/>
                         </label>
                         <div className='divInvo' onClick={() => clickSelectTag()}>
                             <p>Tag Liste</p>

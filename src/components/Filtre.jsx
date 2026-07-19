@@ -1,6 +1,11 @@
 import '../styles/Filtre.css'
+import { useEffect } from 'react'
 
 const Filtre = ({filtreStatus, setStatus, statusList, isNsfw, setIsNsfw}) => {
+
+    useEffect(() => {
+        localStorage.setItem('filtre', JSON.stringify(filtreStatus))
+    },[filtreStatus])
     return (
         <>
             <select
