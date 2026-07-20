@@ -20,11 +20,23 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
+const majChaqueMot = (chaine) => {
+    const chaineTraite = chaine
+        .split('-')
+        .map(mot => {
+            return mot.charAt(0).toUpperCase() + mot.slice(1)
+        })
+        .join(' ')
+
+    return chaineTraite
+}
+
 //Vercel aller stp
 
 const ManhwaPage = () => {
     const navigate = useNavigate()
     const params = useParams()
+    const titre = params.titre
     const id = parseInt(params.id)
     const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
     const manhwaListName = manhwaList.map((manhwa) => manhwa.title.toLowerCase().replaceAll(" ", ""))
@@ -46,6 +58,7 @@ const ManhwaPage = () => {
             }
         } 
         getManhwa()
+        document.title = majChaqueMot(titre)
     },[])
 
     const tagList = (!isLoading && manhwa.tag) ? manhwa.tag.split(/\s*(?:,|$)\s*/) : []

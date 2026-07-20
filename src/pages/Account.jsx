@@ -127,6 +127,10 @@ const Account = () => {
     }   
 
     useEffect(() => {
+        document.title = 'ManhwaCollec'
+    }, [])
+
+    useEffect(() => {
         if (copier) {
             setTimeout(() => {
             setCopier(false)

@@ -56,6 +56,7 @@ function App() {
 
   useEffect(() => {
     setIsUser(false)
+    document.title = 'ManhwaCollec'
   }, [])
 
   useEffect(() => {
