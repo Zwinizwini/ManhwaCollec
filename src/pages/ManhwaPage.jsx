@@ -83,70 +83,74 @@ const ManhwaPage = () => {
     }
 
     return (
-        <div>
-            <BtnNav/>
+        <>
             {isLoading ? <div class="loader"></div>
             :
-            <div className="manhwaInfo">
-                <div className="infoTag">
-                    <img src={manhwa.cover} alt={`Cover de ${manhwa.title}`}/>
-                    <div className="first">
-                        <span className="status-popup" style={{background:styleCouleur(manhwa.status)}}>{manhwa.status}</span>
-                        {manhwa.nsfw===1 && <span className="nsfw-popup">18+</span>}
-                    </div>
-                    {tagList.length > 0 && 
-                        <div className='tag-list first'>
-                            {tagList.map(t => 
-                                <p key={t}>{t}</p>
-                            )}
+            <div>
+                <BtnNav/>
+                {/* <div className="fondEcran" style={{backgroundImage: `url(${manhwa.cover}`}}><div></div></div> */}
+                <div className="manhwaInfo">
+                    <div className="infoTag">
+                        <img src={manhwa.cover} alt={`Cover de ${manhwa.title}`}/>
+                        <div className="first">
+                            <span className="status-popup" style={{background:styleCouleur(manhwa.status)}}>{manhwa.status}</span>
+                            {manhwa.nsfw===1 && <span className="nsfw-popup">18+</span>}
                         </div>
-                    }
-                    <div className="divBtn">
-                        {manhwa.user_id ===  user.id && <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>}
-                        {manhwa.user_id !==  user.id && <BtnAjouter title={manhwa.title} maxChapter={manhwa.maxChapter} cover={manhwa.cover} manhwaListName={manhwaListName}/>}
-                        {manhwa.user_id ===  user.id && <>
-                            <button 
-                                onClick={() => supprManhwa()} 
-                                className='btn-modif' 
-                                id='btn-suppr' 
-                                onMouseEnter={() => setIPH(true)}
-                                onMouseLeave={() => setIPH(false)}
-                            >Supprimer</button>
-                            <Audio isPlaying={isPlayingHover} audio={audioSuppr[randomSound]}/>
-                        </>
+                        {tagList.length > 0 && 
+                            <div className='tag-list first'>
+                                {tagList.map(t => 
+                                    <p key={t}>{t}</p>
+                                )}
+                            </div>
                         }
+                        <div className="divBtn">
+                            {manhwa.user_id ===  user.id && <button onClick={() => setModifier(true)} className='btn-modif'>Modifier</button>}
+                            {manhwa.user_id !==  user.id && <BtnAjouter title={manhwa.title} maxChapter={manhwa.maxChapter} cover={manhwa.cover} manhwaListName={manhwaListName}/>}
+                            {manhwa.user_id ===  user.id && <>
+                                <button 
+                                    onClick={() => supprManhwa()} 
+                                    className='btn-modif' 
+                                    id='btn-suppr' 
+                                    onMouseEnter={() => setIPH(true)}
+                                    onMouseLeave={() => setIPH(false)}
+                                >Supprimer</button>
+                                <Audio isPlaying={isPlayingHover} audio={audioSuppr[randomSound]}/>
+                            </>
+                            }
+                        </div>
+                    </div>
+                    <div className="infoSupp">
+                        <div className="info">
+                            <h2>{manhwa.title}</h2>
+                            {manhwa.note && <p className='note'><span>★</span> {manhwa.note}</p>}
+                            {manhwa.description && <p className='description'>{manhwa.description}</p>}
+                            <div className='popupInfo'>
+                                <PopupInfo info1={"Chapitre Max"} info2={`${manhwa.maxChapter}`}/>
+                                <PopupInfo info1={"Dernier Lu"} info2={`Ch. ${manhwa.chapter}`}/>
+                                <PopupInfo info1={"Lu il y a"} info2={`${date ? date : 0} jours`}/>
+                                <PopupInfo info1={"Progression"} info2={`${Math.round((parseInt(manhwa.chapter)/manhwa.maxChapter) * 100)}%`} />
+                            </div>
+                            <div 
+                                className='progression-bar' 
+                                id='popup-bar' 
+                                style={{background: `linear-gradient(to right, ${progressionCouleur(gradientSeuil)} ${gradientSeuil}%, black ${gradientSeuil}%)`}} 
+                                onMouseMove={(e) => {setPos({x: e.clientX, y: e.clientY})}}>
+                            </div>
+                            <Tooltip 
+                                anchorSelect="#popup-bar"
+                                style={{background: '#08090a'}}
+                                opacity={1}
+                                position={{x: pos.x, y: pos.y}}
+                                content= {`${gradientSeuil}%`}
+                            />
+                        </div>
+                        <div className="chapitre">
+                            {manhwa.link && <ListeChap lien={manhwa.link} maxChapter={manhwa.maxChapter}/>}
+                        </div>
                     </div>
                 </div>
-                <div className="infoSupp">
-                    <div className="info">
-                        <h2>{manhwa.title}</h2>
-                        {manhwa.note && <p className='note'><span>★</span> {manhwa.note}</p>}
-                        {manhwa.description && <p className='description'>{manhwa.description}</p>}
-                        <div className='popupInfo'>
-                            <PopupInfo info1={"Chapitre Max"} info2={`${manhwa.maxChapter}`}/>
-                            <PopupInfo info1={"Dernier Lu"} info2={`Ch. ${manhwa.chapter}`}/>
-                            <PopupInfo info1={"Lu il y a"} info2={`${date ? date : 0} jours`}/>
-                            <PopupInfo info1={"Progression"} info2={`${Math.round((parseInt(manhwa.chapter)/manhwa.maxChapter) * 100)}%`} />
-                        </div>
-                        <div 
-                            className='progression-bar' 
-                            id='popup-bar' 
-                            style={{background: `linear-gradient(to right, ${progressionCouleur(gradientSeuil)} ${gradientSeuil}%, black ${gradientSeuil}%)`}} 
-                            onMouseMove={(e) => {setPos({x: e.clientX, y: e.clientY})}}>
-                        </div>
-                        <Tooltip 
-                            anchorSelect="#popup-bar"
-                            style={{background: '#08090a'}}
-                            opacity={1}
-                            position={{x: pos.x, y: pos.y}}
-                            content= {`${gradientSeuil}%`}
-                        />
-                    </div>
-                    <div className="chapitre">
-                        {manhwa.link && <ListeChap lien={manhwa.link} maxChapter={manhwa.maxChapter}/>}
-                    </div>
-                </div>
-            </div>}
+            </div>
+            }
             {modifier && <Modifier 
                 setModifier={setModifier}
                 manhwaList={manhwaList}
@@ -157,7 +161,7 @@ const ManhwaPage = () => {
                 setManhwa={setManhwa}
                 manhwa={manhwa}
             />}
-        </div>
+        </>
     )
 }
 
