@@ -11,6 +11,7 @@ import PopupToast from '../components/PopupToast'
 import BtnNav from '../components/BtnNav'
 import Amis from '../components/Amis'
 import '../styles/Amis.css'
+import BtnLien from '../components/BtnLien'
 
 const AccountDiv = styled.div`
     width: 600px;
@@ -175,6 +176,7 @@ const Account = () => {
                         <button className="btnDeco" onClick={() => deconnexion()}>Deconnexion</button>
                         {copier && <PopupToast msg={"List copié !"}/>}
                     </DivProfil>
+                    <BtnLien user_id={user.id}/>
                     <Amis/>
                 </> 
                 

@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .compte-body {
     display: flex;
     flex-direction: column;
@@ -56,11 +59,182 @@
     opacity: 0.5;
 }
 
+
+.btnLien {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    position: relative;
+    & a {
+        text-transform: capitalize;
+        color: white;
+    }
+    & .btnNav {
+        position: absolute;
+        top: 0; 
+        right: -120px;
+    }
+}
+
+.clapFilm {
+    width: 100px;
+    height: 60px;
+    font-family: "Playfair Display", serif;
+    letter-spacing: 0.1em;
+    & span {
+        display: inline-block;
+        width: 10%;
+        height: 25px;
+    }
+    & span:nth-child(even) {
+        background: white;
+    }
+    & span:nth-child(odd) {
+        background: black;
+    }
+    & .up {
+        width: 100%;
+        height: 10px;
+        display: flex;
+        overflow: hidden;
+        align-items: center;
+        border-radius: 3px 3px 0 0;
+        background-color: black;
+        transition: all 0.2s ease-in-out;
+        transform-origin: left;
+        & span {
+            transform: rotate(-45deg);
+        }
+    }
+    & .down {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0 0 3px 3px;
+        background: black;
+        position: relative;
+        & img {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            width: 120px;
+            top: -65px;
+            z-index: 2;
+            opacity: 0;
+            transition: all 0.2s ease-in-out;
+        }
+        & div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            display: flex;
+            overflow: hidden;
+            align-items: center;
+            & span {
+                transform: rotate(45deg);
+            }
+        }
+    }
+    &:hover .up {
+        transform: rotate(-20deg);
+    }
+    &:hover img {
+        opacity: 1;
+    }
+    &:active .up {
+        transform: rotate(0deg);
+    }
+}
+
+.btnLien .jeu {
+    position: relative;
+    overflow: hidden;
+    background: #0d6efd;
+    width: 100px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Press Start 2P", system-ui;
+    font-size: 10px;
+    text-shadow: #0a50b8 2px 2px;
+    box-shadow: 3px 3px #0a50b8;
+    border-radius: 3px;
+    transition: all .2s ease-in-out;
+    &:active {
+        transform: translate(3px,3px);
+        box-shadow: none;
+    }
+    & p {
+        margin-top: 15px;
+    }
+    &:hover::after {
+        box-shadow: inset -1px 3px 8px 1px #0a50b8; 
+    }
+    &::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all .2s ease-in-out;
+    }
+}
+
+
+.loader-packman {
+  width: 100px;
+  height: 24px;
+  padding: 2px 0;
+  box-sizing: border-box;
+  display: flex;
+  animation: l5-0 3s infinite steps(6);
+  background:
+    linear-gradient(#0d6efd 0 0) 0 0/0% 100% no-repeat,
+    radial-gradient(circle 3px,#eeee89 90%,#0000) 0 0/20% 100%
+    #0d6efd;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.loader-packman::before {
+  content: "";
+  width: 20px;
+  transform: translate(-100%);
+  border-radius: 50%;
+  background: #ffff2d;
+  animation: 
+    l5-1 .25s .153s infinite steps(5) alternate,
+    l5-2  3s        infinite linear;
+}
+@keyframes l5-1{ 
+    0% {clip-path: polygon(50% 50%,100%   0,100% 0,0 0,0 100%,100% 100%,100% 100%)}
+  100% {clip-path: polygon(50% 50%,100% 65%,100% 0,0 0,0 100%,100% 100%,100%  35%)}
+}
+@keyframes l5-2{ 
+  100% {transform: translate(90px)}
+}
+@keyframes l5-0{ 
+  100% {background-size:120% 100%,20% 100%}
+}
+
 @media screen and (max-width: 700px) {
     .compte {
         width: 80% !important;
     }
     .compte-body label {
         width: 90%;
+    }
+    .btnLien .btnNav {
+        top: 120%;
+        right: 50%;
+        transform: translate(50%);
     }
 }
