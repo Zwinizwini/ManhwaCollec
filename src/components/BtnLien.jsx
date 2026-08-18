@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../supabase"
-import sadako from '../assets/sadako.PNG'
+import sadako from '../assets/sadako2.PNG'
 import EditLienExt from "./EditLienExt"
 
 const BtnLien = ({user_id}) => {
@@ -49,6 +49,12 @@ const BtnLien = ({user_id}) => {
                             ))}
                         </div>
                         {extractName(listeLien.lien_film)}
+                    </div>
+                    <div className="svg">
+                        <svg width={20} height={20} viewBox="0 0 20 20" fill="rgb(10, 10, 10)" >
+                            <path d="M0 0 V20 H20 V13 L7 0 Z"/>
+                        </svg>
+                        <div></div>
                     </div>
                 </a>
             }
