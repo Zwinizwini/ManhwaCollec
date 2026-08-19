@@ -89,7 +89,17 @@ const EditLienExt = ({setEdit, user_id, setLL}) => {
 
     
     const validClick = () => {
-        const categorie = objLien.media === 'Film' ? 'lien_film' : 'lien_jeu'
+        let categorie
+        switch (objLien.media) {
+            case "Film":
+                categorie = "lien_film"
+                break
+            case "Jeux":
+                categorie = "lien_jeu"
+                break
+            default:
+                categorie = "lien_anime"
+        }
         updateLien(categorie)
     }
 
@@ -116,6 +126,7 @@ const EditLienExt = ({setEdit, user_id, setLL}) => {
                 >
                     <option value="Film">Film</option>
                     <option value="Jeu">Jeux</option>
+                    <option value="Anime">Anime</option>
                 </select>
                 <button onClick={() => validClick()}>Valider</button>
             </div>

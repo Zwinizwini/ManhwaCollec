@@ -18,7 +18,8 @@ const BtnLien = ({user_id}) => {
             if (data) {
                 setLL({
                     lien_film: data[0].lien_film,
-                    lien_jeu: data[0].lien_jeu
+                    lien_jeu: data[0].lien_jeu,
+                    lien_anime: data[0].lien_anime
                 })
             }
         } 
@@ -62,6 +63,12 @@ const BtnLien = ({user_id}) => {
                 <a href={listeLien.lien_jeu} target="_blank" className="jeu">
                     <div class="loader-packman"></div>
                     <p>{extractName(listeLien.lien_jeu)}</p>
+                </a>
+            }
+            {listeLien?.lien_anime &&
+                <a href={listeLien.lien_anime} target="__blank" className="cybr-btn">
+                    {extractName(listeLien.lien_anime)}
+                    <span aria-hidden class="cybr-btn__glitch">{extractName(listeLien.lien_anime)}</span>
                 </a>
             }
             <button onClick={() => setEdit(true)} className="btnNav">
