@@ -59,7 +59,7 @@ const Inscription = () => {
                 onChange={(e) => setCMdp(e.target.value)}
                 onBlur={(e) => verifMdp(e.target.value, mdp)}/>
             </label>
-            <button disabled={!mdpCorrect || !emailCorrect} onClick={() => inscription(email, mdp, pseudo)} id="btnInscr">Inscription</button>
+            <button disabled={!mdpCorrect || !emailCorrect} onClick={() => inscription(email, mdp, pseudo)} className="btnDeco" id="btnInscr">Inscription</button>
         </div>
     )
 }

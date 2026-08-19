@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@font-face {
+    font-family: 'AnimeStyle';
+    src: url(../assets/fonts/TakashiJapanDemo-9Mwr2.ttf);
+}
+@font-face {
+    font-family: 'AnimeStyle2';
+    src: url(../assets/fonts/TakashiJapanItalicDemoItalic-lx3Gw.ttf);
+}
 
 .compte-body {
     display: flex;
@@ -27,7 +35,7 @@
     height: 30px;
 }
 
-.compte-body button, .btnDeco {
+.btnDeco {
     margin-top: 10px;
     width: 150px;
     height: 40px;
@@ -39,19 +47,31 @@
     transition: all ease-in-out 0.1s;
 }
 
-.compte-body button:hover, .btnDeco:hover {
+.btnDeco:hover {
     border: 1px solid #3C3489;
     background: #26215C;
     color: #AFA9EC;
 }
 
-.compte-body button:active, .btnDeco:active {
+.btnDeco:active {
     transform: scale(0.95);
 }
 
 .compte-body div {
     display: flex;
     gap: 20px;
+}
+
+.compte-body .mdp-oblie {
+    background: none;
+    border: none;
+    color: #7f77dd;
+    margin-left: auto;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 #btnInscr:disabled {
@@ -68,6 +88,8 @@
     & a {
         text-transform: capitalize;
         color: white;
+        width: 100px;
+        height: 60px;
     }
     & .btnNav {
         position: absolute;
@@ -77,8 +99,6 @@
 }
 
 .clapFilm {
-    width: 100px;
-    height: 60px;
     font-family: "Playfair Display", serif;
     letter-spacing: 0.1em;
     & span {
@@ -187,8 +207,6 @@
     position: relative;
     overflow: hidden;
     background: #0d6efd;
-    width: 100px;
-    height: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -256,6 +274,48 @@
 }
 @keyframes l5-0{ 
   100% {background-size:120% 100%,20% 100%}
+}
+
+.btnLien .anime {
+    font-family: 'AnimeStyle', sans-serif;
+    letter-spacing: .1em;
+}
+.btn-cyberpunk {
+  position: relative;
+  font-family: 'Consolas', monospace;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #00f0ff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 1;
+}
+
+/* Le fond avec le clip-path est déporté sur le ::before */
+.btn-cyberpunk::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #12131a;
+  border-left: 3px solid #00f0ff;
+clip-path: polygon(0% 0%, 100% 0%, 100% 74%, 84% 100%, 0 100%);
+  transition: all 0.2s ease;
+  z-index: -1;
+}
+
+/* Au survol : on applique la box-shadow directement sur l'élément */
+.btn-cyberpunk:hover {
+  color: #12131a;
+  /* Lueur néon qui entoure le bouton */
+  box-shadow: 0 0 15px #00f0ff, inset 0 0 10px #00f0ff;
+}
+
+.btn-cyberpunk:hover::before {
+  background: #00f0ff;
 }
 
 @media screen and (max-width: 700px) {
