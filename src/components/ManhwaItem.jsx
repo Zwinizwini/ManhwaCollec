@@ -85,6 +85,15 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
         updateManhwalist(updateList)
     }
 
+    function getMedian(arr) {
+
+        const sorted = arr.sort();
+        const middle = Math.floor(sorted.length / 2);
+
+        if (sorted.length % 2 !== 0) return sorted[middle]
+        return (sorted[middle - 1] + sorted[middle]) / 2
+    }
+
     useEffect(() => {
         const apiCall = async () => {
             if (lastCheckDiff > 1 && (status !== "Fini") && nsfw === 0) {
@@ -98,10 +107,11 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
                     )
                     setRData(true)
                     const chapList = resultList.reduce(
-                        (acc, site) => (site.title.toLowerCase().replaceAll(" ","") === title.toLowerCase().replaceAll(" ","")) && (site.latestChapter < 10000) ? acc.concat(site.latestChapter) : acc
+                        (acc, site) => (site.title.toLowerCase().replaceAll(" ","") === title.toLowerCase().replaceAll(" ","")) ? acc.concat(site.latestChapter) : acc
                         , []
                     )
-                    const chapterAPI = chapList.length > 0 ? Math.round(Math.max(...chapList)) : maxChapter
+
+                    const chapterAPI = chapList.length > 0 ? getMedian(chapList) : maxChapter
                     const chapterF = chapterAPI < maxChapter ? maxChapter : chapterAPI
                     setChapUpdate(chapterF)
                     handleMAJ(chapterF)
