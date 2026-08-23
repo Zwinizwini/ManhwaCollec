@@ -29,7 +29,7 @@ const FormAjout = ({isForm, setForm}) => {
 
     async function recupManhwa(id) {
         try {
-            const response = await fetch(`https://api.jikan.moe/v4/manga/${id}`)
+            const response = await fetch(`https://api.tenrai.org/v1/manga/${id}`)
             const {data} = await response.json()
             ajoutManhwa(data) 
         } catch (err) {
