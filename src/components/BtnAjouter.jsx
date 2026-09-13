@@ -4,7 +4,7 @@ import { AjoutListContext, ManhwaContext } from "../utils/Context"
 import { useAuth } from "../utils/AuthContext"
 
 
-const BtnAjouter = ({title, cover, maxChapter, manhwaListName}) => {
+const BtnAjouter = ({title, cover, maxChapter, manhwaListName, nsfw, isPublic = false}) => {
     const { manhwaList, saveManhwaList } = useContext(ManhwaContext)
     const { ajoutList, setAjoutList } = useContext(AjoutListContext)
     const { user } = useAuth()
@@ -43,15 +43,24 @@ const BtnAjouter = ({title, cover, maxChapter, manhwaListName}) => {
             status: 'Pas lu',
             chapter: 0,
             lastRead: new Date().toISOString(),
-            lastReadCount: ""
+            lastReadCount: "",
+            nsfw: nsfw
         }
         addManhwa(manhwaObj)
     }
 
     return (
         <>
-            {isValid && <button onClick={() => {ajoutManhwa()}} className="bouton-chap" id="btnAjoutAutre">Ajouter +</button>}
-            {ajoutList && <button className="bouton-chap" style={{background: '#085041', border: '1px solid #1d9e75'}}>Ajouté</button>}
+            {!isPublic ?
+                <>
+                    {isValid && <button onClick={() => {ajoutManhwa()}} className="bouton-chap" id="btnAjoutAutre">Ajouter +</button>}
+                    {ajoutList && <button className="bouton-chap" style={{background: '#085041', border: '1px solid #1d9e75'}}>Ajouté</button>}
+                </>
+                :
+                <>
+                    {isValid && <button onClick={() => {ajoutManhwa()}} className="btnajout">Ajouter +</button>}
+                </>
+            }
         </>
     )
 }

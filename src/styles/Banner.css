@@ -13,6 +13,31 @@
 	color: #7F77DD;
 }
 
+.bannerSearch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  & input {
+    opacity: 0;
+    width: 0px;
+    border: 1px solid #2a2d35;
+    border-radius: 5px;
+    background: #2a2d35;
+    transition: width .2s ease-in;
+    outline: none;
+    color: white;
+    padding: 2px 5px;
+  }
+  & svg {
+    cursor: pointer;
+  }
+  &:focus-within input {
+    opacity: 1;
+    width: 100px;
+  }
+}
+
 @media screen and (max-width: 700px) {
   #bannerNom {
     font-size: 18px;
