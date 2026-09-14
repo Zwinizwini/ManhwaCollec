@@ -174,7 +174,7 @@ const Account = () => {
                                 copieURL()}}
                         >Partager Liste</button>
                         <button className="btnDeco" onClick={() => deconnexion()}>Deconnexion</button>
-                        {copier && <PopupToast msg={"List copié !"}/>}
+                        {copier && <PopupToast msg={"List copié !"} isCopy={true}/>}
                     </DivProfil>
                     <BtnLien user_id={user.id}/>
                     <Amis/>

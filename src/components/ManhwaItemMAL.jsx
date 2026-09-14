@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import BtnAjouter from './BtnAjouter'
 
 
-const ManhwaItemMAL = ({manhwa, isUser, manhwaNameList}) => {
+const ManhwaItemMAL = ({manhwa, isUser, manhwaNameList}) => {  
     return (
         <>
             <Link 

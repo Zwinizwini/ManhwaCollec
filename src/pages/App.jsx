@@ -16,21 +16,13 @@ function App() {
   const {user} = useAuth()
   const {setIsUser} = useContext(UserContext)
   const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
-  const {ajoutList, setAjoutList} = useContext(AjoutListContext)
+  const {ajoutList} = useContext(AjoutListContext)
 
 
   useEffect(() => {
     setIsUser(false)
     document.title = 'ManhwaCollec'
   }, [])
-
-  useEffect(() => {
-    if (ajoutList) {
-      setTimeout(() => {
-        setAjoutList(false)
-      }, 2800);
-    }
-  }, [ajoutList])
 
 
   return (
@@ -43,7 +35,7 @@ function App() {
             updateManhwalist={saveManhwaList} 
           />
           {ajoutList && <>
-            <PopupToast manhwaList={manhwaList} msg={"ajouté à la bibliothèque"}/>
+            <PopupToast msg={"ajouté à la bibliothèque"}/>
             <Audio isPlaying={ajoutList} audio={uwu}/>
           </>
           }

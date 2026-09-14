@@ -147,31 +147,6 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
                     {note != null && <span className='note-hover'>{note}★</span>}
                 </div>
             </Link>
-            {/* {isPopup && 
-                <Popup 
-                    title={title}
-                    chapter={chapter}
-                    status={status}
-                    lastRead={lastRead}
-                    lastReadCompter={lastReadCompter}
-                    nsfw={nsfw}
-                    cover={cover}
-                    description={description}
-                    link={link}
-                    setPopup={setPopup}
-                    isPopup={isPopup}
-                    maxChapter={chaptUpdate}
-                    id={id}
-                    manhwaList={manhwaList}
-                    updateManhwalist={updateManhwalist}
-                    note={note}
-                    gradientSeuil={gradientSeuil}
-                    setChapUpdate={setChapUpdate}
-                    manhwaListName={manhwaListName}
-                    tag={tag}
-                    coor={{x: itemnLoc.current.getBoundingClientRect().x + (itemnLoc.current.getBoundingClientRect().width/2), y: itemnLoc.current.getBoundingClientRect().y + (itemnLoc.current.getBoundingClientRect().height/2)}}
-                />
-            } */}
         </>
 
     )

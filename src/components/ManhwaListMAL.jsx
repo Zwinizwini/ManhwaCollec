@@ -1,59 +1,16 @@
 import ManhwaItemMAL from './ManhwaItemMAL'
 import '../styles/ManhwaList.css'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-
-const SabreLaserDiv = styled.div`
-    width: 20px;
-    height: 30px;
-    background: rgb(87, 85, 85);
-    position: relative;
-    border-radius: 5px;
-    &::after {
-        content: '';
-        position: absolute;
-        border-top: 3px solid black;
-        border-bottom: 3px solid black;
-        width: 20px;
-        height: 20px;
-        top: 0;
-    }
-    &::before {
-        content: '';
-        position: absolute;
-        background: red;
-        width: 5px;
-        height: 5px;
-        transition: all .2s ease-in-out;
-    }
-`
-
-const Faisseau = styled.div`
-    width: 15px;
-    height: 0;
-    box-shadow: 0 0 5px #02e022;
-    background: #a7f6a4;
-    transition: all 1s ease-in-out;
-    border-radius: 5px 5px 0 0;
-`
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    &:has(input:checked) #faisseau {
-        height: 50px;
-    }
-    &:has(input:checked) #sabre::before {
-        width: 2px;
-    }
-`
+import { AjoutListContext } from '../utils/Context'
+import { useContext } from 'react'
+import PopupToast from './PopupToast'
 
 const ManhwaListMAL = ({manhwaList, loading, page, isNsfw, setIsNsfw, setBL, isSearch, titre, tailleSearch, manhwaNameList, user}) => {
+    const { ajoutList } = useContext(AjoutListContext)
 
     return (
         <div className='container'>
+            {ajoutList && <PopupToast msg={"ajouté à la bibliothèque"}/>}
             <div className='menu'>
                 <div className="filtre" style={{justifyContent: 'center'}}>
                         <select
@@ -122,13 +79,6 @@ const ManhwaListMAL = ({manhwaList, loading, page, isNsfw, setIsNsfw, setBL, isS
                     </div>
                 </>
             }
-            {/* <label>
-                <Container>
-                    <Faisseau id='faisseau'/>
-                    <SabreLaserDiv id='sabre'/>
-                    <input type="checkbox" id="inputNsfw"/>
-                </Container>
-            </label> */}
         </div>
     ) 
 }

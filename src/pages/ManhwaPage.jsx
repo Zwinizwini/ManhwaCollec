@@ -20,23 +20,9 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-const majChaqueMot = (chaine) => {
-    const chaineTraite = chaine
-        .split('-')
-        .map(mot => {
-            return mot.charAt(0).toUpperCase() + mot.slice(1)
-        })
-        .join(' ')
-
-    return chaineTraite
-}
-
-//Vercel aller stp
-
 const ManhwaPage = () => {
     const navigate = useNavigate()
     const params = useParams()
-    const titre = params.titre
     const id = parseInt(params.id)
     const {manhwaList, saveManhwaList} = useContext(ManhwaContext)
     const manhwaListName = manhwaList.map((manhwa) => manhwa.title.toLowerCase().replaceAll(" ", ""))
@@ -55,10 +41,10 @@ const ManhwaPage = () => {
             if (data) {
                 setManhwa(data[0])
                 setIL(false)
+                document.title = data[0].title
             }
         } 
         getManhwa()
-        document.title = majChaqueMot(titre)
     },[])
 
     const tagList = (!isLoading && manhwa.tag) ? manhwa.tag.split(/\s*(?:,|$)\s*/) : []
@@ -88,7 +74,6 @@ const ManhwaPage = () => {
             :
             <div>
                 <BtnNav/>
-                {/* <div className="fondEcran" style={{backgroundImage: `url(${manhwa.cover}`}}><div></div></div> */}
                 <div className="manhwaInfo">
                     <div className="infoTag">
                         <img src={manhwa.cover} alt={`Cover de ${manhwa.title}`}/>

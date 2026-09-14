@@ -56,6 +56,15 @@ export const AjoutListContext = createContext()
 
 export const AjoutListProvider = ({children}) => {
     const [ajoutList, setAjoutList] = useState(false)
+
+    useEffect(() => {
+        if (ajoutList) {
+        setTimeout(() => {
+            setAjoutList(false)
+        }, 3000);
+        }
+    }, [ajoutList])
+
     return (
         <AjoutListContext.Provider value={{ajoutList, setAjoutList}}>
             {children}
