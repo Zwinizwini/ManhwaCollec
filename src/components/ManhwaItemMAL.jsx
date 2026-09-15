@@ -21,7 +21,7 @@ const ManhwaItemMAL = ({manhwa, isUser, manhwaNameList}) => {
                     <span className="name-hover">{manhwa.title}</span>
                     {manhwa.nsfw===1 && <span className="nsfw" style={{top:'2px'}}>NSFW</span>}
                     <div className='info-hover' style={{background: 'linear-gradient(transparent, #1c1f27)'}}>
-                        {isUser && <BtnAjouter title={manhwa.title} cover={manhwa.cover} maxChapter={manhwa.chapter} nsfw={manhwa.nsfw} manhwaListName={manhwaNameList} isPublic={true}/>}
+                        {isUser && <BtnAjouter title={manhwa.title} cover={manhwa.cover} maxChapter={manhwa.chapters} nsfw={manhwa.nsfw} manhwaListName={manhwaNameList} isPublic={true}/>}
                     </div>
                     {manhwa.score != null && <span className='note-hover'>{manhwa.score}★</span>}
                 </div>

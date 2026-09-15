@@ -38,6 +38,113 @@
   }
 }
 
+.phone {
+  display: none;
+  height: 32px;
+  & .btnPhone {
+    position: relative;
+    height: 20px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    & input {
+      display: none;
+    }
+    & div {
+      width: 30px;
+      height: 3px;
+      border-radius: 5px;
+      background: white;
+      transition: all .1s ease-in;
+    }
+    &::after, &::before {
+      content: '';
+      width: 30px;
+      height: 3px;
+      border-radius: 5px;
+      background: white;
+      position: absolute;
+      transition: all .2s ease-in;
+    }
+    &::after {
+      top: 0;
+    }
+    &::before {
+      bottom: 0;
+    }
+    &:has(input:checked) div {
+      opacity: 0;
+    }
+    &:has(input:checked)::after {
+      top: 50%;
+      transform: rotate(45deg);
+    }
+    &:has(input:checked)::before {
+      top: 50%;
+      transform: rotate(-45deg);
+    }
+  }
+  &:has(input:checked) .navPhone {
+    display: flex;
+  }
+  & .navPhone {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 52px;
+    background: #16191f;
+    z-index: 10;
+    border-top: 1px solid #2a2d35;
+    justify-content: left;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px 0;
+    gap: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    & .container-btnStat {
+      width: 100%;
+    }
+    & a, & .bannerSearch {
+      font-size: 20px;
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      border-bottom: 1px solid #7F77DD;
+      padding: 0 0 5px 0;
+    }
+    & .pseudo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all .2s ease-in-out;
+      &:hover {
+        color: #fff;
+      }
+      &:hover .initial {
+        background: #7F77DD;
+      }
+      & .initial {
+        border-radius: 50%;
+        background: #1c1f27;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        border: 1px solid #7F77DD;
+        transition: all .2s ease-in-out;
+      }
+    }
+    
+  }
+}
+
 @media screen and (max-width: 700px) {
   #bannerNom {
     font-size: 18px;
@@ -58,5 +165,11 @@
     top: 7px;
     left: 50%;
     transform: translate(-50%);
+  }
+  .PC {
+    display: none;
+  }
+  .phone {
+    display: flex;
   }
 }
