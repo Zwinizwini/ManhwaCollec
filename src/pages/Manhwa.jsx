@@ -20,6 +20,7 @@ const Manhwa = () => {
     const manhwaListName = manhwaList.map((manhwa) => manhwa.title.toLowerCase().replaceAll(" ", ""))
     const {user} = useAuth()
     const [isAdmin, setAdmin] = useState(false)
+    const [tagList, setTL] = useState([])
 
     useEffect(() => {
         const getAdmin = async () => {
@@ -109,8 +110,8 @@ const Manhwa = () => {
     }, [isLoading])
 
     return (
-        <div>
-            {isAdmin && <button onClick={() => getTopAnimeData()}>Recup Manhwa</button>}
+        <>
+            {isAdmin && <button onClick={() => getTopAnimeData()} className="btnAdmin">Recup Manhwa</button>}
             <ManhwaListMAL 
                 manhwaList={manhwaBDD} 
                 loading={isLoadingBDD} 
@@ -119,8 +120,10 @@ const Manhwa = () => {
                 setBL={setBL} isSearch={false} 
                 manhwaNameList={manhwaListName} 
                 user={user}
+                tagList={tagList}
+                setTL={setTL}
             />
-        </div>
+        </>
     )
 }
 
