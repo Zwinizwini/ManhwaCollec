@@ -64,3 +64,22 @@ nav {
   align-items: center;
   gap: 10px;
 }
+
+.divBtnNav {
+  margin-top: 104px;
+}
+
+.btnAdmin {
+  position: absolute;
+  top: 104px;
+  left: 10px;
+}
+
+@media screen and (max-width:700px) {
+  .divBtnNav {
+    margin-top: 74px;
+  }
+  .btnAdmin {
+    display: none;
+  }
+}

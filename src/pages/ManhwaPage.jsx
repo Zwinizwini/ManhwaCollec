@@ -70,7 +70,7 @@ const ManhwaPage = () => {
 
     return (
         <>
-            {isLoading ? <div class="loader"></div>
+            {isLoading ? <div className="loader"></div>
             :
             <div>
                 <BtnNav/>

@@ -10,7 +10,7 @@ const ImgStyled = styled.img`
 const AccountDiv = styled.div`
     width: 80%;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 100px;
     display: flex;
     justify-content: center;
     align-items: center;

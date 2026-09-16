@@ -9,6 +9,10 @@
     margin-top: 60px;
 }
 
+.container {
+    margin-top: 104px;
+}
+
 .menu {
     display: flex;
     margin: auto;
@@ -20,7 +24,8 @@
 
 .filtre {
     display: flex;
-    width: 750px;
+    max-width: 750px;
+    width: 100%;
     align-items: center;
     justify-content: space-between;
     margin: auto;
@@ -105,5 +110,9 @@
 
     .ajouter-manhwa {
         width: 110px;
+    }
+
+    .container {
+        margin-top: 74px;
     }
 }

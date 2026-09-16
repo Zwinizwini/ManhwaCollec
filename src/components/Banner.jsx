@@ -4,28 +4,34 @@ import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import {colors} from '../utils/colors'
 import { useAuth } from '../utils/AuthContext'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import livre from '../assets/livre.png'
+import accueil from '../assets/accueil.png'
+import account from '../assets/utilisateur.png'
+import stat from '../assets/statistique.png'
+
 
 const StyledLink = styled(Link)`
-    font-size: 2em;
-    font-weight: bold;
-    color: white;
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+  margin-left: 20px;
 `
 
 const AccountLink = styled(Link)`
-    border-radius: 50%;
-    background: #1c1f27;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    border: 1px solid ${colors.violet};
-    color: white;
-    &:hover {
-        background-color: ${colors.violet};
-    }
+  border-radius: 50%;
+  background: #1c1f27;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid ${colors.violet};
+  color: white;
+  &:hover {
+    background-color: ${colors.violet};
+  }
 `
 
 const ManhwaBtn = styled(Link)`
@@ -85,13 +91,6 @@ const Banner = () => {
     const [titre, setTitre] = useState('')
     const [tailleCC, setCC] = useState(0)
     const [menu, setMenu] = useState(false)
-
-    useEffect(() => {
-      if (menu) {
-        document.body.style.overflow = "hidden"
-      } 
-      return () => {document.body.style.overflow = ""}
-    }, [menu])
     
 
     const initialPseudo = () => {
@@ -108,6 +107,8 @@ const Banner = () => {
     <div className="banner">
         <StyledLink to='/' id="bannerNom" onClick={() => setMenu(false)}>Manhwa<span id='violet'>Collec</span></StyledLink>
         <img src={CC} alt="tkt" className='CC' id='cc' style={{transform: `translate(-50%) scale(${1+tailleCC*0.5})`}} onClick={() => setCC(prec => prec+1)}/>
+        
+        {/* Menu PC */}
         <nav className='PC'>
             <label className="bannerSearch">
               <input type="text" 
@@ -133,6 +134,8 @@ const Banner = () => {
             <AccountLink to="/account" id="bannerAccount">{initialPseudo()}</AccountLink>
 
         </nav>
+
+        {/* Btn activation menu telephone */}
         <nav className='phone'>
           <label className="btnPhone">
             <div></div>
@@ -141,35 +144,35 @@ const Banner = () => {
             checked={menu}
             />
           </label>
-          {menu && 
-            <div className='navPhone'>
-              <label className="bannerSearch">
-                <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-                  <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                  <input type="text" 
-                    id="search"
-                    onChange={(e) => setTitre(e.target.value)}
-                    value={titre}
-                    onKeyDown={(e) => e.key === 'Enter' && redirection()}
-                    placeholder='Search Manhwa'
-                  />
-              </label>
-              <ManhwaBtn to='/manhwa-liste?page=1' onClick={() => setMenu(false)}>MANHWA</ManhwaBtn>
-              <div className='container-btnStat' onClick={() => setMenu(false)}>
-                  <StatBtn to='/stat'>
-                  STAT
-                  <Bars>
-                      {BAR_DATA.map((h, i) => <Bar key={i} h={h} />)}
-                  </Bars>
-                  </StatBtn> 
-              </div>
-              <Link to="/account" className='pseudo' onClick={() => setMenu(false)}>
-                <div className='initial' id="bannerAccount">{initialPseudo()}</div>
-                {user?.user_metadata.pseudo}
-              </Link>
-            </div>
-          }
+
+          {/* Menu de telephone */}
+          <div className='navPhone'>
+            <Link to={'/'} onClick={() => setMenu(false)}>
+              <img src={accueil} alt="img accueil"/>
+              Accueil
+            </Link>
+            <Link to='/manhwa-liste?page=1' onClick={() => setMenu(false)}>
+              <img src={livre} alt="img livre"/>
+              MANHWA
+            </Link>
+            <Link to='/stat' onClick={() => setMenu(false)}>
+                <img src={stat} alt="img stat"/>
+                Stat
+            </Link>
+            <Link to="/account" className='pseudo' onClick={() => setMenu(false)}>
+              <img src={account} alt="img compte"/>
+              {user? user.user_metadata.pseudo : 'compte'}
+            </Link>
+            <label className="bannerSearch">
+              <input type="text" 
+                id="search"
+                onChange={(e) => setTitre(e.target.value)}
+                value={titre}
+                onKeyDown={(e) => e.key === 'Enter' && redirection()}
+                placeholder='Search Manhwa'
+              />
+            </label>
+          </div>
         </nav>
     </div>
 )

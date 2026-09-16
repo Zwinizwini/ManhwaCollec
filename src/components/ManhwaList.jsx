@@ -64,7 +64,7 @@ const ManhwaList = ({manhwaList, updateManhwalist}) => {
                 {isForm && <FormAjout isForm={isForm} setForm={setForm}/>}
             </div>
             {
-                loading ? <div class="loader"></div>
+                loading ? <div className="loader"></div>
                 : 
                 <ul className='manhwa-list'>
                     {activeList.map(({id, title, chapter, status, lastRead, lastReadCount, nsfw, cover,description,link, maxChapter, note, lastCheck, tag}, index) => (

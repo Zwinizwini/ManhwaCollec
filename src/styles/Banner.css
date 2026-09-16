@@ -1,12 +1,17 @@
 .banner {
   background-color: #16191f;
-  padding: 20px;
+  padding: 20px 0;
   margin-bottom: 21px;
   color: white;
   border-bottom: 1px solid #2a2d35;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
 }
 
 #violet {
@@ -28,6 +33,9 @@
     outline: none;
     color: white;
     padding: 2px 5px;
+    height: 20px;
+    border: 1px solid #7F77DD;
+    box-shadow: #7F77DD 0px 0px 5px;
   }
   & svg {
     cursor: pointer;
@@ -38,30 +46,41 @@
   }
 }
 
+.PC {
+  margin-right: 20px;
+}
+
 .phone {
   display: none;
   height: 32px;
+  margin-right: 20px;
+  /*Bouton pour activation du menu pour téléphone*/
   & .btnPhone {
     position: relative;
     height: 20px;
-    width: 30px;
+    width: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    background: #7F77DD;
+    border-radius: 5px;
+    padding: 5px;
+    overflow: hidden;
+    box-shadow: 1px 1px 10px #2a2d35;
     & input {
       display: none;
     }
     & div {
-      width: 30px;
+      width: 20px;
       height: 3px;
       border-radius: 5px;
       background: white;
-      transition: all .1s ease-in;
+      transition: all .2s ease-in;
     }
     &::after, &::before {
       content: '';
-      width: 30px;
+      width: 20px;
       height: 3px;
       border-radius: 5px;
       background: white;
@@ -69,13 +88,13 @@
       transition: all .2s ease-in;
     }
     &::after {
-      top: 0;
+      top: 5px;
     }
     &::before {
-      bottom: 0;
+      bottom: 4px;
     }
     &:has(input:checked) div {
-      opacity: 0;
+      transform: translateX(-50px);
     }
     &:has(input:checked)::after {
       top: 50%;
@@ -86,62 +105,62 @@
       transform: rotate(-45deg);
     }
   }
+
   &:has(input:checked) .navPhone {
-    display: flex;
+    display: grid;
   }
+  /*Menu pour téléphone*/
   & .navPhone {
     display: none;
-    width: 100%;
-    height: 100%;
+    width: 150px;
+    height: 150px;
     position: absolute;
-    left: 0;
-    top: 52px;
+    right: 5px;
+    border-radius: 10px;
+    top: 55px;
     background: #16191f;
     z-index: 10;
-    border-top: 1px solid #2a2d35;
-    justify-content: left;
-    align-items: center;
-    flex-direction: column;
-    padding: 10px 0;
+    padding: 10px;
     gap: 10px;
     text-transform: uppercase;
     font-weight: bold;
-    & .container-btnStat {
-      width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 13px;
+    border: 1px solid #7F77DD;
+    box-shadow: 0 0 10px #7F77DD;
+    animation: open .1s ease-in-out;
+    & img {
+      width: 24px;
     }
-    & a, & .bannerSearch {
-      font-size: 20px;
-      width: 100%;
-      text-align: center;
-      justify-content: center;
-      border-bottom: 1px solid #7F77DD;
-      padding: 0 0 5px 0;
-    }
-    & .pseudo {
+    & a {
       display: flex;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      gap: 10px;
+      gap: 0;
       transition: all .2s ease-in-out;
       &:hover {
         color: #fff;
       }
-      &:hover .initial {
-        background: #7F77DD;
-      }
-      & .initial {
-        border-radius: 50%;
-        background: #1c1f27;
-        width: 30px;
-        height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 5px;
-        border: 1px solid #7F77DD;
-        transition: all .2s ease-in-out;
+      &:active {
+        transform: scale(0.9);
       }
     }
+    & .container-btnStat {
+      flex-direction: column-reverse;
+    }
+    & label {
+      grid-column: span 2;
+    }
     
+  }
+}
+
+@keyframes open {
+  from {
+    transform: scale(0);
+  } to {
+    transform: scale(1);
   }
 }
 
@@ -157,7 +176,7 @@
   }
 
   .banner {
-    padding: 10px;
+    padding: 10px 0;
   }
 
   .CC {
@@ -171,5 +190,9 @@
   }
   .phone {
     display: flex;
+  }
+  .bannerSearch input {
+    opacity: 1;
+    width: 100px;
   }
 }
