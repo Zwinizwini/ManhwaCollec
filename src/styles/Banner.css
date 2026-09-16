@@ -1,5 +1,5 @@
 .banner {
-  background-color: #16191f;
+  background-color: #16191fcc;
   padding: 20px 0;
   margin-bottom: 21px;
   color: white;
@@ -12,6 +12,7 @@
   left: 0;
   width: 100%;
   z-index: 3;
+  backdrop-filter: blur(12px);
 }
 
 #violet {
