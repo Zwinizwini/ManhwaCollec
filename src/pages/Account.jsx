@@ -44,7 +44,8 @@ const BtnHead = styled.button`
 `
 
 const DivStyle = styled.div`
-    width: 500px;
+    max-width: 500px;
+    width: 100%;
     margin-top: 20px;
 `  
 
