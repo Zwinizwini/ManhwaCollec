@@ -1,0 +1,77 @@
+
+
+
+
+.trailsBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all .2s ease-in-out;
+
+
+    & .gauche, & .droite {
+        position: absolute;
+        top: 0;
+        transition: all .2s ease-in-out;
+        height: 24px;
+        &::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: radial-gradient(circle,rgba(239, 239, 194, 1) 5%, rgba(124, 114, 85, 1) 62%, rgba(255, 255, 252, 1) 100%);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        & path {
+            fill: url(#degraderPath);
+        }
+    }
+    & .gauche {
+        left: -2px;
+        &::after {
+            left: 60%;
+        }
+    }
+    & .droite {
+        right: -2px;
+        &::after {
+            right: 60%;
+        }
+    }
+
+    & .centre {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        height: 10px;
+        width: 100px;
+        padding: 1px 0 7px 0;
+        background: #1d2e3a;
+        border-top: 3px solid #4079a5;
+        border-bottom: 3px solid #4079a5;
+        font-size: 14px;
+        border-radius: 50px;
+        transition: all .2s ease-in-out;
+    }
+    
+    &:hover {
+        & path {
+            fill: url(#degraderHover);
+        }
+        & .gauche::after {
+            background: radial-gradient(circle,rgba(239, 239, 194, 1) 5%, rgba(176, 149, 89, 1) 62%, rgba(255, 255, 252, 1) 100%)
+        }
+        & .centre {
+            background: #497c9b;
+            border-top: 3px solid #4dcaff;
+            border-bottom: 3px solid #4dcaff;
+            color: white;
+        }
+    }
+    &:active {
+        transform: scale(0.9);
+    }
+}
