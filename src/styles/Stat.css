@@ -48,12 +48,12 @@
     margin-bottom: 5px;
 }
 
-.statInfo svg {
+.statInfo .statSVG {
     margin-left: 50%;
     transform: translateX(-50%);
 }
 
-.stat svg {
+.stat .statSVG {
     margin-top: 10px;
 }
 

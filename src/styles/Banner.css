@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Metaphore';
+  src: url(../assets/fonts/Fontspring-DEMO-juana-black.otf);
+}
+
+
 .banner {
   background-color: #16191fcc;
   padding: 20px 0;
@@ -45,6 +51,11 @@
     opacity: 1;
     width: 100px;
   }
+}
+
+.stat-link {
+  font-family: 'Metaphore', sans-serif;
+  letter-spacing: .1rem;
 }
 
 .PC {

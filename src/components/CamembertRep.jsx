@@ -1,12 +1,19 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { PieChart } from "react-minimal-pie-chart"
 import StatLegend from "./StatLegend"
 import { Tooltip } from "react-tooltip"
+import TrailsDialog from "./TrailsDialog"
 
 
 const CamembertRep = ({manhwaList, totalManhwa}) => {
     const [hovered1, setHovered1] = useState(null)
-    const [pos, setPos] = useState({x:0,y:0})
+    const boxRef = useRef(null)
+        const handleMouseMove = (e) => {
+            if (boxRef.current) {
+                boxRef.current.style.left = `${e.clientX}px`;
+                boxRef.current.style.top = `${e.clientY}px`;
+            }
+        }
 
     const nbFini = manhwaList.filter((manhwa => manhwa.status === 'Fini')).length
     const nbFiniP = Math.round((nbFini/totalManhwa) * 100)
@@ -46,7 +53,7 @@ const CamembertRep = ({manhwaList, totalManhwa}) => {
         <div className="container-gauche">
             <h2 style={{margin:0, color: 'white', textAlign: 'left', width:'100%'}}>liste de manhwa</h2>
             <p style={{color: "#ccc", textAlign: 'left', width:'100%'}}>{totalManhwa} manhwa au total</p>
-            <div id="anchor-hover" onMouseMove={(e) => {setPos({x: e.clientX, y: e.clientY})}}>
+            <div id="anchor-hover" onMouseMove={handleMouseMove}>
                 <PieChart
                     data={dataStatus}
                     animate={true}
@@ -60,15 +67,16 @@ const CamembertRep = ({manhwaList, totalManhwa}) => {
                     onMouseOut={() => {
                         setHovered1(null)
                     }}
+                    className="statSVG"
                 />
-                <Tooltip
-                    anchorSelect="#anchor-hover"
-                    border={typeof hovered1 === 'number' && `1px solid ${dataStatus[hovered1].colorHover}`}
-                    style={{background: '#08090a'}}
-                    opacity={1}
-                    position={{x: pos.x, y: pos.y}}
-                    content= {typeof hovered1 === 'number' && `${dataStatus[hovered1].title} : ${dataStatus[hovered1].value}`}
-                />
+                {typeof hovered1 === 'number' &&
+                    <div ref={boxRef} style={{position:'fixed'}}>
+                        <TrailsDialog
+                            nom={`Status`}
+                            texte={`${dataStatus[hovered1].title} : ${dataStatus[hovered1].value} %`}
+                        />
+                    </div>
+                }
             </div>
             <div className="container-legend">
                 {dataStatus.map((status) => (

@@ -9,7 +9,8 @@ import livre from '../assets/livre.png'
 import accueil from '../assets/accueil.png'
 import account from '../assets/utilisateur.png'
 import stat from '../assets/statistique.png'
-
+import metaphore from '../assets/Metaphore.png'
+import TrailsBtn from './TrailsBtn'
 
 const StyledLink = styled(Link)`
   font-size: 2em;
@@ -48,45 +49,40 @@ const ManhwaBtn = styled(Link)`
 `
 
 const StatBtn = styled(Link)`
-  display: inline-flex;
+  position: relative;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
+  justify-content: center;
+  font-size: 25px;
+  transform: scaleY(0.55);
+  letter-spacing: -0.04em;
   font-weight: bold;
   text-decoration: none;
   cursor: pointer;
+  width: 100px;
+  height: 42px;
   transition: all .2s, transform .1s;
   &:hover {
     color: #fff;
   }
-  &:hover span {
-    background: #fff;
+  &:hover img {
+    filter: brightness(100%);
   }
-  & span {
-    transition: all .2s;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    transition: all .2s ease-in-out;
+    filter: brightness(70%);
   }
 
   &:active { transform: scale(0.95); }
 `
 
-const Bars = styled.div`
-  display: flex;
-  align-items: flex-end;
-  gap: 2px;
-  height: 16px;
-  margin-bottom: 5px;
-`
-
-const Bar = styled.span`
-  width: 3px;
-  border-radius: 1px;
-  background: #7F77DD;
-  height: ${({ h }) => h}px;
-`
-
 const Banner = () => {
     const {user} = useAuth()
-    const BAR_DATA = [5,11,8,14,6]
     const navigate = useNavigate()
     const [titre, setTitre] = useState('')
     const [tailleCC, setCC] = useState(0)
@@ -122,15 +118,11 @@ const Banner = () => {
                 <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </label>
-            <ManhwaBtn to='/manhwa-liste?page=1'>MANHWA</ManhwaBtn>
-            <div className='container-btnStat'>
-                <StatBtn to='/stat'>
-                <Bars>
-                    {BAR_DATA.map((h, i) => <Bar key={i} h={h} />)}
-                </Bars>
-                STAT
-                </StatBtn> 
-            </div>
+            <Link to='/manhwa-liste?page=1' className='trailsBtn'><TrailsBtn/></Link>
+            <StatBtn to='/stat' className='stat-link'>
+              <img src={metaphore} alt="meta"/>
+              STAT
+            </StatBtn>
             <AccountLink to="/account" id="bannerAccount">{initialPseudo()}</AccountLink>
 
         </nav>
@@ -161,7 +153,7 @@ const Banner = () => {
             </Link>
             <Link to="/account" className='pseudo' onClick={() => setMenu(false)}>
               <img src={account} alt="img compte"/>
-              {user? user.user_metadata.pseudo : 'compte'}
+              {user? <span>{user.user_metadata.pseudo}</span> : <span>compte</span>}
             </Link>
             <label className="bannerSearch">
               <input type="text" 

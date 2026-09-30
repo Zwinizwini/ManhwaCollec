@@ -1,13 +1,19 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { PieChart } from "react-minimal-pie-chart"
-import { Tooltip } from "react-tooltip"
 import StatLegend from "./StatLegend"
+import TrailsDialog from "./TrailsDialog"
 
 
 const CamembertTag = ({manhwaList}) => {
     const [hovered3,setHovered3] = useState(null)
     const [lecture, isLecture] = useState(false)
-    const [pos, setPos] = useState({x:0,y:0})
+    const boxRef = useRef(null)
+    const handleMouseMove = (e) => {
+        if (boxRef.current) {
+            boxRef.current.style.left = `${e.clientX}px`;
+            boxRef.current.style.top = `${e.clientY}px`;
+        }
+    }
 
     let tagList, dataTag
     if (lecture) {
@@ -70,7 +76,7 @@ const CamembertTag = ({manhwaList}) => {
                     <input type="checkbox" id="inputNsfw"/>
                 </label>
                 
-                <div id="anchor-hover3" onMouseMove={(e) => {setPos({x: e.clientX, y: e.clientY})}}>
+                <div id="anchor-hover3" onMouseMove={handleMouseMove}>
                     <PieChart
                         data={dataTag}
                         animate={true}
@@ -83,15 +89,16 @@ const CamembertTag = ({manhwaList}) => {
                         onMouseOut={() => {
                             setHovered3(null)
                         }}
+                        className="statSVG"
                     />
-                    <Tooltip
-                        anchorSelect="#anchor-hover3"
-                        border={`1px solid black`}
-                        style={{background: '#08090a'}}
-                        opacity={1}
-                        position={{x: pos.x, y: pos.y}}
-                        content= {typeof hovered3 === 'number' && `${dataTag[hovered3].title} : ${dataTag[hovered3].value}`}
-                    />
+                    {typeof hovered3 === 'number' &&
+                        <div ref={boxRef} style={{position:'fixed'}}>
+                            <TrailsDialog
+                                nom={'Tag'}
+                                texte={`${dataTag[hovered3].title} : ${dataTag[hovered3].value} %`}
+                            />
+                        </div>
+                    }
                 </div>
             </div>
 
