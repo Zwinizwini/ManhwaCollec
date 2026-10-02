@@ -38,8 +38,9 @@ const Manhwa = () => {
             if (excludeBL) requete = requete.not('tag', 'ilike', '%Boys Love%')
             if (isNsfw === '0' || isNsfw === '1') requete = requete.eq('nsfw', isNsfw)
             const { data, error } = await requete
+                // .eq('nsfw', 1)
                 .range((page-1)*50,(page*50)-1)
-                .order('id', {ascending: true})
+                .order('score', {ascending: false})
             if (error) console.error(error)
             if (data) {
                 setMBDD(data)
@@ -102,6 +103,101 @@ const Manhwa = () => {
         }
     }
 
+
+    const getPornhwa = async (variable = {page: 1, startDateGreater:20000000, startDateLesser:20010000}) => {
+        const query = `
+        query($page: Int, $startDateGreater: FuzzyDateInt, $startDateLesser: FuzzyDateInt)  {
+            Page(page: $page) {
+                pageInfo {
+                hasNextPage
+                }
+                media(
+                type: MANGA
+                startDate_greater: $startDateGreater
+                startDate_lesser: $startDateLesser
+                countryOfOrigin: "KR"
+                ) {
+                id
+                title {
+                    english
+                    romaji
+                }
+                coverImage {
+                    extraLarge
+                }
+                averageScore
+                chapters
+                description
+                genres
+                synonyms
+                idMal
+                tags {
+                    name
+                }
+                isAdult
+                }
+            }
+        }
+        `
+        const url = 'https://graphql.anilist.co',
+            options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    query: query,
+                    variables: variable
+                })
+            };
+        
+            try {
+                const response = await fetch(url, options)
+                const {data} = await response.json();
+                setLoading(true)
+
+
+                data.Page.media.forEach(manhwa => {
+                    const cover = manhwa.coverImage.extraLarge
+                    let tag =  manhwa.tags.some((elem) => elem.name === "Boys' Love") ? manhwa.genres.join(',').concat(',', "Boys Love") : manhwa.genres.join(',')
+                    const manwhaData = {
+                        id: manhwa.id,
+                        title: manhwa.title.english ? manhwa.title.english : manhwa.title.romaji,
+                        title_synonyms: manhwa.synonyms.join('#'),
+                        tag: tag,
+                        cover: cover,
+                        chapters: manhwa.chapters,
+                        synopsis: manhwa.description,
+                        score: manhwa.averageScore / 10,
+                        nsfw: manhwa.isAdult ? 1 : 0,
+                        id_mal: manhwa.idMal
+                    };
+                    setMAL(prec => [...prec, manwhaData])
+                });
+
+                console.log('autre page ? ' + data.Page.pageInfo.hasNextPage)
+                if(data.Page.pageInfo.hasNextPage) {
+                    console.log('encore une page')
+                    setTimeout(() => {
+                        getPornhwa({page: variable.page+1, startDateGreater:variable.startDateGreater, startDateLesser:variable.startDateLesser});
+                    }, 2500)
+                } else if (variable.startDateLesser < 20270000) { 
+                    console.log('année : ' + variable.startDateLesser)
+                    console.log('----------------------------------------------')
+                    setTimeout(() => {
+                        getPornhwa({page: 1, startDateGreater:variable.startDateGreater+10000, startDateLesser:variable.startDateLesser+10000});
+                    }, 2500)
+                } else {
+                    console.log('fini')
+                    setLoading(false)
+                }
+            } catch (error) {
+                console.error(error)
+            }
+
+    }
+
     useEffect(() => {
         if (!isLoading) {
             console.log(manhwaMAL)
@@ -111,7 +207,7 @@ const Manhwa = () => {
 
     return (
         <>
-            {isAdmin && <button onClick={() => getTopAnimeData()} className="btnAdmin">Recup Manhwa</button>}
+            {isAdmin && <button onClick={() => getPornhwa()} className="btnAdmin">Recup Manhwa</button>}
             <ManhwaListMAL 
                 manhwaList={manhwaBDD} 
                 loading={isLoadingBDD} 
