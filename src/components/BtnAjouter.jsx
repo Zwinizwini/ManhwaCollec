@@ -4,11 +4,14 @@ import { AjoutListContext, ManhwaContext } from "../utils/Context"
 import { useAuth } from "../utils/AuthContext"
 
 
-const BtnAjouter = ({title, cover, maxChapter, manhwaListName, nsfw, isPublic = false}) => {
+const BtnAjouter = ({title, cover, maxChapter, manhwaListName, nsfw, isPublic = false, titreSyn = []}) => {
     const { manhwaList, saveManhwaList } = useContext(ManhwaContext)
     const { ajoutList, setAjoutList } = useContext(AjoutListContext)
     const { user } = useAuth()
-    const isValid = !manhwaListName.includes(title.toLowerCase().replaceAll(" ", ""))
+    
+    const isValid = !manhwaListName.includes(title.toLowerCase().replaceAll(" ", "")) 
+        && !titreSyn.some((elem) => manhwaListName.includes(elem.toLowerCase().replaceAll(" ", "")))
+
 
     useEffect(() => {
         if (ajoutList) {

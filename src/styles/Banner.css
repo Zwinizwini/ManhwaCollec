@@ -161,7 +161,7 @@
     & .container-btnStat {
       flex-direction: column-reverse;
     }
-    & label {
+    & form {
       grid-column: span 2;
     }
     

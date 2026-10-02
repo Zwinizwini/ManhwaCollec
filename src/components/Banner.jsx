@@ -106,18 +106,22 @@ const Banner = () => {
         
         {/* Menu PC */}
         <nav className='PC'>
-            <label className="bannerSearch">
-              <input type="text" 
-                id="search"
-                onChange={(e) => setTitre(e.target.value)}
-                value={titre}
-                onKeyDown={(e) => e.key === 'Enter' && redirection()}
-                placeholder='Search Manhwa'
-              />
-              <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-                <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </label>
+            <form onSubmit={(e) => {
+              e.preventDefault()
+              redirection()
+            }}>
+              <label className="bannerSearch">
+                <input type="text" 
+                  id="search"
+                  onChange={(e) => setTitre(e.target.value)}
+                  value={titre}
+                  placeholder='Search Manhwa'
+                />
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+                  <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </label>
+            </form>
             <Link to='/manhwa-liste?page=1' className='trailsBtn'><TrailsBtn/></Link>
             <StatBtn to='/stat' className='stat-link'>
               <img src={metaphore} alt="meta"/>
@@ -155,15 +159,19 @@ const Banner = () => {
               <img src={account} alt="img compte"/>
               {user? <span>{user.user_metadata.pseudo}</span> : <span>compte</span>}
             </Link>
-            <label className="bannerSearch">
-              <input type="text" 
-                id="search"
-                onChange={(e) => setTitre(e.target.value)}
-                value={titre}
-                onKeyDown={(e) => e.key === 'Enter' && redirection()}
-                placeholder='Search Manhwa'
-              />
-            </label>
+            <form onSubmit={(e) => {
+              e.preventDefault()
+              redirection()
+            }}>
+              <label className="bannerSearch">
+                <input type="text" 
+                  id="search"
+                  onChange={(e) => setTitre(e.target.value)}
+                  value={titre}
+                  placeholder='Search Manhwa'
+                />
+              </label>
+            </form>
           </div>
         </nav>
     </div>
