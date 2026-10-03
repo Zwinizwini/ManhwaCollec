@@ -22,12 +22,14 @@ const ModifTag = ({tagList, setTagUpdate}) => {
                         
                         return (
                             <li className="tag-item" key={tag}>
-                                <input type="checkbox" name={tag} id={tag} 
-                                    checked={isChecked} 
-                                    onChange={(e) => clickItemTag(e, tag)}
-                                />
-                                <span className="checkbox"><span>✓</span></span>
-                                <label htmlFor={tag}>{tag}</label>
+                                <label htmlFor={tag}>
+                                    <input type="checkbox" name={tag} id={tag} 
+                                        checked={isChecked} 
+                                        onChange={(e) => clickItemTag(e, tag)}
+                                    />
+                                    <span className="checkbox"><span>✓</span></span>
+                                    {tag}
+                                </label>
                             </li>
                         )
                     }
