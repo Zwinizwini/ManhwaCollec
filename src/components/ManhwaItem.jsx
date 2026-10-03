@@ -111,7 +111,7 @@ const ManhwaItem = ({index, id, title, chapter, status, lastRead, nsfw, cover, l
                         , []
                     )
 
-                    const chapterAPI = chapList.length > 0 ? getMedian(chapList) : maxChapter
+                    const chapterAPI = chapList.length > 0 ? Math.floor(getMedian(chapList)) : maxChapter
                     const chapterF = chapterAPI < maxChapter ? maxChapter : chapterAPI
                     setChapUpdate(chapterF)
                     handleMAJ(chapterF)

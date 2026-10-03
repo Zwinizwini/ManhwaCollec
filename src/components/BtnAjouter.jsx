@@ -4,7 +4,7 @@ import { AjoutListContext, ManhwaContext } from "../utils/Context"
 import { useAuth } from "../utils/AuthContext"
 
 
-const BtnAjouter = ({title, cover, maxChapter, manhwaListName, nsfw, isPublic = false, titreSyn = []}) => {
+const BtnAjouter = ({title, cover, maxChapter, manhwaListName, nsfw, isPublic = false, titreSyn = [], tag}) => {
     const { manhwaList, saveManhwaList } = useContext(ManhwaContext)
     const { ajoutList, setAjoutList } = useContext(AjoutListContext)
     const { user } = useAuth()
@@ -47,7 +47,8 @@ const BtnAjouter = ({title, cover, maxChapter, manhwaListName, nsfw, isPublic = 
             chapter: 0,
             lastRead: new Date().toISOString(),
             lastReadCount: "",
-            nsfw: nsfw
+            nsfw: nsfw,
+            tag: tag
         }
         addManhwa(manhwaObj)
     }

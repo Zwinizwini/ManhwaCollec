@@ -4,15 +4,17 @@ import { Link } from 'react-router-dom'
 import { AjoutListContext } from '../utils/Context'
 import { useContext } from 'react'
 import PopupToast from './PopupToast'
+import ModifTag from './ModifTag'
 
-const ManhwaListMAL = ({manhwaList, loading, page, isNsfw, setIsNsfw, setBL, isSearch, titre, tailleSearch, manhwaNameList, user}) => {
+const ManhwaListMAL = ({manhwaList, loading, page, isNsfw, setIsNsfw, setBL, isSearch, titre, manhwaNameList, user, tagList, setTL}) => {
     const { ajoutList } = useContext(AjoutListContext)
+    
 
     return (
         <div className='container'>
             {ajoutList && <PopupToast msg={"ajouté à la bibliothèque"}/>}
             <div className='menu'>
-                <div className="filtre" style={{justifyContent: 'center'}}>
+                <div className="filtre" style={{justifyContent: 'center', flexDirection: "row"}}>
                         <select
                             value={isNsfw}
                             onChange={(e) => {
@@ -36,6 +38,11 @@ const ManhwaListMAL = ({manhwaList, loading, page, isNsfw, setIsNsfw, setBL, isS
                                 <input type="checkbox" id="inputNsfw"/>
                             </div>
                         </label>
+                        <div className='selectTagDiv' onClick={() => {
+                            document.querySelector('.select-tag').classList.toggle('openTag')
+                        }}>
+                            <ModifTag tagList={tagList} setTagUpdate={setTL}/>
+                        </div>
                 </div>
             </div>
             {
@@ -50,6 +57,7 @@ const ManhwaListMAL = ({manhwaList, loading, page, isNsfw, setIsNsfw, setBL, isS
                                         manhwa={manhwa}
                                         manhwaNameList={manhwaNameList}
                                         isUser={user}
+                                        index={index}
                                     />
                                 </div>
                             : null ) 
@@ -67,14 +75,22 @@ const ManhwaListMAL = ({manhwaList, loading, page, isNsfw, setIsNsfw, setBL, isS
                         >Previous</Link>
                         {isSearch ? <Link to={`/search/${titre}?page=${page+1}`}
                             onClick={(e) => {
-                                tailleSearch < 50 && e.preventDefault()
+                                manhwaList.length < 50 && e.preventDefault()
                             }}
                             style={{
-                                pointerEvents: tailleSearch < 50 ? 'none' : 'auto',
-                                opacity: tailleSearch < 50 ? 0.5 : 1
+                                pointerEvents: manhwaList.length < 50 ? 'none' : 'auto',
+                                opacity: manhwaList.length < 50 ? 0.5 : 1
                             }}
                             >Next</Link>
-                        : <Link to={`/manhwa-liste?page=${page+1}`}>Next</Link>
+                        : <Link to={`/manhwa-liste?page=${page+1}`}
+                            onClick={(e) => {
+                                manhwaList.length < 50 && e.preventDefault()
+                            }}
+                            style={{
+                                pointerEvents: manhwaList.length < 50 ? 'none' : 'auto',
+                                opacity: manhwaList.length < 50 ? 0.5 : 1
+                            }}
+                        >Next</Link>
                         }
                     </div>
                 </>

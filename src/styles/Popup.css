@@ -239,6 +239,11 @@ h2 {
     }
 }
 
+.select-tag {
+    color: white;
+    position: relative;
+}
+
 .select-btn {
     width: 100%;
     display: flex;
@@ -256,7 +261,9 @@ h2 {
     margin-top: 15px;
     border-radius: 10px;
 	box-shadow: black 0 8px 24px;
-
+    position: absolute;
+    z-index: 2;
+    width: 200px;
 }
 
 .tag-setlist .tag-item {
@@ -507,7 +514,6 @@ h2 {
     }
     .select-tag.openTag .tag-setlist {
         width: 200px;
-        transform: translateX(-50%);
     }
 
     .snd-container {

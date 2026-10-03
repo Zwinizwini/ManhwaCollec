@@ -65,7 +65,7 @@ const ManhwaPagePublic = () => {
                             </div>
                         }
                         <div className="divBtn">
-                            <BtnAjouter title={manhwa.title} maxChapter={manhwa.chapters} cover={manhwa.cover} manhwaListName={manhwaListName} nsfw={manhwa.nsfw}/>
+                            <BtnAjouter tag={manhwa.tag} titreSyn={manhwa.title_synonyms.split('#')} title={manhwa.title} maxChapter={manhwa.chapters} cover={manhwa.cover} manhwaListName={manhwaListName} nsfw={manhwa.nsfw}/>
                         </div>
                     </div>
                     <div className="infoSupp">

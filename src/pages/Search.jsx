@@ -18,6 +18,7 @@ const Search = () => {
     const {manhwaList} = useContext(ManhwaContext)
     const manhwaListName = manhwaList.map((manhwa) => manhwa.title.toLowerCase().replaceAll(" ", ""))
     const {user} = useAuth()
+    const [tagList, setTL] = useState([])
 
     useEffect(() => {
         const getManhwas = async () => {
@@ -52,6 +53,8 @@ const Search = () => {
                 tailleSearch={manhwaBDD.length}
                 manhwaNameList={manhwaListName}
                 user={user}
+                tagList={tagList}
+                setTL={setTL}
             />
         </div>
     )

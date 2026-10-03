@@ -9,7 +9,7 @@ const ModifTag = ({tagList, setTagUpdate}) => {
     return (
         <div className='select-tag'>
             <div className="select-btn">
-                <span className="btn-text">Select Tag</span>
+                <span className="btn-text">{tagList.length > 0 ? `${tagList[0]} ... x${tagList.length}` : 'Select Tag'}</span>
                 <span className='arrow-dwn'>
                     ▼
                 </span>

@@ -37,8 +37,10 @@ const Manhwa = () => {
             let requete = supabase.from('manhwaMAL').select('*')
             if (excludeBL) requete = requete.not('tag', 'ilike', '%Boys Love%')
             if (isNsfw === '0' || isNsfw === '1') requete = requete.eq('nsfw', isNsfw)
+            if (tagList.length > 0) {
+                tagList.forEach((elem) => requete = requete.ilike('tag', `%${elem}%`))
+            }
             const { data, error } = await requete
-                // .eq('nsfw', 1)
                 .range((page-1)*50,(page*50)-1)
                 .order('score', {ascending: false})
             if (error) console.error(error)
@@ -48,7 +50,7 @@ const Manhwa = () => {
             }
         }
         getManhwas()
-    }, [page, isNsfw, excludeBL])
+    }, [page, isNsfw, excludeBL, tagList])
 
     const ajoutManhwaBDD = async () => {
         for (const manhwa of manhwaMAL) {
@@ -59,51 +61,7 @@ const Manhwa = () => {
             if (error) console.error(error)
         }
     }
-
-    async function getTopAnimeData(page = 1, totalAnime = 7643) {
-
-        try {
-          const response = await fetch(`https://api.tenrai.org/v1/top/manga?type=manhwa&limit=50&page=${page}`);
-          const {data} = await response.json();
-          setLoading(true)
-     
-          data.forEach(manhwa => {
-            const {title, title_synonyms, chapters, synopsis, score} = manhwa;
-            const id_mal = manhwa.mal_id
-            const cover = manhwa.images.webp.large_image_url
-            const tagListe = [...manhwa.genres, ...manhwa.themes]
-            const tag = tagListe.reduce(
-                (acc, current) => acc.concat(current.name),
-                []
-            ).toString()
-            const manwhaData = {
-                id_mal: id_mal,
-                title: title,
-                title_synonyms: title_synonyms.join('#'),
-                tag: tag,
-                cover: cover,
-                chapters: chapters,
-                synopsis: synopsis,
-                score: score,
-                nsfw: tag.includes('Erotica') ? 1 : 0
-            };
-            setMAL(prec => [...prec, manwhaData])
-            console.log('Loading Liste Manhwa')
-          });
     
-          if (data.length > 0 && totalAnime > 0) {
-            setTimeout(() => {
-                getTopAnimeData(page + 1, totalAnime - data.length);
-              }, 1000)
-          } else {
-            setLoading(false)
-          }
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-    }
-
-
     const getPornhwa = async (variable = {page: 1, startDateGreater:20000000, startDateLesser:20010000}) => {
         const query = `
         query($page: Int, $startDateGreater: FuzzyDateInt, $startDateLesser: FuzzyDateInt)  {

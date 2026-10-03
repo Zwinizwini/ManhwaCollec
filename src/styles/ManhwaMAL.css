@@ -44,6 +44,24 @@
     }
 }
 
+.selectTagDiv {
+    border-radius: 5px;
+    height: 33px;
+    padding: 0px 10px;
+    color: #888;
+    background-color: #1c1f27;
+    border: 1px solid #2a2d35;
+    box-shadow: #2a2d35 1px 1px 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all .2s ease;
+
+    & .tag-setlist {
+        transform: translateX(-25%);
+    }
+}
+
 .btnajout {
     border: none;
     border-radius: 5px;
